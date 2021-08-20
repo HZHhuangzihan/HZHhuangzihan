@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>类、超类和子类 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="类、超类和子类
+假设你在某个公司工作，这个公司里经理的待遇与普通员工的待遇存在着一些差异。不过，他们之间也存在着很多相同的地方，例如，他们都领取薪水。只是普通员工在完成本职任务之后仅领取薪水，而经理,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">类、超类和子类</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">类、超类和子类</h1><div class="stuff"><span>七月 22, 2021</span><ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/abstract/" rel="tag">abstract</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/extends/" rel="tag">extends</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/final/" rel="tag">final</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/super/" rel="tag">super</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/this/" rel="tag">this</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%86%85%E8%81%94/" rel="tag">内联</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/" rel="tag">动态绑定</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%90%E7%B1%BB/" rel="tag">子类</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB/" rel="tag">抽象类</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%A1%A8/" rel="tag">方法表</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/" rel="tag">替换原则</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%B1%BB/" rel="tag">类</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BB%A7%E6%89%BF%E9%93%BE/" rel="tag">继承链</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/" rel="tag">访问控制修饰符</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%B6%85%E7%B1%BB/" rel="tag">超类</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%87%8D%E8%BD%BD%E8%A7%A3%E6%9E%90/" rel="tag">重载解析</a></li></ul></div><div class="content markdown"><h1 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h1><blockquote><p>假设你在某个公司工作，这个公司里经理的待遇与普通员工的待遇存在着一些差异。不过，他们之间也存在着很多相同的地方，例如，他们都领取薪水。只是普通员工在完成本职任务之后仅领取薪水，而经理在完成了预期的业绩之后还能得到<strong>奖金</strong>。这种情形就需要使用继承。为什么呢？因为需要为经理定义一个新类<strong>Manager</strong>，并增加一些新功能。但可以重用<strong>Employee</strong>类中已经编写的部分代码，并保留原来<strong>Employee</strong>类中的<strong>所有</strong>字段。从理论上讲，在Manager与Employee之间存在着明显的“is-a”（是）关系，每个经理都是一个员工：“is-a”关系是继承的一个明显特征。</p></blockquote><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><blockquote><p>这一章中，我们使用了员工和经理的经典示例，不过必须提醒你的是对这个例子要有所保留。在真实世界里，员工也可能会成为经理，所以你建模时可能希望经理 也是员工，而不是员工的一个子类。不过，在我们的例子中，假设公司里只有两类人：一些人永远是员工，另一些人一直是经理。</p></blockquote><h2 id="定义子类"><a href="#定义子类" class="headerlink" title="定义子类"></a>定义子类</h2><blockquote><p>可以如下继承<strong>Employee</strong>类来定义<strong>Manager</strong>类，这里使用关键字<strong>extends</strong>表示继承。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Manager extends Employee
+&#123;
+    added methods and fields
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h3 id="关键字extends"><a href="#关键字extends" class="headerlink" title="关键字extends"></a>关键字extends</h3><blockquote><p>关键字<strong>extends</strong>表明正在构造的新类派生于一个已存在的类。这个已存在的类称为<strong>超类</strong>（superclass）、<strong>基类</strong>（base class）或<strong>父类</strong>（parent class）；新类称为<strong>子类</strong>（subclass）、<strong>派生类</strong>（derived class） 或<strong>孩子类</strong>（child class）。超类和子类是Java程序员最常用的两个术语，而了解 其他语言的程序员可能更加偏爱使用父类和孩子类，这也能很贴切地体现“继承”。</p><p>尽管<strong>Employee</strong>类是一个超类，但并不是因为它优于子类或者拥有比子类更多的功能。实际上恰恰相反，子类比超类拥有的功能<strong>更多</strong>。例如，看过<strong>Manager</strong>类的源代码之后就会发现，<strong>Manager</strong>类比超类Employee封装了更多的数据，拥有更多的功能。</p></blockquote><span id="more"></span><h3 id="注释-1"><a href="#注释-1" class="headerlink" title="注释"></a>注释</h3><blockquote><p>前缀“<strong>超</strong>“（super）和“<strong>子</strong>”（sub）来源于计算机科学与数学理论中集合语言的术语。所有员工组成的集合包含所有经理组成的集合。可以这样说，员工集合是经理集合的超集，也可以说，经理集合是员工集合的子集。</p><p>在<strong>Manager</strong>类中，增加了一个用于存储奖金信息的字段，以及一个用于设置这个字段的新方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Manager extends Employee
+&#123;
+    private double bonus;
+    . . .
+    public void setBonus(double bonus)
+    &#123;
+        this.bonus &#x3D; bonus;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>这里定义的方法和字段并没有什么特别之处。如果有一个<strong>Manager</strong>对象，就可以使用<strong>setBonus</strong>方法。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager boss &#x3D; . . .;
+boss.setBonus(5000);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>当然，由于<strong>setBonus</strong>方法不是在<strong>Employee</strong>类中定义的，所以属于<strong>Employee</strong>类的对象不能使用它。</p><p>然而，尽管在<strong>Manager</strong>类中没有显式地定义<strong>getName</strong>和<strong>getHireDay</strong>等方法，但是<strong>可以</strong>对<strong>Manager</strong>对象使用这些方法，这是因为<strong>Manager</strong>类自动地继承了超类<strong>Employee</strong>中的这些方法。</p><p>类似地，从超类中还继承了<strong>name</strong>、<strong>salary</strong>和<strong>hireDay</strong>这3个字段。这样一来，每个<strong>Manager</strong>对象就包含了4个字段：<strong>name</strong>、<strong>salary</strong>、<strong>hireDay</strong>和<strong>bonus</strong>。</p><p>通过扩展超类定义子类的时候，只需要指出子类与超类的不同之处。因此在设计类的时候，应该将最一般的方法放在超类中，而将更特殊的方法放在子类中，这种将通用功能抽取到超类的做法在面向对象程序设计中十分普遍。</p></blockquote><h2 id="覆盖方法"><a href="#覆盖方法" class="headerlink" title="覆盖方法"></a>覆盖方法</h2><blockquote><p>超类中的有些方法对子类<strong>Manager</strong>并不一定适用。具体来说，<strong>Manager</strong>类中的<strong>getSalary</strong>方法应该返回薪水和奖金的总和。为此，需要提供一个新的方法来<strong>覆盖</strong>（override）超类中的这个方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Manager extends Employee
+&#123;
+    . . .
+    public double getSalary()
+    &#123;
+        . . .
+    &#125;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>应该如何实现这个方法呢？乍看起来似乎很简单，只要返回<strong>salary</strong>和<strong>bonus</strong>字段的总和就可以了：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public double getSalary()
+&#123;
+    return salary + bonus; &#x2F;&#x2F; won&#39;t work
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>不过，这样做是不行的。回想一下，只有<strong>Employee</strong>方法能直接访问<strong>Employee</strong>类的私有字段。这意味着，<strong>Manager</strong>类的<strong>getSalary</strong>方法不能直接访问<strong>salary</strong>字段。如果<strong>Manager</strong>类的方法想要访问那些私有字段，就要像所有其他方法一样使用公共接口，在这里就是要使用<strong>Employee</strong>类中的公共方法<strong>getSalary</strong>。</p><p>现在，再试一下。你需要调用<strong>getSalary</strong>方法而不是直接访问<strong>salary</strong>字段：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public double getSalary()
+&#123;
+    double baseSalary &#x3D; getSalary(); &#x2F;&#x2F; still won&#39;t work
+    return baseSalary + bonus;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>上面这段代码仍然有问题。问题出现在调用<strong>getSalary</strong>的语句上，它只是在调用<strong>自身</strong>，这是因为<strong>Manager</strong>类也有一个<strong>getSalary</strong>方法（就是我们正在实现的这个方法），所以这条语句将会导致无限次地调用自己，直到整个程序最终崩溃。</p></blockquote><h3 id="关键字super"><a href="#关键字super" class="headerlink" title="关键字super"></a>关键字super</h3><blockquote><p>这里需要指出：我们希望调用超类<strong>Employee</strong>中的<strong>getSalary</strong>方法，而不是当前类的这个方法。为此，可以使用特殊的关键字<strong>super</strong>解决这个问题：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">super.getSalary()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这个语句调用的是<strong>Employee</strong>类中的<strong>getSalary</strong>方法。下面是<strong>Manager</strong>类中<strong>getSalary</strong>方法的正确版本：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public double getSalary()
+&#123;
+    double baseSalary &#x3D; super.getSalary(); 
+    return baseSalary + bonus;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="注释-2"><a href="#注释-2" class="headerlink" title="注释"></a>注释</h3><blockquote><p>有些人认为<strong>super</strong>与<strong>this</strong>引用是类似的概念，实际上，这样比较并不太恰当。 这是因为<strong>super</strong>不是一个对象的引用，例如，不能将值<strong>super</strong>赋给另一个对象变量，它只是一个指示编译器调用超类方法的特殊关键字。</p><p>正像前面所看到的那样，在子类中可以<strong>增加</strong>字段、<strong>增加</strong>方法或<strong>覆盖</strong>超类的方法，不过，继承绝对不会删除任何字段或方法。</p></blockquote><h2 id="子类构造器"><a href="#子类构造器" class="headerlink" title="子类构造器"></a>子类构造器</h2><blockquote><p>在例子的最后，我们来提供一个构造器。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Manager(String name, double salary, int year, int month, int day)
+&#123;
+    super(name, salary, year, month, day);
+    bonus &#x3D; 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>这里的关键字<strong>super</strong>具有不同的含义。语句</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">super(name, salary, year, month, day);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>是“调用超类<strong>Employee</strong>中带有<strong>n、s、year、month和day</strong>参数的构造器”的简写形式。</p><p>由于<strong>Manager</strong>类的构造器不能访问<strong>Employee</strong>类的私有字段，所以必须通过一个构造器来初始化这些私有字段。可以利用特殊的<strong>super</strong>语法调用这个构造器。使用<strong>super</strong>调用构造器的语句必须是子类构造器的第一条语句。</p><p>如果子类的构造器没有显式地调用超类的构造器，将自动地调用超类的无参数构造器。如果超类没有无参数的构造器，并且在子类的构造器中又没有显式地调用超类的其他构造器，Java编译器就会报告一个错误。</p></blockquote><h3 id="注释-3"><a href="#注释-3" class="headerlink" title="注释"></a>注释</h3><h4 id="关键字this和super的含义"><a href="#关键字this和super的含义" class="headerlink" title="关键字this和super的含义"></a>关键字this和super的含义</h4><blockquote><p>回想一下，关键字<strong>this</strong>有两个含义：一是指示隐式参数的引用，二是调用该类的其他构造器。类似地，super关键字也有两个含义：一是调用超类的方法，二是调用超类的构造器。在调用构造器的时候，<strong>this</strong>和<strong>super</strong>这两个关键字紧密相关。调用构造器的语句只能作为另一个构造器的第一条语句出现。构造器参数可以传递给当前类（<strong>this</strong>）的另一个构造器，也可以传递给超类（<strong>super</strong>）的构造器。</p><p>重新定义<strong>Manager</strong>对象的<strong>getSalary</strong>方法之后，奖金就会<strong>自动地</strong>添加到经理的薪水中。</p><p>下面给出一个例子来说明这个类的使用。我们要创建一个新经理，并设置他的奖金：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager boss &#x3D; new Manager(&quot;Carl Cracker&quot;, 80000, 1987, 12, 15);
+boss.setBonus(5000);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>下面定义一个包含3个员工的数组：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">var staff &#x3D; new Employee[3];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>在数组中混合填入经理和员工：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">staff[0] &#x3D; boss;
+staff[l] &#x3D; new Employee(&quot;Harry Hacker&quot;, 50000, 1989, 10, 1);
+staff[2] &#x3D; new Employee(&quot;Tony Tester&quot;, 40000, 1990, 3, 15);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>输出每个人的薪水：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">for (Employee e : staff)
+    System.out.println(e.getName() + &quot; &quot; + e.getSalary());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>运行这条循环语句将会输出下列数据：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Carl Cracker 85000.0
+Harry Hacker 50000.0
+Tommy Tester 40000.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>这里的<code>staff[1]</code>和<code>staff[2]</code>仅输出了基本薪水，这是因为它们是<strong>Employee</strong>对象，而<strong>staff[0]</strong> 是一个<strong>Manager</strong>对象，它的<strong>getSalary</strong>方法会将奖金与基本薪水相加。</p><p>需要提醒大家的是，以下调用</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">e.getSalary()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>能够选出应该执行的<strong>正确getSalary</strong>方法。请注意，尽管这里将<strong>e声明</strong>为<strong>Employee</strong>类型，但实际上<strong>e</strong>既可以引用<strong>Employee</strong>类型的对象，也可以引用<strong>Manager</strong>类型的对象。</p><p>当<strong>e</strong>引用<strong>Employee</strong>对象时，<code>e.getSalary()</code>调用的是<strong>Employee</strong>类中的<strong>getSalary</strong>方法；当<strong>e</strong>引用<strong>Manager</strong>对象时，<code>e.getSalary()</code>调用的是<strong>Manager</strong>类中的<strong>getSalary</strong>方法。虚拟机知道<strong>e</strong>实际引用的对象类型，因此能够正确地调用相应的方法。</p></blockquote><h3 id="多态（polymorphism）和动态绑定（dynamic-binding）"><a href="#多态（polymorphism）和动态绑定（dynamic-binding）" class="headerlink" title="多态（polymorphism）和动态绑定（dynamic binding）"></a>多态（polymorphism）和动态绑定（dynamic binding）</h3><blockquote><p>一个对象变量（例如，变量<strong>e</strong>）可以指示多种实际类型的现象称为<strong>多态</strong>（polymorphism）。在运行时能够自动地选择适当的方法，称为<strong>动态绑定</strong>（dynamic binding）。</p><p>下面的程序展示了<strong>Employee</strong>对象与<strong>Manager</strong>对象在薪水计算上的区别。</p></blockquote><h3 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h3><h4 id="inheritance-Huangzihan-Employee-java"><a href="#inheritance-Huangzihan-Employee-java" class="headerlink" title="inheritance/Huangzihan_Employee.java"></a>inheritance/Huangzihan_Employee.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package inheritance;
+
+import java.time.*;
+
+public class Huangzihan_Employee
+&#123;
+	private String huangzihan_name;
+	private double huangzihan_salary;
+	private LocalDate huangzihan_hireDay;
+	
+	public Huangzihan_Employee(String huangzihan_name, double huangzihan_salary, int huangzihan_year, int huangzihan_month, int huangzihan_day) 
+	&#123;
+		this.huangzihan_name &#x3D; huangzihan_name;
+		this.huangzihan_salary &#x3D; huangzihan_salary;
+		huangzihan_hireDay &#x3D; LocalDate.of(huangzihan_year, huangzihan_month, huangzihan_day);
+	&#125;
+	
+	public String huangzihan_getName() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public double huangzihan_getSalary() 
+	&#123;
+		return huangzihan_salary;
+	&#125;
+	
+	public LocalDate huangzihan_getHireDay() 
+	&#123;
+		return huangzihan_hireDay;
+	&#125;
+	
+	public void huangzihan_raiseSalary(double huangzihan_byPercent) 
+	&#123;
+		double huangzihan_raise &#x3D; huangzihan_salary * huangzihan_byPercent &#x2F; 100;
+		huangzihan_salary +&#x3D; huangzihan_raise;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="inheritance-Huangzihan-Manager-java"><a href="#inheritance-Huangzihan-Manager-java" class="headerlink" title="inheritance/Huangzihan_Manager.java"></a>inheritance/Huangzihan_Manager.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package inheritance;
+
+public class Huangzihan_Manager extends Huangzihan_Employee
+&#123;
+    private double huangzihan_bonus;
+	
+	&#x2F;*
+	 * @param huangzihan_name 雇员的姓名
+	 * @param huangzihan_salary 工资
+	 * @param huangzihan_year 雇佣年份
+	 * @param huangzihan_month 雇佣月份
+	 * @param huangzihan_day 雇佣天数
+	 * 
+	 *&#x2F;
+	
+	 public Huangzihan_Manager(String huangzihan_name, double huangzihan_salary, int huangzihan_year, int huangzihan_month, int huangzihan_day) 
+	 &#123;
+		 super(huangzihan_name, huangzihan_salary, huangzihan_year, huangzihan_month, huangzihan_day);
+		 huangzihan_bonus &#x3D; 0;
+	 &#125;
+	 
+	 public double huangzihan_getSalary() 
+	 &#123;
+		 double huangzihan_baseSalary &#x3D; super.huangzihan_getSalary();
+		 return huangzihan_baseSalary + huangzihan_bonus;
+	 &#125;
+	 
+	 public void huangzihan_setBonus(double huangzihan_b) 
+	 &#123;
+		 huangzihan_bonus &#x3D; huangzihan_b;
+	 &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="inheritance-Huangzihan-ManagerTest-java"><a href="#inheritance-Huangzihan-ManagerTest-java" class="headerlink" title="inheritance/Huangzihan_ManagerTest.java"></a>inheritance/Huangzihan_ManagerTest.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package inheritance;
+
+&#x2F;* @功能：这个程序演示了继承。
+ * @版本：1.21
+ * @时间：2021-07-21
+ * @作者：黄子涵
+ * 
+ *&#x2F;
+
+public class Huangzihan_ManagerTest
+&#123;
+	public static void main(String[] huangzihan_args) 
+	&#123;
+		&#x2F;&#x2F; 构造一个Manager对象
+		Huangzihan_Manager huangzihan_boss &#x3D; new Huangzihan_Manager(&quot;huangzihan&quot;, 80000, 1987, 12, 15);
+		
+		huangzihan_boss.huangzihan_setBonus(5000);
+		
+		var huangzihan_staff &#x3D; new Huangzihan_Employee[3];
+		
+		&#x2F;&#x2F; 用Manager和Employee对象填充人员数组
+		
+		huangzihan_staff[0] &#x3D; huangzihan_boss;
+		huangzihan_staff[1] &#x3D; new Huangzihan_Employee(&quot;Huangzihan&quot;, 50000, 1989, 10, 1);
+		huangzihan_staff[2] &#x3D; new Huangzihan_Employee(&quot;huang_zihan&quot;, 40000, 1990, 3, 15);
+		
+		&#x2F;&#x2F; 打印出所有Employee对象的信息
+		for(Huangzihan_Employee huangzihan_e : huangzihan_staff) 
+		&#123;
+			System.out.println(&quot;名字&#x3D;&quot; + huangzihan_e.huangzihan_getName() + &quot;，工资&#x3D;&quot; + huangzihan_e.huangzihan_getSalary());
+		&#125;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">名字&#x3D;huangzihan，工资&#x3D;85000.0
+名字&#x3D;Huangzihan，工资&#x3D;50000.0
+名字&#x3D;huang_zihan，工资&#x3D;40000.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="继承层次"><a href="#继承层次" class="headerlink" title="继承层次"></a>继承层次</h2><h3 id="继承链（inheritance-chain）"><a href="#继承链（inheritance-chain）" class="headerlink" title="继承链（inheritance chain）"></a>继承链（inheritance chain）</h3><blockquote><p>继承并不仅限于一个层次。例如，可以由<strong>Manager</strong>类派生<strong>Executive</strong>类。由一个公共超类派生出来的所有类的集合称为<strong>继承层次</strong>（inheritance<br>hierarchy），如图（Employee继承层次）所示。在继承层次中，从某个特定的类到其祖先的路径称为该类的<strong>继承链</strong>（inheritance chain）。</p></blockquote><center><img src="/2021/07/22/%E7%B1%BB%E3%80%81%E8%B6%85%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB/Employee继承层次.png" width="90%" height="90%"> Employee继承层次</center><blockquote><p>通常，一个祖先类可以有多个子孙链。例如，可以由<strong>Employee</strong>类派生出子类 <strong>Programmer</strong>和<strong>Secretary</strong>，它们与<strong>Manager</strong>类没有任何关系（它们彼此之间也没有任何关系）。必要的话，可以将这个过程一直延续下去。</p></blockquote><h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><blockquote><p>有一个简单规则可以用来判断是否应该将数据设计为继承关系，这就是“is-a”规则，它指出子类的每个对象也是超类的对象。例如，每个经理都是员工，因此，将<strong>Manager</strong>类设计为<strong>Employee</strong>类的子类是有道理的；反之则不然，并不是每一名员工都是经理。</p></blockquote><h3 id="替换原则（substitution-principle）"><a href="#替换原则（substitution-principle）" class="headerlink" title="替换原则（substitution principle）"></a>替换原则（substitution principle）</h3><blockquote><p>“is-a”规则的另一种表述是<strong>替换原则</strong>（substitution<br>principle）。它指出程序中岀现超类对象的任何地方都可以使用子类对象替换。</p><p>例如，可以将子类的对象赋给超类变量。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Employee e;
+e &#x3D; new Employee(. . .); &#x2F;&#x2F; Employee object expected
+e &#x3D; new Managerf(. . .)；&#x2F;&#x2F; OK, Manager can be used as well<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>在Java程序设计语言中，对象变量是<strong>多态的</strong>（polymorphic.）。一个<strong>Employee</strong>类型的变量既可以引用一个<strong>Employee</strong>类型的对象，也可以引用<strong>Employee</strong>类的任何一个子类的对象（例如，<strong>Manager</strong>、<strong>Executive</strong>、<strong>Secretary</strong>等)。</p><p>在程序（inheritance/Huangzihan_ManagerTest.java）中，我们就利用了这个替换原则：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager boss &#x3D; new Manager(...);
+Employee[] staff &#x3D; new Employee[3];
+staff[0] &#x3D; boss;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>在这个例子中，变量<code>staff[0]</code>与<code>boss</code>引用同一个对象。但编译器只将<code>staff[0]</code>看成是一个<strong>Employee</strong>对象。这意味着，可以这样调用</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">boss.setBonus(5000); &#x2F;&#x2F; OK<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>但不能这样调用</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">staff[0].setBonus(5000);   &#x2F;&#x2F; ERROR<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这是因为<strong>staff[0]</strong>声明的类型是<strong>Employee</strong>，而<strong>setBonus</strong>不是<strong>Employee</strong>类的方法。</p><p>不过，不能将超类的引用赋给子类变量。例如，下面的赋值是非法的：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager m &#x3D; staff[i];   &#x2F;&#x2F; ERROR<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>原因很清楚：不是所有的员工都是经理。如果赋值成功，<strong>m</strong>有可能引用了一个不是经理的<strong>Employee</strong>对象，而在后面有可能会调用<strong>m.setBonusf(…)</strong>，这就会发生运行时错误。</p></blockquote><h3 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h3><blockquote><p>在Java中，子类引用的数组可以转换成超类引用的数组，而不需要使用强制类 型转换。例如，下面是一个经理数组</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager[] managers &#x3D; new Manager[10];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>将它转换成<code>Employee[]</code>数组完全是合法的：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Employee[] staff &#x3D; managers;   &#x2F;&#x2F; OK<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这样做肯定不会有问题，请思考一下其中的缘由。毕竟，如果<code>manager[i]</code>是一个<strong>Manager</strong>，它也一定是一个<strong>Employee</strong>。不过，实际上将会发生一些令人惊讶的事情。要切记<strong>managers</strong>和<strong>staff</strong>引用的是同一个数组。现在看一下这条语句：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">staff[0] &#x3D; new Employee(&quot;Harry Hacker&quot;, . . .);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>编译器竟然接纳了这个赋值操作。但在这里，<code>staff[0]</code>与<code>manager[0]</code>是相同的引用，似乎我们把一个普通员工擅自归入经理行列中了。这是一种很不好的情形，当调用<code>managers[0].setBonus(1000)</code>的时候，将会试图调用一个不存在的实例字段，进而搅乱相邻存储空间的内容。</p><p>为了确保不发生这类破坏，所有数组都要牢记创建时的元素类型，并负责监督仅 将类型兼容的引用存储到数组中。例如，使用<code>new managers[10]</code>创建的数组是一个经理数组。如果试图存储一个<strong>Employee</strong>类型的引用就会引发<strong>ArrayStoreException</strong>异常。</p></blockquote><h2 id="理解方法调用"><a href="#理解方法调用" class="headerlink" title="理解方法调用"></a>理解方法调用</h2><blockquote><p>准确地理解如何在对象上应用方法调用非常重要。下面假设要调用<strong>x.f(args)</strong>，隐式参数<strong>x</strong>声明为类<strong>C</strong>的一个对象。下面是调用过程的详细描述：</p></blockquote><ol><li>编译器查看对象的声明类型和方法名。需要注意的是：有可能存在多个名字为<strong>f</strong>但参数类型不一样的方法。例如，可能存在方法<strong>f(int)</strong>和方法<strong>f(String)</strong>。编译器将会一一列举<strong>C</strong>类中所有名为<strong>f</strong>的方法和其超类中所有名为<strong>f</strong>而且可访问的方法（超类的私有方法不可访问）。</li></ol><blockquote><p>至此，编译器已知道所有可能被调用的候选方法。</p></blockquote><h3 id="重载解析（overloading-resolution）"><a href="#重载解析（overloading-resolution）" class="headerlink" title="重载解析（overloading resolution）"></a>重载解析（overloading resolution）</h3><ol><li>接下来，编译器要确定方法调用中提供的参数类型。如果在所有名为<strong>f</strong>的方法中存在一个与所提供参数类型完全匹配的方法，就选择这个方法。这个过程称为<strong>重载解析</strong>（overloading resolution）。例如，对于调用<strong>x.f(“Hello”)</strong>，编译器将会挑选<strong>f(String)</strong>，而不是<strong>f(int)</strong>。由于允许类型转换（<strong>int</strong>可以转换成<strong>double</strong>， <strong>Manager</strong>以转换成<strong>Employee</strong>，等等)，所以情况可能会变得很复杂。如果编译器没有找到与参数类型匹配的方法，或者发现经过类型转换后有多个方法与之匹配，编译器就会报告一个错误。</li></ol><blockquote><p>至此，编译器已经知道需要调用的方法的名字和参数类型。</p></blockquote><h3 id="注释-4"><a href="#注释-4" class="headerlink" title="注释"></a>注释</h3><blockquote><p>前面曾经说过，方法的名字和参数列表称为方法的<strong>签名</strong>。例如，<strong>f(int)</strong>和<strong>f(String)</strong>是两个有相同名字、不同签名的方法。如果在子类中定义了一个与超类签名相同的方法，那么子类中的这个方法就会覆盖超类中这个相同签名的方法。</p><p>返回类型不是签名的一部分。不过在覆盖一个方法时，需要保证返回类型的兼容 性。允许子类将覆盖方法的返回类型改为原返回类型的子类型。例如，假设<strong>Employee</strong>类有以下方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee getBuddyf() &#123; . . . &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>经理不会想找这种底层员工作搭档。为了反映这一点，在子类<strong>Manager</strong>中，可以如下覆盖这个方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Manager getBuddyf() &#123; . . . &#125;  &#x2F;&#x2F; OK to change return type<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>我们说，这两个<strong>getBuddy</strong>方法有<strong>可协变</strong>的返回类型。</p></blockquote><h3 id="静态绑定（static-binding）"><a href="#静态绑定（static-binding）" class="headerlink" title="静态绑定（static binding）"></a>静态绑定（static binding）</h3><ol><li><p>如果是<strong>private</strong>方法、<strong>static</strong>方法、<strong>final</strong>方法或者构造器，那么编译器将可以准确地知道应该调用哪个方法。这称为<strong>静态绑定</strong>（static binding）。与此对应的是，如果要调用的方法依赖于隐式参数的实际类型，那么必须在运行时使用动态绑定。编译器会利用动态绑定生成一个调用<code>f(String)</code>的指令。</p></li><li><p>程序运行并且采用动态绑定调用方法时，虚拟机必须调用与<strong>x</strong>所引用对象的<strong>实际</strong>类型对应的那个方法。假设<strong>x</strong>的实际类型是<strong>D</strong>，它是<strong>C</strong>类的子类。如果<strong>D</strong>类定义了方法<code>f(String)</code>，就会调用这个方法；否则，将在<strong>D</strong>类的超类中寻找<code>f(String)</code>，以此类推。</p></li></ol><h3 id="方法表（method-table）"><a href="#方法表（method-table）" class="headerlink" title="方法表（method table）"></a>方法表（method table）</h3><blockquote><p>每次调用方法都要完成这个搜索，时间开销相当大。因此，虚拟机预先为每个类计算了一个<strong>方法表</strong>（method table），其中列岀了所有方法的签名和要调用的实际方法。这样一来，在真正调用方法的时候，虚拟机仅查找这个表就行了。在前面的例子中，虚拟机搜索<strong>D</strong>类的方法表，寻找与调用<code>f(Sting)</code>相匹配的方法。这个方法既有可能是<code>D.f(String)</code>，也有可能是<code>X.f(String)</code>，这里的X是D的某个超类。这里需要提醒一点，如果调用是<strong>super.f(param)</strong>，那么编译器将对隐式参数超类的方法表进行搜索。</p><p>现在来详细分析程序（inheritance/Huangzihan_ManagerTest.java）中调用<code>e.getSalary()</code>的过程。<strong>e</strong>声明为<strong>Employee</strong>类型。<strong>Employee</strong>类只有一个名叫<strong>getSalary</strong>的方法，这个方法没有参数。因此，在这里不必担心重载解析的问题。</p><p>由于<strong>getSalary</strong>不是<strong>private</strong>方法、<strong>static</strong>方法或<strong>final</strong>方法，所以将釆用动态绑定。虚拟机为<strong>Employee</strong>和<strong>Manager</strong>类生成方法表。在<strong>Employee</strong>的方法表中列出了这个<strong>Employee</strong>类本身定义的所有方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Employee:
+    getName() -&gt; Employee.getName()
+    getSalary() -&gt; Employee.getSalary() 
+    getHireDay() -&gt; Employee.getHireDay() 
+    raiseSalary(double) -&gt; Employee.raiseSalary(double)
+&#96;&#96;&#96;    
+    
+&gt; 实际上，上面列出的方法并不完整，稍后会看到**Employee**类有一个超类**Object**，**Employee**类从这个超类中还继承了大量方法，在此，我们略去了**Object**方法。
+
+&gt; **Manager**方法表稍微有些不同。其中有三个方法是继承而来的，一个方法是重新定义的，还有一个方法是新增加的。
+
+&#96;&#96;&#96;C&#x2F;C++
+Manager:
+    getName() -&gt; Employee.getName()
+    getSalary() -&gt; Manager.getSalary()
+    getHireDay() -&gt; Employee.getHireDay()
+    raiseSalary(double) -&gt; Employee.raiseSalary(double) 
+    setBonus(double) -&gt; Manager.setBonus(double)
+&#96;&#96;&#96;    
+    
+&gt; 在运行时，调用&#96;e.getSalary()&#96;的解析过程为：
+
+1. 首先，虚拟机获取**e**的实际类型的方法表。这可能是**Employee**、**Manager**的方法表，也可能是**Employee**类的其他子类的方法表。
+
+2. 接下来，虚拟机查找定义了&#96;getSalary()&#96;签名的类。此时，虚拟机已经知道应该调用哪个方法。
+
+3. 最后，虚拟机调用这个方法。
+
+&gt; 动态绑定有一个非常重要的特性：无须对现有的代码进行修改就可以对程序进行扩展。假设增加一个新类**Executive**，并且变量**e**有可能引用这个类的对象，我们不需要对包含调用&#96;e.getSalary()&#96;的代码重新进行编译。如果**e**恰好引用一个**Executive**类的对象，就会自动地调用&#96;Executive.getSalary()&#96;方法。
+
+### 警告
+
+&gt; 在覆盖一个方法的时候，子类方法**不能低于**超类方法的**可见性**。特别是，如果超类方法是**public**，子类方法必须也要声明为**public**。经常会发生这类错误：即子类方法不小心遗漏了**public**修饰符。此时，编译器就会报错，指出你试图提供更严格的访问权限。
+
+## 阻止继承：final类和方法
+
+&gt; 有时候，我们可能希望阻止人们利用某个类定义子类。不允许扩展的类被称为**final**类。如果在定义类的时候使用了**final**修饰符就表明这个类是**final**类。例如，假设希望阻止人们派生**Executive**类的子类，就可以在声明这个类的时候使用**final**修饰符。声明格式如下所示： 
+
+&#96;&#96;&#96;C&#x2F;C++
+public final class Executive extends Manager
+&#123;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>类中的某个特定方法也可以被声明为<strong>final</strong>。如果这样做，子类就不能覆盖这个方法（<strong>final</strong>类中的所有方法自动地成为<strong>final</strong>方法）。例如</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Employee
+&#123;
+    . . .
+    public final String getName()
+    &#123;
+        return name;
+    &#125;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="注释-5"><a href="#注释-5" class="headerlink" title="注释"></a>注释</h3><blockquote><p>前面曾经说过，字段也可以声明为<strong>final</strong>。对于<strong>final</strong>字段来说，构造对象之后就不允许改变它们的值了。不过，如果将一个类声明为<strong>final</strong>，只有其中的方法自动地成为<strong>final</strong>，而不包括字段。</p><p>将方法或类声明为<strong>final</strong>的主要原因是：确保它们不会在子类中改变语义。例如，<strong>Calendar</strong>类中的<strong>getTime</strong>和<strong>setTime</strong>方法都声明为<strong>final</strong>。这表明<strong>Calendar</strong>类的设计者负责实现<strong>Date</strong>类与日历状态之间的转换，而不允许子类来添乱。同样地，<strong>String</strong>类也是<strong>final</strong>类，这意味着不允许任何人定义<strong>String</strong>的子类。换言之，如果有一个<strong>String</strong>引用，它引用的一定是一个<strong>String</strong>对象，而不可能是其他类的对象。</p><p>有些程序员认为：除非有足够的理由使用多态性，否则应该将所有的方法都声明为<strong>final</strong>。事实上，在C++和C#中，如果没有特别地说明，所有的方法都不使用多态性。这两种做法可能都有些偏激。我们提倡在设计类层次时，要仔细地思考应该将哪些方法和类声明为<strong>final</strong>。</p></blockquote><h3 id="内联（inlining）"><a href="#内联（inlining）" class="headerlink" title="内联（inlining）"></a>内联（inlining）</h3><blockquote><p>在早期的Java中，有些程序员为了避免动态绑定带来的系统开销而使用<strong>final</strong>关键字。如果一个方法没有被覆盖并且很短，编译器就能够对它进行优化处理，这个过程称为内联（inlining）。例如，内联调用<code>e.getName()</code>将被替换为访问字段<strong>e.name</strong>。这是一项很有意义的改进，CPU在处理当前指令时，分支会扰乱预取指令的策略，所以，CPU不喜欢分支。然而，如果<strong>getName</strong>在另外一个类中被覆盖，那么编译器就无法知道覆盖的代码将会做什么操作，因此也就不能对它进行内联处理了。</p><p>幸运的是，虚拟机中的即时编译器比传统编译器的处理能力强得多。这种编译器可以准确地知道类之间的继承关系，并能够检测出是否有类确实覆盖了给定的方法。如果方法很简短、被频繁调用而且确实没有被覆盖，那么即时编译器就会将这个方法进行内联处理。如果虚拟机加载了另外一个子类，而这个子类覆盖了一个内联方法，那么将会发生什么情况呢？优化器将取消对这个方法的内联。这个过程很慢，不过很少会发生这种情况。</p></blockquote><h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><blockquote><p>将一个类型强制转换成另外一个类型的过程称为强制类型转换。Java程序设计语言为强制类型转换提供了一种特殊的表示法。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">double x &#x3D; 3.405;
+int nx &#x3D; (int) x;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>将表达式<strong>x</strong>的值转换成整数类型，舍弃了小数部分。</p></blockquote><h3 id="程序示例-1"><a href="#程序示例-1" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangzihanTest
+&#123;
+	public static void main(String[] huangzihan_args) 
+	&#123;
+		double huangzihan_x &#x3D; 3.405;
+		int huangzihan_nx &#x3D; (int) huangzihan_x;
+		System.out.println(huangzihan_nx);
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>正像有时候需要将浮点数转换成整数一样，有时候也可能需要将某个类的对象引用转换成另外一个类的对象引用。要完成对象引用的强制类型转换，转换语法与数值表达式的强制类型转换类似，仅需要用一对圆括号将目标类名括起来，并放置在需要转换的对象引用之前就可以了。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager boss &#x3D; (Manager) staff[0];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="强制类型转换的唯一原因"><a href="#强制类型转换的唯一原因" class="headerlink" title="强制类型转换的唯一原因"></a>强制类型转换的唯一原因</h3><blockquote><p>进行强制类型转换的唯一原因是：要在暂时忽视对象的实际类型之后使用对象的全部功能。例如，在<strong>managerTest</strong>类中，由于<strong>某些</strong>元素是普通员工，所以<strong>staff</strong>数组必须是<strong>Employee</strong>对象的数组。我们需要将数组中引用经理的元素复原成<strong>Manager</strong>对象，以便能够访问新增加的所有变量（需要注意，在第一节的示例代码中，为了避免强制类型转换，我们做了一些特别的处理。将<strong>boss</strong>变量存入数组之前，先将它初始化为一个<strong>Manager</strong>对象。为了设置经理的奖金，必须使用正确的类型）。</p><p>大家知道，在Java中，每个对象变量都有一个类型。类型描述了这个变量所引用的以及能够引用的对象类型。例如，<strong>staff[i]</strong>引用一个<strong>Employee</strong>对象（因此它还可以引用<strong>Manager</strong>对象）。</p><p>将一个值存入变量时，编译器将检查你是否承诺过多。如果将一个子类的引用赋给一个超类变量，编译器是允许的。但将一个超类的引用赋给一个子类变量时，就承诺过多了。必须进行强制类型转换，这样才能够通过运行时的检查。</p><p>如果试图在继承链上进行向下的强制类型转换，并且“谎报”对象包含的内容，会发生什么情况呢？</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manager boss &#x3D; (Manager) staff[1];  &#x2F;&#x2F; ERROR<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>运行这个程序时，Java运行时系统将注意到你的承诺不符，并产生一个<strong>ClassCastException</strong>异常。如果没有捕获这个异常，那么程序就会终止。因此，应该养成这样一个良好的程序设计习惯：在进行强制类型转换之前，先查看是否能够成功地转换。为此只需要使用<strong>instanceof</strong>操作符就可以实现。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">if (staff[1] instanceof Manager)
+&#123;
+    boss &#x3D; (Manager) staff[1];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>最后，如果这个类型转换不可能成功，编译器就不会让你完成这个转换。例如，下面这个强制类型转换：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">String c &#x3D; (String) staff[1];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>将会产生编译错误，这是因为<strong>String</strong>不是<strong>Employee</strong>的子类。</p><p>综上所述：</p></blockquote><ul><li>只能在继承层次内进行强制类型转换。</li><li>在将超类强制转换成子类之前，应该使用<strong>instanceof</strong>进行检查。</li></ul><h3 id="注释-6"><a href="#注释-6" class="headerlink" title="注释"></a>注释</h3><blockquote><p>如果<strong>x</strong>为<strong>null</strong>，进行以下测试</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">x instanceof C<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>不会产生异常，只是返回<strong>false</strong>。之所以这样处理是因为<strong>null</strong>没有引用任何对象，当然也不会引用C类型的对象。</p><p>实际上，通过强制类型转换来转换对象的类型通常并不是一种好的做法。在我们的示例中，大多数情况并不需要将<strong>Employee</strong>对象强制转换成<strong>Manager</strong>对象，两个类的对象都能够正确地调用<strong>getSalary</strong>方法，这是因为实现多态性的动态绑定机制能够自动地找到正确的方法。</p><p>只有在使用<strong>Manager</strong>中特有的方法时才需要进行强制类型转换，例如，<strong>setBonus</strong>方法。如果岀于某种原因发现需要在<strong>Employee</strong>对象上调用<strong>setBonus</strong>方法，那么就应该自问超类的设计是否合理。可能需要重新设计超类，并添加<strong>setBonus</strong>方法，这才是更合适的选择。请记住，只要没有捕获<strong>ClassCastException</strong>异常，程序就会终止执行。一般情况下，最好尽量少用强制类型转换和<strong>instanceof</strong>运算符。</p></blockquote><h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><blockquote><p>如果自下而上在类的继承层次结构中上移，位于上层的类更具有一般性，可能更加抽象。从某种角度看，祖先类更有一般性，人们只将它作为派生其他类的基类，而不是用来构造你想使用的特定的实例。例如，考虑扩展<strong>Employee</strong>类层次结构。员工是一个人，学生也是一个人。下面扩展我们的类层次结构来加入类<strong>Person</strong>和类<strong>Student</strong>。图（Person及其子类的继承图）显示了这三个类之间的继承关系。</p></blockquote><center><img src="/2021/07/22/%E7%B1%BB%E3%80%81%E8%B6%85%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB/Person及其子类的继承图.png" width="90%" height="90%"> Person及其子类的继承图</center><blockquote><p>为什么要那么麻烦提供这样一个高层次的抽象呢？每个人都有一些属性，如姓名。学生与员工都有姓名属性，因此通过引入一个公共的超类，我们就可以把<strong>getName</strong>方法放在继承层次结构中更高的一层。</p><p>现在，再增加一个<strong>getDescription</strong>方法，它可以返回对一个人的简短描述。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">an employee with a salary of $50,000.00
+a student majoring in computer science<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="abstract关键字"><a href="#abstract关键字" class="headerlink" title="abstract关键字"></a>abstract关键字</h3><blockquote><p>在<strong>Employee</strong>类和<strong>Student</strong>类中实现这个方法很容易。但是在<strong>Person</strong>类中应该提供什么内容呢？除了姓名之外，<strong>Person</strong>类对这个人一无所知。当然，可以让<code>Person.getDescription()</code>返回一个空字符串。不过还有一个更好的方 法，就是使用<strong>abstract</strong>关键字，这样就完全不需要实现这个方法了。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public abstract String getDescription();
+&#x2F;&#x2F; no implementation required<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>为了提高程序的清晰度，包含一个或多个抽象方法的类本身必须被声明为抽象的。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public abstract class Person
+&#123;
+    . . .
+    public abstract String getDescription();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>除了抽象方法之外，抽象类还可以包含字段和具体方法。例如，<strong>Person</strong>类还保存着一个人的姓名，另外有一个返回姓名的具体方法。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public abstract class Person
+&#123;
+    private String name;
+    
+    public Person(String name)
+    &#123;
+        this.name &#x3D; name;
+    &#125;    
+
+    public abstract String getDescription();
+    
+    public String getName()
+    &#123;
+        return name;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><blockquote><p>有些程序员认为，在抽象类中不能包含具体方法。建议尽量将通用的字段和方 法（不管是否是抽象的）放在超类（不管是否是抽象类）中。</p><p>抽象方法充当着占位方法的角色，它们在子类中具体实现。扩展抽象类可以有两种选择。一种是在子类中保留抽象类中的部分或所有抽象方法仍未定义，这样就必须将子类也标记为抽象类；另一种做法是定义全部方法，这样一来，子类就不是抽象的了。</p><p>例如，通过扩展抽象<strong>Person</strong>类，并实现<strong>getDescription</strong>方法来定义<strong>Student</strong>类。由于在<strong>Student</strong>类中不再含有抽象方法，所以不需要将这个类声明为抽象类。</p><p>即使不含抽象方法，也可以将类声明为抽象类。</p><p>抽象类不能实例化。也就是说，如果将一个类声明为<strong>abstract</strong>，就不能创建这个类的对象。例如，表达式</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">new Personf(&quot;Vince Vu&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>是错误的，但可以创建一个具体子类的对象。</p><p>需要注意，可以定义一个抽象类的<strong>对象变量</strong>，但是这样一个变量只能引用非抽象子类的对象。例如，</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Person p &#x3D; new Student(&quot;Vince Vu&quot;, &quot;Economics&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这里的<strong>p</strong>是一个抽象类型<strong>Person</strong>的变量，它引用了一个非抽象子类<strong>Student</strong>的实例。</p><p>下面定义一个扩展抽象类<strong>Person</strong>的具体子类<strong>Student</strong>：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Student extends Person
+&#123;
+    private String major;
+    
+    public Student(String name, String major)
+    &#123;
+        super(name);
+        this.major &#x3D; major;	
+    &#125;
+    
+    public String getDescription()
+    &#123;
+        return &quot;a student majoring in &quot; + major;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p><strong>Student</strong>类定义了<strong>getDescription</strong>方法。因此，在<strong>Student</strong>类中的全部方法都是具体的，这个类不再是抽象类。</p><p>（Huangzihan_abstractClasses/Huangzihan_PersonTest.java）的程序中定义了抽象超类<strong>Person</strong>（见程序Huangzihan_abstractClasses/Huangzihan_Person.java）和两个具体子类<br><strong>Employee</strong>（见程序Huangzihan_abstractClasses/Huangzihan_Employee.java）和<strong>Student</strong>（见程序Huangzihan_abstractClasses/Huangzihan_Student.java）。下面将员工和学生对象填充到一个<strong>Person</strong>引用数组。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">var people &#x3D; new Person[2];
+people[0] &#x3D; new Employee(. . .);
+people[1] &#x3D; new Student(. . .);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>然后，输出这些对象的姓名和信息描述：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">for (Person p : people)
+    System.out.println(p.getName() + &quot;, &quot; + p.getDescription());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>有些人可能对下面这个调用感到困惑：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">p.getDescription()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这不是调用了一个没有定义的方法吗？请牢记，由于不能构造抽象类<strong>Person</strong>的对象，所以变量<strong>P</strong>永远不会引用<strong>Person</strong>对象，而是引用诸如<strong>Employee</strong>或<strong>Student</strong>这样的具体子类的对象，而这些对象中都定义了<strong>getDescription</strong>方法。</p><p>是否可以干脆省略<strong>Person</strong>超类中的抽象方法，而仅在<strong>Employee</strong>和<strong>Student</strong>子类中定义<strong>getDescription</strong>方法呢？如果这样做，就不能在变量<strong>p</strong>上调用<strong>getDescription</strong>方法了。编译器只允许调用在类中声明的方法。</p></blockquote><h3 id="程序示例-2"><a href="#程序示例-2" class="headerlink" title="程序示例"></a>程序示例</h3><h4 id="Huangzihan-abstractClasses-Huangzihan-Person-java"><a href="#Huangzihan-abstractClasses-Huangzihan-Person-java" class="headerlink" title="Huangzihan_abstractClasses/Huangzihan_Person.java"></a>Huangzihan_abstractClasses/Huangzihan_Person.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package Huangzihan_abstractClasses;
+
+public abstract class Huangzihan_Person
+&#123;
+	public abstract String huangzihan_getDescription();
+	private String huangzihan_name;
+	
+	public Huangzihan_Person(String huangzihan_name) 
+	&#123;
+		this.huangzihan_name &#x3D; huangzihan_name;
+	&#125;
+	
+	public String huangzihan_getName() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="Huangzihan-abstractClasses-Huangzihan-Employee-java"><a href="#Huangzihan-abstractClasses-Huangzihan-Employee-java" class="headerlink" title="Huangzihan_abstractClasses/Huangzihan_Employee.java"></a>Huangzihan_abstractClasses/Huangzihan_Employee.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package Huangzihan_abstractClasses;
+
+import java.time.LocalDate;
+
+public class Huangzihan_Employee extends Huangzihan_Person
+&#123;
+	private double huangzihan_salary;
+	private LocalDate huangzihan_hireDay;
+	
+	public Huangzihan_Employee(String huangzihan_name, double huangzihan_salary, int huangzihan_year, int huangzihan_month, int huangzihan_day)
+	&#123;
+		super(huangzihan_name);
+		this.huangzihan_salary &#x3D; huangzihan_salary;
+		huangzihan_hireDay &#x3D; LocalDate.of(huangzihan_year, huangzihan_month, huangzihan_day);
+	&#125;
+	
+	public double huangzihan_getSalary() 
+	&#123;
+		return huangzihan_salary;
+	&#125;
+	
+	public LocalDate huangzihan_getHireDay() 
+	&#123;
+		return huangzihan_hireDay;
+	&#125;
+	
+	public String huangzihan_getDescription() 
+	&#123;
+		return String.format(&quot;员工的工资为$%.2f&quot;, huangzihan_salary);
+	&#125;
+	
+	public void huangzihan_raiseSalary(double huangzihan_byPercent) 
+	&#123;
+		double huangzihan_raise &#x3D; huangzihan_salary * huangzihan_byPercent &#x2F; 100;
+		huangzihan_salary +&#x3D; huangzihan_raise;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="Huangzihan-abstractClasses-Huangzihan-Student-java"><a href="#Huangzihan-abstractClasses-Huangzihan-Student-java" class="headerlink" title="Huangzihan_abstractClasses/Huangzihan_Student.java"></a>Huangzihan_abstractClasses/Huangzihan_Student.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package Huangzihan_abstractClasses;
+
+public class Huangzihan_Student extends Huangzihan_Person
+&#123;
+	private String huangzihan_major;
+	&#x2F;*
+	 * @param huangzihan_name 学生的名字
+	 * @param huangzihan_major 学生的专业
+	 * 
+	 *&#x2F;
+	
+	public Huangzihan_Student(String huangzihan_name, String huangzihan_major) 
+	&#123;
+		&#x2F;&#x2F; 将名称传递给超类构造函数
+		super(huangzihan_name);
+		this.huangzihan_major &#x3D; huangzihan_major;
+	&#125;
+	
+	public String huangzihan_getDescription() 
+	&#123;
+		return &quot;学生正在主修&quot; + huangzihan_major + &quot;专业&quot;;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="Huangzihan-abstractClasses-Huangzihan-PersonTest-java"><a href="#Huangzihan-abstractClasses-Huangzihan-PersonTest-java" class="headerlink" title="Huangzihan_abstractClasses/Huangzihan_PersonTest.java"></a>Huangzihan_abstractClasses/Huangzihan_PersonTest.java</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">package Huangzihan_abstractClasses;
+
+&#x2F;*
+ * @功能：该程序演示了抽象类。
+ * @版本：1.01
+ * @时间：2021-07-21
+ * @作者：黄子涵
+ * 
+ *&#x2F;
+
+public class Huangzihan_PersonTest
+&#123;
+	public static void main(String[] huangzihan_args) 
+	&#123;
+		var huangzihan_people &#x3D; new Huangzihan_Person[2];
+		
+		&#x2F;&#x2F; 用Huangzihan_Student和Huangzihan_Employee对象填充people数组
+		huangzihan_people[0] &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;, 50000, 1989, 10, 1);
+		huangzihan_people[1] &#x3D; new Huangzihan_Student(&quot;黄子涵&quot;, &quot;电子信息工程专业&quot;);
+		
+		&#x2F;&#x2F; 打印出所有Huangzihan_Person对象的名称和描述
+		for(Huangzihan_Person huangzihan_p: huangzihan_people) 
+		&#123;
+			System.out.println(huangzihan_p.huangzihan_getName() + &quot;,&quot; + huangzihan_p.huangzihan_getDescription());
+		&#125;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">huangzihan,员工的工资为$50000.00
+黄子涵,学生正在主修电子信息工程专业专业<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="受保护访问"><a href="#受保护访问" class="headerlink" title="受保护访问"></a>受保护访问</h2><blockquote><p>大家都知道，最好将类中的字段标记为<strong>private</strong>，而方法标记为<strong>public</strong>。任何声明为<strong>private</strong>的内容对其他类都是不可见的。前面已经看到，这对于子类来说也完全适用，即子类也不能访问超类的私有字段。</p><p>不过，在有些时候，你可能希望限制超类中的某个方法只允许子类访问，或者更少见地，可能希望允许子类的方法访问超类的某个字段。为此，需要将这些类方法或字段声明为受保护（<strong>protected</strong>）。例如，如果将超类<strong>Employee</strong>中的<strong>hireDay</strong>字段声明为<strong>proteced</strong>，而不是<strong>private</strong>，<strong>Manager</strong>方法就可以直接访问这个字段。</p><p>在Java中，保护字段只能由同一个包中的类访问。现在考虑一个<strong>Administrator</strong>子类，这个子类在另一个不同的包中。<strong>Administrator</strong>类中的方法只能查看<strong>Administrator</strong>对象自己的<strong>hireDay</strong>字段，而不能查看其他<strong>Employee</strong>对象的这个字段。有了这个限制，就能避免滥用保护机制，不能通过派生子类来访问受保护的字段。</p><p>在实际应用中，要谨慎使用受保护字段。假设你的类要提供给其他程序员使用，而你在设计这个类时设置了一些受保护字段。你不知道的是，其他程序员可能会由这个类再派生出新类，并开始访问你的受保护字段。在这种情况下，如果你想修改你的类的实现，就势必会影响那些程序员。这违背了OOP提倡数据封装的精神。</p><p>受保护的方法更具有实际意义。如果需要限制某个方法的使用，就可以将它声明为<strong>protected</strong>。这表明子类（可能很熟悉祖先类）得到了信任，可以正确地使用这个方法，而其他类则不行。</p><p>这种方法的一个很好的示例就是<strong>Object</strong>类中的<strong>clone</strong>方法。</p></blockquote><h3 id="Java中的4个访问控制修饰符"><a href="#Java中的4个访问控制修饰符" class="headerlink" title="Java中的4个访问控制修饰符"></a>Java中的4个访问控制修饰符</h3><blockquote><p>下面对Java中的4个访问控制修饰符做个小结：</p></blockquote><ol><li>仅对本类可见————private。</li><li>对外部完全可见————public。</li><li>对本包和所有子类可见————protected。</li><li>对本包可见——默认（很遗憾），不需要修饰符。</li></ol><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E3%80%81%E8%B6%85%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">类、超类和子类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%AD%90%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">定义子类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97extends"><span class="toc-number">1.2.1.</span> <span class="toc-text">关键字extends</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A6%86%E7%9B%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">覆盖方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97super"><span class="toc-number">1.3.1.</span> <span class="toc-text">关键字super</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E7%B1%BB%E6%9E%84%E9%80%A0%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">子类构造器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97this%E5%92%8Csuper%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">关键字this和super的含义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%80%81%EF%BC%88polymorphism%EF%BC%89%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%EF%BC%88dynamic-binding%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">多态（polymorphism）和动态绑定（dynamic binding）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.4.3.</span> <span class="toc-text">程序示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#inheritance-Huangzihan-Employee-java"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">inheritance&#x2F;Huangzihan_Employee.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inheritance-Huangzihan-Manager-java"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">inheritance&#x2F;Huangzihan_Manager.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inheritance-Huangzihan-ManagerTest-java"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">inheritance&#x2F;Huangzihan_ManagerTest.java</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.4.4.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E5%B1%82%E6%AC%A1"><span class="toc-number">1.5.</span> <span class="toc-text">继承层次</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E9%93%BE%EF%BC%88inheritance-chain%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">继承链（inheritance chain）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">1.6.</span> <span class="toc-text">多态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99%EF%BC%88substitution-principle%EF%BC%89"><span class="toc-number">1.6.1.</span> <span class="toc-text">替换原则（substitution principle）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A"><span class="toc-number">1.6.2.</span> <span class="toc-text">警告</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-number">1.7.</span> <span class="toc-text">理解方法调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E8%A7%A3%E6%9E%90%EF%BC%88overloading-resolution%EF%BC%89"><span class="toc-number">1.7.1.</span> <span class="toc-text">重载解析（overloading resolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-4"><span class="toc-number">1.7.2.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%EF%BC%88static-binding%EF%BC%89"><span class="toc-number">1.7.3.</span> <span class="toc-text">静态绑定（static binding）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A1%A8%EF%BC%88method-table%EF%BC%89"><span class="toc-number">1.7.4.</span> <span class="toc-text">方法表（method table）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-5"><span class="toc-number">1.7.5.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%81%94%EF%BC%88inlining%EF%BC%89"><span class="toc-number">1.7.6.</span> <span class="toc-text">内联（inlining）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.8.</span> <span class="toc-text">强制类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.8.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="toc-number">1.8.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%94%AF%E4%B8%80%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.8.3.</span> <span class="toc-text">强制类型转换的唯一原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-6"><span class="toc-number">1.8.4.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-number">1.9.</span> <span class="toc-text">抽象类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#abstract%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.9.1.</span> <span class="toc-text">abstract关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">1.9.2.</span> <span class="toc-text">提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.9.3.</span> <span class="toc-text">程序示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Huangzihan-abstractClasses-Huangzihan-Person-java"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">Huangzihan_abstractClasses&#x2F;Huangzihan_Person.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Huangzihan-abstractClasses-Huangzihan-Employee-java"><span class="toc-number">1.9.3.2.</span> <span class="toc-text">Huangzihan_abstractClasses&#x2F;Huangzihan_Employee.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Huangzihan-abstractClasses-Huangzihan-Student-java"><span class="toc-number">1.9.3.3.</span> <span class="toc-text">Huangzihan_abstractClasses&#x2F;Huangzihan_Student.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Huangzihan-abstractClasses-Huangzihan-PersonTest-java"><span class="toc-number">1.9.3.4.</span> <span class="toc-text">Huangzihan_abstractClasses&#x2F;Huangzihan_PersonTest.java</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-2"><span class="toc-number">1.9.4.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%97%E4%BF%9D%E6%8A%A4%E8%AE%BF%E9%97%AE"><span class="toc-number">1.10.</span> <span class="toc-text">受保护访问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E4%B8%AD%E7%9A%844%E4%B8%AA%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">1.10.1.</span> <span class="toc-text">Java中的4个访问控制修饰符</span></a></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

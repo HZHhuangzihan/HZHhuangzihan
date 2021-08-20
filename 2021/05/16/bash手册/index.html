@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>bash手册 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="bash手册man命令
+man命令用来访问存储在Linux系统上的手册页面。在想要查找的工具的名称前面输入man命令，就可以找到那个工具相应的手册条目。
+
+man man
+窍门：bash手册甚至包含,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">bash手册</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">bash手册</h1><div class="stuff"><span>五月 16, 2021</span></div><div class="content markdown"><h1 id="bash手册"><a href="#bash手册" class="headerlink" title="bash手册"></a>bash手册</h1><h2 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h2><blockquote><p>man命令用来访问存储在Linux系统上的手册页面。在想要查找的工具的名称前面输入man命令，就可以找到那个工具相应的手册条目。</p></blockquote><h3 id="man-man"><a href="#man-man" class="headerlink" title="man man"></a>man man</h3><blockquote><p>窍门：bash手册甚至包含了一份有关其自身的参考信息。输入<code>man man</code>来查看与手册页相关的手册页。</p></blockquote><p>根据上面的提示，我在控制台终端输入这行代码：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man man<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后它弹出这样一个页面：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">MAN(1)                                                    Manual pager utils                                                   MAN(1)
+
+NAME
+       man - an interface to the system reference manuals
+
+SYNOPSIS
+       man [man options] [[section] page ...] ...
+       man -k [apropos options] regexp ...
+       man -K [man options] [section] term ...
+       man -f [whatis options] page ...
+       man -l [man options] file ...
+       man -w|-W [man options] page ...
+
+DESCRIPTION
+       man  is  the  system&#39;s  manual pager.  Each page argument given to man is normally the name of a program, utility or function.
+       The manual page associated with each of these arguments is then found and displayed.  A section, if provided, will direct  man
+       to look only in that section of the manual.  The default action is to search in all of the available sections following a pre-
+       defined order (see DEFAULTS), and to show only the first page found, even if page exists in several sections.
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>如果我们想退出这个页面，直接按<code>q</code>键就可以。然后我又查了我平时用的那条<code>ls</code>指令，整个过程代码如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man ls
+
+LS(1)                                                       User Commands                                                       LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List  information  about  the  FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor
+       --sort is specified.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -a, --all
+              do not ignore entries starting with .
+
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>窍门：如果你是新接触bash shell，可能一开始会觉得手册页面并不太用。但是如果养成了阅读手册的习惯，尤其是阅读第一段或是DESCRIPTION部分的前两段，最终你会学到各种技术行话，手册页也会变得越来越有用。</p></blockquote><span id="more"></span><h3 id="分页程序（page）"><a href="#分页程序（page）" class="headerlink" title="分页程序（page）"></a>分页程序（page）</h3><blockquote><p>当使用man命令查看命令手册的时候，这些手册页是由分页程序（page）来显示的。分页程序是一种实用工具，能够逐页显示文本。可以通过点击空格键进行翻页，或是使用回车键逐行查看。另外还可以使用箭头键向前向后滚动手册页的内容（假设你用的终端仿真软件包支持箭头键功能）。</p></blockquote><p>在分页程序最下面的一行有这样一条语句：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manual page ls(1) line 1&#x2F;218 15% (press h for help or q to quit)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当我们使用回车键和箭头键向前向后的时候，这句话在中的1/218的1不断地增加。</p><blockquote><p>读完了手册页，可以点击q键退出。退出手册页之后，你会重新获得shell CLI提示符，这表示shell正在等待接受下一条命令。</p><p>手册页将与命令相关的信息分成了不同的节。每一节惯用的命名标准如表<strong>Linux手册页惯用的节名</strong></p></blockquote><h4 id="Linux手册页惯用的节名"><a href="#Linux手册页惯用的节名" class="headerlink" title="Linux手册页惯用的节名"></a>Linux手册页惯用的节名</h4><div class="table-container"><table><thead><tr><th>节</th><th>描述</th></tr></thead><tbody><tr><td>Name</td><td>显示命令名和一段简短的描述</td></tr><tr><td>Synopsis</td><td>命令的语法</td></tr><tr><td>Confi guration</td><td>命令配置信息</td></tr><tr><td>Description</td><td>命令的一般性描述</td></tr><tr><td>Options</td><td>命令选项描述</td></tr><tr><td>Exit Status</td><td>命令的退出状态指示</td></tr><tr><td>Return Value</td><td>命令的返回值</td></tr><tr><td>Errors</td><td>命令的错误消息</td></tr><tr><td>Environment</td><td>描述所使用的环境变量</td></tr><tr><td>Files</td><td>命令用到的文件</td></tr><tr><td>Versions</td><td>命令的版本信息</td></tr><tr><td>Conforming To</td><td>命令所遵从的标准</td></tr><tr><td>Notes</td><td>其他所遵从的标准</td></tr><tr><td>Bugs</td><td>提供提交bug的途径</td></tr><tr><td>Example</td><td>展示命令的用法</td></tr><tr><td>Authors</td><td>命令开发人员的信息</td></tr><tr><td>Copyright</td><td>命令源代码的版权状况</td></tr><tr><td>See Also</td><td>与该命令类型的其他命令</td></tr></tbody></table></div><blockquote><p>窍门：如果不记得命令名怎么办？可以使用关键字搜索手册页。语法是：man -k 关键字。例如，要查找与终端相关的命令，可以输入man -k terminal。</p><p>除了对节按照惯例进行命名，手册页还有对应的内容区域。每个内容区域都分配了一个数字，从1开始，一直到9，如下表<strong>Linux手册页的内容区域</strong></p></blockquote><h4 id="Linux手册页的内容区域"><a href="#Linux手册页的内容区域" class="headerlink" title="Linux手册页的内容区域"></a>Linux手册页的内容区域</h4><div class="table-container"><table><thead><tr><th>区域号</th><th>所涵盖的内容</th></tr></thead><tbody><tr><td>1</td><td>可执行程序或shell命令</td></tr><tr><td>2</td><td>系统调用</td></tr><tr><td>3</td><td>库调用</td></tr><tr><td>4</td><td>特殊文件</td></tr><tr><td>5</td><td>文件格式与约定</td></tr><tr><td>6</td><td>游戏</td></tr><tr><td>7</td><td>概览、约定及杂项</td></tr><tr><td>8</td><td>超级用户和系统管理员命令</td></tr><tr><td>9</td><td>内核例程</td></tr></tbody></table></div><h5 id="查看命令在Linux手册页中的区域"><a href="#查看命令在Linux手册页中的区域" class="headerlink" title="查看命令在Linux手册页中的区域"></a>查看命令在Linux手册页中的区域</h5><blockquote><p>man工具通常提供的是命令所对应的最低编号的内容。</p></blockquote><p>当我在命令行输入<code>man ls</code>，在弹出来的分页程序中的第一行和最后一行，发现这两条语句中的LS和ls后面的括号有一个数字：（1）。这表示所显示的手册页来自内容区域1（可执行程序或shell命令）</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">LS(1)                  User Commands                         LS(1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Manual page ls(1) line 1&#x2F;218 15% (press h for help or q to quit)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>一个命令偶尔会在多个内容区域都有对应的手册页。比如说，有个叫作hostname的命令。手册页中既包括该命令的相关信息，也包括对系统主机名的概述。想要查看所需要的页面，可以输入<code>man section# topic</code>。对手册页的第一部分而言，就是输入<code>man 1 hostname</code>。对于手册页中的第7部分，就是输入<code>man 7 hostname</code>。</p></blockquote><p>我根据上面的提示分别打开了<code>hostname</code>的第1部分和第7部分，部分代码如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man 1 hostname
+HOSTNAME(1)                                           Linux Programmer&#39;s Manual                                           HOSTNAME(1)
+
+NAME
+       hostname - show or set the system&#39;s host name
+       domainname - show or set the system&#39;s NIS&#x2F;YP domain name
+       ypdomainname - show or set the system&#39;s NIS&#x2F;YP domain name
+       nisdomainname - show or set the system&#39;s NIS&#x2F;YP domain name
+       dnsdomainname - show the system&#39;s DNS domain name
+       
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man 7 hostname
+HOSTNAME(7)                                           Linux Programmer&#39;s Manual                                           HOSTNAME(7)
+
+NAME
+       hostname - hostname resolution description
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>你也可以只看各部分内容的简介：输入<code>man 1 intro</code>阅读第1部分，输入<code>man 2 intro</code>阅读第2部分，输入<code>man 3 intro</code>阅读第3部分，等等。</p></blockquote><p>根据上面的提示，我在提示符<code>#</code>后面分别输入<code>man 1 intro</code>和<code>man 7 intro</code>，控制台终端的输出如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man 1 intro
+INTRO(1)                                                 Linux User&#39;s Manual                                                 INTRO(1)
+
+NAME
+       intro - introduction to user commands
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man 7 intro
+INTRO(7)                                              Linux Programmer&#39;s Manual                                              INTRO(7)
+
+NAME
+       intro - introduction to overview and miscellany section
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>当我想查看<code>ls</code>的第2部分、第3部分、第4部分，在shell提示符<code>#</code>后面分别输入<code>man 2 ls</code>、<code>man 3 ls</code>、<code>man 4 ls</code>，但是因为<code>ls</code>这条命令没有这三部分，所以控制台终端输出是这样的：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# man 2 ls
+No manual entry for ls in section 2
+root@huangzihan:&#x2F;# man 3 ls
+No manual entry for ls in section 3
+root@huangzihan:&#x2F;# man 4 ls
+No manual entry for ls in section 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="info页面"><a href="#info页面" class="headerlink" title="info页面"></a>info页面</h4><blockquote><p>手册页不是唯一的参考资料。还有另一种叫作info页面的信息。可以输入<code>info info</code>来了解info页面的相关内容。</p></blockquote><p>根据上面的提示，我在提示符<code>#</code>后面输入<code>info info</code>，控制台终端的输出如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Next: Stand-alone Info,  Up: (dir)
+
+Stand-alone GNU Info
+********************
+
+This documentation describes the stand-alone Info reader which you can
+use to read Info documentation.
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>如果想查看<code>ls</code>的info页面，我们可以把上面那条命令改为<code>info ls</code>，对应的控制台的输出为：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# info ls
+Next: dir invocation,  Up: Directory listing
+
+10.1 ‘ls’: List directory contents
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+
+The ‘ls’ program lists information about files (of any type, including
+directories).  Options and file arguments can be intermixed arbitrarily,
+as usual.
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="help帮助"><a href="#help帮助" class="headerlink" title="help帮助"></a>help帮助</h2><blockquote><p>另外，大多数命令都可以接受<code>-help</code>或<code>--help</code>选项。例如你可以输入<code>hostname -help</code>来查看帮助。关于帮助的更多信息，可以输入<code>help help</code>。（看出这里面的门道没？）</p></blockquote><p>根据上面的提示，我在shell提示符<code>#</code>后面输入<code>help help</code>，对应的控制台终端输出是这样的：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# help help
+help: help [-dms] [pattern ...]
+    Display information about builtin commands.
+
+    Displays brief summaries of builtin commands.  If PATTERN is
+    specified, gives detailed help on all commands matching PATTERN,
+    otherwise the list of help topics is printed.
+
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>如果想查看<code>ls</code>命名，可以在shell提示符<code>#</code>后面输入<code>ls --help</code>，这个查看<code>ls</code>的命令只有这个是对的，中途我还输错了几次，整个过程代码是这样的：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">root@huangzihan:&#x2F;# ls -help
+ls: invalid option -- &#39;e&#39;
+Try &#39;ls --help&#39; for more information.
+root@huangzihan:&#x2F;# ls --help
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+...
+...
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bash%E6%89%8B%E5%86%8C"><span class="toc-number">1.</span> <span class="toc-text">bash手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#man%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">man命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#man-man"><span class="toc-number">1.1.1.</span> <span class="toc-text">man man</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E7%A8%8B%E5%BA%8F%EF%BC%88page%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">分页程序（page）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux%E6%89%8B%E5%86%8C%E9%A1%B5%E6%83%AF%E7%94%A8%E7%9A%84%E8%8A%82%E5%90%8D"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Linux手册页惯用的节名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux%E6%89%8B%E5%86%8C%E9%A1%B5%E7%9A%84%E5%86%85%E5%AE%B9%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Linux手册页的内容区域</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4%E5%9C%A8Linux%E6%89%8B%E5%86%8C%E9%A1%B5%E4%B8%AD%E7%9A%84%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.1.2.2.1.</span> <span class="toc-text">查看命令在Linux手册页中的区域</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#info%E9%A1%B5%E9%9D%A2"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">info页面</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#help%E5%B8%AE%E5%8A%A9"><span class="toc-number">1.2.</span> <span class="toc-text">help帮助</span></a></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>方法参数 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="方法参数按值调用和按引用调用
+按值调用（call by value）表示方法接收的是调用者提供的值。而按引用调用（call by reference）表示方法接收的是调用者提供的变量地址。方法可以修,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">方法参数</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">方法参数</h1><div class="stuff"><span>七月 17, 2021</span></div><div class="content markdown"><h1 id="方法参数"><a href="#方法参数" class="headerlink" title="方法参数"></a>方法参数</h1><h2 id="按值调用和按引用调用"><a href="#按值调用和按引用调用" class="headerlink" title="按值调用和按引用调用"></a>按值调用和按引用调用</h2><blockquote><p><strong>按值调用</strong>（call by value）表示方法接收的是调用者提供的值。而<strong>按引用调用</strong>（call by reference）表示方法接收的是调用者提供的变量<strong>地址</strong>。方法可以<strong>修改</strong>按引用传递的变量的值，而不能修改按值传递的变量的值。“按……调用”（call by）是一个标准的计算机科学术语，用来描述各种程序设计语言（不只是Java）中方法参数的传递方式（事实上，以前还有<strong>按名调用</strong>（call by<br>name），Algol程序设计语言是最古老的高级程序设计语言之一，它使用的就是这种参数传递方式。不过，这种传递方式已经成为历史）。</p><p>Java程序设计语言<strong>总是</strong>采用按值调用。也就是说，方法得到的是所有参数值的一个副本。具体来讲，方法不能修改传递给它的任何参数变量的内容。</p><p>例如，考虑下面的调用：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">double percent &#x3D; 10;
+harry.raiseSalary(percent);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>不论这个方法具体如何实现，我们知道，在这个方法调用之后，<strong>percent</strong>的值还是10。</p><p>下面再仔细研究一下这种情况。假定一个方法试图将一个参数值增加至3倍：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public static void tripleValue(double x)   &#x2F;&#x2F; doesn&#39;t work 
+&#123;
+    x &#x3D; 3 * x;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><span id="more"></span><blockquote><p>然后调用这个方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">double percent &#x3D; 10;
+tripleValue(percent);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="调用方法执行过程"><a href="#调用方法执行过程" class="headerlink" title="调用方法执行过程"></a>调用方法执行过程</h2><blockquote><p>不过，这样并不能起作用。调用这个方法之后，<strong>percent</strong>的值还是10。下面看一下具体的执行过程：</p></blockquote><ol><li><strong>x</strong>初始化为<strong>percent</strong>值的一个副本（也就是10）。</li><li><strong>x</strong>乘以<strong>3</strong>后等于<strong>30</strong>，但是<strong>percent</strong>仍然是10（如图（修改数值参数没有持久效果）所示）。</li><li>这个方法结束之后，参数变量<strong>x</strong>不再使用。</li></ol><h3 id="修改数值参数没有持久效果"><a href="#修改数值参数没有持久效果" class="headerlink" title="修改数值参数没有持久效果"></a>修改数值参数没有持久效果</h3><center><img src="/2021/07/17/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0/修改数值参数没有持久效果.png" width="70%" height="70%"> 修改数值参数没有持久效果</center><h3 id="两种类型的方法参数"><a href="#两种类型的方法参数" class="headerlink" title="两种类型的方法参数"></a>两种类型的方法参数</h3><p>然而，有两种类型的方法参数：</p><ul><li>基本数据类型（数字、布尔值）。</li><li>对象引用。</li></ul><blockquote><p>你已经看到，一个方法不可能修改基本数据类型的参数，而对象引用作为参数就不同了，可以很容易地利用下面这个方法将一个员工的工资增至三倍：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public static void tripleSalary(Employee x)  &#x2F;&#x2F; works
+&#123;
+    x.raiseSalary(200);
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>当调用</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">harry &#x3D; new Employee(. . .);
+tripleSalary(harry);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>时，具体的执行过程为：</p></blockquote><ol><li><strong>x</strong>初始化为<strong>harry</strong>值的一个副本，这里就是一个对象引用。</li><li><strong>raiseSalary</strong>方法应用于这个对象引用。<strong>x</strong>和<strong>harry</strong>同时引用的那个<strong>Employee</strong>对象的工资提高了200%。</li><li>方法结束后，参数变量<strong>x</strong>不再使用。当然，对象变量<strong>harry</strong>继续引用那个工资增至3倍的员工对象（如图（修改对象参数有持久效果）所示）。</li></ol><h3 id="修改对象参数有持久效果"><a href="#修改对象参数有持久效果" class="headerlink" title="修改对象参数有持久效果"></a>修改对象参数有持久效果</h3><center><img src="/2021/07/17/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0/修改对象参数有持久效果.png" width="90%" height="90%"> 修改对象参数有持久效果</center><blockquote><p>可以看到，实现一个改变对象参数状态的方法是完全可以的，实际上也相当常见。理由很简单，方法得到的是对象引用的副本，原来的对象引用和这个副本都引用同一个对象。</p><p>很多程序设计语言（特别是C++和Pascal）提供了两种参数传递的方式：按值调用和按引用调用。有些程序员（甚至有些书的作者）认为Java程序设计语言对对象采用的是按引用调用，实际上，这种理解是不对的。由于这种误解具有一定的普遍性，所以很有必要给出一个反例来详细地说明一下这个问题。</p><p>首先，编写一个交换两个<strong>Employee</strong>对象的方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public static void swap(Employee x, Employee y)   &#x2F;&#x2F;  doesn&#39;t work
+&#123;
+    Employee temp &#x3D; x;
+    x &#x3D; y;
+    y &#x3D; temp;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>如果Java对对象采用的是按引用调用，那么这个方法就应该能够实现交换：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">var a &#x3D; new Employee(&quot;Alice&quot;, . . .);
+var b &#x3D; new Employee(&quot;Bob&quot;, . . .);
+swap(a, b);
+&#x2F;&#x2F; does a now refer to Bob, b to Alice?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>但是，这个方法并没有改变存储在变量<strong>a</strong>和<strong>b</strong>中的对象引用。<strong>swap</strong>方法的参数<strong>x</strong>和<strong>y</strong>被初始化为两个对象引用的<strong>副本</strong>，这个方法交换的是这两个副本。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">&#x2F;&#x2F; x refers to Alice, y to Bob 
+Employee temp &#x3D; x;
+x &#x3D; y;
+y &#x3D; temp;
+&#x2F;&#x2F; now x refers to Bob, y to Alice<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>最终，白费力气。在方法结束时参数变量<strong>x</strong>和<strong>y</strong>被丢弃了。原来的变量<strong>a</strong>和<strong>b</strong>仍然引用这个方法调用之前所引用的对象（如图（交换对象参数没有持久效果）所示）。</p></blockquote><h3 id="交换对象参数没有持久效果"><a href="#交换对象参数没有持久效果" class="headerlink" title="交换对象参数没有持久效果"></a>交换对象参数没有持久效果</h3><center><img src="/2021/07/17/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0/交换对象参数没有持久效果.png" width="100%" height="100%"> 交换对象参数没有持久效果</center><blockquote><p>这个过程说明：Java程序设计语言对对象采用的不是按引用调用，实际上，<strong>对象引用是按值传递的</strong>。</p></blockquote><h3 id="Java中方法参数的使用"><a href="#Java中方法参数的使用" class="headerlink" title="Java中方法参数的使用"></a>Java中方法参数的使用</h3><blockquote><p>下面总结一下在Java中对方法参数能做什么和不能做什么：</p></blockquote><ul><li>方法不能修改基本数据类型的参数（即数值型或布尔型）。</li><li>方法可以改变对象参数的<strong>状态</strong>。</li><li>方法不能让一个对象参数引用一个新的对象。</li></ul><blockquote><p>程序清单4-4中的程序展示了这几点。在这个程序中，首先试图将一个数值参数的值增至三倍，但没有成功：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Testing tripleValue:
+Before: percent&#x3D;10.0
+End of method: x&#x3D;30.0
+After: percent&#x3D;10.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>随后，成功地将一个员工的工资增至三倍：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Testing tripleSalary:
+Before: salary&#x3D;50000.0
+End of method:salary&#x3D;150000.0
+After: salary&#x3D;150000.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>方法结束之后，<strong>harry</strong>引用的对象状态发生了改变。这是因为这个方法可以通过对象引用的副本修改所引用对象的状态。</p><p>最后，程序演示了<strong>swap</strong>方法的失败效果：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Testing swap:
+Before: a&#x3D;Alice 
+Before: b&#x3D;Bob 
+End of method: x&#x3D;Bob 
+End of method: y&#x3D;Alice 
+After: a&#x3D;Alice 
+After: b&#x3D;Bob<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>可以看出，参数变量<strong>x</strong>和<strong>y</strong>交换了，但是变量<strong>a</strong>和<strong>b</strong>没有受到影响。</p></blockquote><h3 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">&#x2F;*
+ * 功能：这个程序演示了Java中的参数传递。
+ * @版本：1.01
+ * @时间：2021-07-17
+ * @作者：黄子涵
+ * 
+ *&#x2F;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   &#x2F;*测试一：方法不能修改数值参数*&#x2F;
+	   System.out.println(&quot;测试一：方法不能修改数值参数&quot;);
+	   System.out.println(&quot;huangzihan_tripleValue()测试中：&quot;);
+	   double huangzihan_percent &#x3D; 10;
+	   System.out.println(&quot;测试之前：huangzihan_percent&#x3D;&quot; + huangzihan_percent);
+	   huangzihan_tripleValue(huangzihan_percent);
+	   System.out.println(&quot;测试之后：huangzihan_percent()&#x3D;&quot; + huangzihan_percent);
+	   System.out.println();
+	   
+	   &#x2F;*测试二：方法可以更改对象参数的状态*&#x2F;
+	   System.out.println(&quot;测试二：方法可以更改对象参数的状态&quot;);
+	   System.out.println(&quot;huangzihan_tripleSalary()测试中:&quot;);
+	   var huangzihan &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;, 50000);
+	   System.out.println(&quot;测试之前：huangzihan_salary()&#x3D;&quot; + huangzihan.huangzihan_getSalary());
+       huangzihan_tripleSalary(huangzihan);
+	   System.out.println(&quot;测试之后：huangzihan_salary()&#x3D;&quot; + huangzihan.huangzihan_getSalary());
+	   System.out.println();
+	   
+	   &#x2F;*测试三：方法无法将新对象附加到对象参数*&#x2F;
+	   System.out.println(&quot;测试三：方法无法将新对象附加到对象参数&quot;);
+	   System.out.println(&quot;huangzihan_swap()测试中：&quot;);
+	   var huangzihan_a &#x3D; new Huangzihan_Employee(&quot;Huangzihan_Alice&quot;, 70000);
+	   var huangzihan_b &#x3D; new Huangzihan_Employee(&quot;Huangzihan_Bob&quot;, 60000);
+	   System.out.println(&quot;测试之前：huangzihan_a&#x3D;&quot; + huangzihan_a.huangzihan_getName());
+	   System.out.println(&quot;测试之前：huangzihan_b&#x3D;&quot; + huangzihan_b.huangzihan_getName());
+	   huangzihan_swap(huangzihan_a, huangzihan_b);
+       System.out.println(&quot;测试之后：huangzihan_a&#x3D;&quot; + huangzihan_a.huangzihan_getName());
+       System.out.println(&quot;测试之后：huangzihan_b&#x3D;&quot; + huangzihan_b.huangzihan_getName());
+       System.out.println();
+   &#125;
+   
+   public static void huangzihan_tripleValue(double huangzihan_x) 
+   &#123;
+	   huangzihan_x &#x3D; 3* huangzihan_x;
+	   System.out.println(&quot;方法结束：huangzihan_x&#x3D;&quot; + huangzihan_x);
+   &#125;
+	   
+   public static void huangzihan_tripleSalary(Huangzihan_Employee huangzihan_x) 
+   &#123;
+	   huangzihan_x.huangzihan_raiseSalary(200);
+	   System.out.println(&quot;方法结束：huangzihan_salary&#x3D;&quot; + huangzihan_x.huangzihan_getSalary());		   
+   &#125;
+	   
+   public static void huangzihan_swap(Huangzihan_Employee huangzihan_x, Huangzihan_Employee huangzihan_y) 
+   &#123;
+	   Huangzihan_Employee huangzihan_temp &#x3D; huangzihan_x;
+	   huangzihan_x &#x3D; huangzihan_y;
+	   huangzihan_y &#x3D; huangzihan_temp;
+	   System.out.println(&quot;方法结束：huangzihan_x&#x3D;&quot; + huangzihan_x.huangzihan_getName());
+	   System.out.println(&quot;方法结束：huangzihan_y&#x3D;&quot; + huangzihan_y.huangzihan_getName());
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	String huangzihan_name;
+	double huangzihan_salary;
+	public Huangzihan_Employee(String huangzihan_n, double huangzihan_s) 
+	&#123;
+		huangzihan_name &#x3D; huangzihan_n;
+		huangzihan_salary &#x3D; huangzihan_s;
+	&#125;
+	
+	public String huangzihan_getName() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public double huangzihan_getSalary() 
+	&#123;
+		return huangzihan_salary;
+	&#125;
+	
+	public void huangzihan_raiseSalary(double huangzihan_byPercent) 
+	&#123;
+		double huangzihan_raise &#x3D; huangzihan_salary * huangzihan_byPercent &#x2F; 100;
+		huangzihan_salary +&#x3D; huangzihan_raise;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">测试一：方法不能修改数值参数
+huangzihan_tripleValue()测试中：
+测试之前：huangzihan_percent&#x3D;10.0
+方法结束：huangzihan_x&#x3D;30.0
+测试之后：huangzihan_percent()&#x3D;10.0
+
+测试二：方法可以更改对象参数的状态
+huangzihan_tripleSalary()测试中:
+测试之前：huangzihan_salary()&#x3D;50000.0
+方法结束：huangzihan_salary&#x3D;150000.0
+测试之后：huangzihan_salary()&#x3D;150000.0
+
+测试三：方法无法将新对象附加到对象参数
+huangzihan_swap()测试中：
+测试之前：huangzihan_a&#x3D;Huangzihan_Alice
+测试之前：huangzihan_b&#x3D;Huangzihan_Bob
+方法结束：huangzihan_x&#x3D;Huangzihan_Bob
+方法结束：huangzihan_y&#x3D;Huangzihan_Alice
+测试之后：huangzihan_a&#x3D;Huangzihan_Alice
+测试之后：huangzihan_b&#x3D;Huangzihan_Bob<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">方法参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E5%80%BC%E8%B0%83%E7%94%A8%E5%92%8C%E6%8C%89%E5%BC%95%E7%94%A8%E8%B0%83%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">按值调用和按引用调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">调用方法执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E5%80%BC%E5%8F%82%E6%95%B0%E6%B2%A1%E6%9C%89%E6%8C%81%E4%B9%85%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">修改数值参数没有持久效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">两种类型的方法参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%B9%E8%B1%A1%E5%8F%82%E6%95%B0%E6%9C%89%E6%8C%81%E4%B9%85%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.3.</span> <span class="toc-text">修改对象参数有持久效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E5%AF%B9%E8%B1%A1%E5%8F%82%E6%95%B0%E6%B2%A1%E6%9C%89%E6%8C%81%E4%B9%85%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.4.</span> <span class="toc-text">交换对象参数没有持久效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E4%B8%AD%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.5.</span> <span class="toc-text">Java中方法参数的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.6.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.2.7.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

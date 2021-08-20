@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>静态字段与静态方法 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="静态字段与静态方法静态字段
+如果将一个字段定义为static，每个类只有一个这样的字段。而对于非静态的实例字段，每个对象都有自己的一个副本。例如，假设需要给每一个员工赋予唯一的标识码。这里给Empl,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">静态字段与静态方法</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">静态字段与静态方法</h1><div class="stuff"><span>七月 16, 2021</span></div><div class="content markdown"><h1 id="静态字段与静态方法"><a href="#静态字段与静态方法" class="headerlink" title="静态字段与静态方法"></a>静态字段与静态方法</h1><h2 id="静态字段"><a href="#静态字段" class="headerlink" title="静态字段"></a>静态字段</h2><blockquote><p>如果将一个字段定义为<strong>static</strong>，每个类只有一个这样的字段。而对于非静态的实例字段，每个对象都有自己的一个副本。例如，假设需要给每一个员工赋予唯一的标识码。这里给<strong>Employee</strong>类添加一个实例字段<strong>id</strong>和一个静态字段<strong>nextId</strong>：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    private static int nextId &#x3D; 1;
+    private int id;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>现在，每一个<strong>Employee</strong>对象都有一个自己的<strong>id</strong>字段，但这个类的所有实例将共享一个<strong>nextId</strong>字段。换句话说，如果有1000个<strong>Employee</strong>类对象，则有1000个实例字段<strong>id</strong>，分别对应每一个对象。但是，只有一个静态字段<strong>nextId</strong>。即使没有<strong>Employee</strong>对象，静态字段<strong>nextId</strong>也存在。它属于类，而不属于任何单个的对象。</p></blockquote><h3 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   Huangzihan_Employee huangzihan &#x3D; new Huangzihan_Employee(1,2);
+	   System.out.println(huangzihan.huangzihan_nextId());
+	   System.out.println(huangzihan.huangzihan_id());
+	   System.out.println();
+	   Huangzihan_Employee Huangzihan &#x3D; new Huangzihan_Employee(3,4);
+	   System.out.println(Huangzihan.huangzihan_nextId());
+	   System.out.println(Huangzihan.huangzihan_id());
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private static int huangzihan_nextId &#x3D; 1;
+	private int huangzihan_id;
+	
+	public Huangzihan_Employee(int huangzihan_n, int huangzihan_i)
+	&#123;
+		huangzihan_nextId &#x3D; huangzihan_n;
+		huangzihan_id &#x3D; huangzihan_i;
+	&#125;
+	
+	public int huangzihan_nextId() 
+	&#123;
+		return huangzihan_nextId;
+	&#125;
+	
+	public int huangzihan_id() 
+	&#123;
+		return huangzihan_id;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><span id="more"></span><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">1
+2
+
+3
+4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><h4 id="类字段"><a href="#类字段" class="headerlink" title="类字段"></a>类字段</h4><blockquote><p>在一些面向对象程序设计语言中，静态字段被称为<strong>类字段</strong>。术语“静态”只是沿用了C++的叫法，并无实际意义。</p><p>下面实现一个简单的方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public void setId()
+&#123;
+    id &#x3D; nextId;
+    nextId++;
+&#125;    
+&#96;&#96;&#96;    
+    
+&gt; 假定为**harry**设置员工标识码：
+
+&#96;&#96;&#96;C&#x2F;C++
+harry.setId();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p><strong>harry</strong>的<strong>id</strong>字段被设置为静态字段<strong>nextId</strong>当前的值，并且静态字段<strong>nextId</strong>的值加1：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">harry.id &#x3D; Employee.nextId;
+Employee.nextId++;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h5 id="程序示例-1"><a href="#程序示例-1" class="headerlink" title="程序示例"></a>程序示例</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   Huangzihan_Employee huangzihan &#x3D; new Huangzihan_Employee(1,2);
+	   huangzihan.huangzihan_setId(1, 2);
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private static int huangzihan_nextId &#x3D; 1;
+	private int huangzihan_id;
+	
+	public Huangzihan_Employee(int huangzihan_n, int huangzihan_i)
+	&#123;
+		huangzihan_nextId &#x3D; huangzihan_n;
+		huangzihan_id &#x3D; huangzihan_i;
+	&#125;
+	
+	public void huangzihan_setId(int huangzihan_n, int huangzihan_i) 
+	&#123;
+		huangzihan_id &#x3D; huangzihan_nextId;
+		huangzihan_nextId++;
+		System.out.println(huangzihan_nextId);
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="静态常量"><a href="#静态常量" class="headerlink" title="静态常量"></a>静态常量</h2><blockquote><p>静态变量使用得比较少，但静态常量却很常用。例如，在<strong>Math</strong>类中定义一个静态常量：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Math 
+&#123;
+    . . .
+    public static final double PI &#x3D; 3.14159265358979323846;
+    . . .
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>在程序中，可以用<strong>Math.PI</strong>来访问这个常量。</p><p>如果省略关键字<strong>static</strong>，<strong>PI</strong>就变成了<strong>Math</strong>类的一个实例字段。也就是说，需要通过<strong>Math</strong>类的一个对象来访问<strong>PI</strong>，并且每一个<strong>Math</strong>对象都有它自己的一个<strong>PI</strong>副本。</p><p>你已经多次使用的另一个静态常量是<strong>System.out</strong>。它在<strong>System</strong>类中声明如下：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class System 
+&#123;
+    . . .
+    public static final PrintStream out &#x3D; . . .;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>前面曾经多次提到过，由于每个类对象都可以修改公共字段，所以，最好不要有公共字段。然而，公共常量（即<strong>final</strong>字段）却没问题。因为<strong>out</strong>被声明为<strong>final</strong>，所以，不允许再将它重新赋值为另一个打印流：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">System.out &#x3D; new PrintStream(...);    &#x2F;&#x2F;ERROR--out is final<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="注释-1"><a href="#注释-1" class="headerlink" title="注释"></a>注释</h3><blockquote><p>如果查看<strong>System</strong>类，就会发现有一个<strong>setOut</strong>方法可以将<strong>System.out</strong>设置为不同的流。你可能会感到奇怪，为什么这个方法可以修改<strong>final</strong>变量的值。原因在于，<strong>setOut</strong>方法是一个<strong>原生</strong>方法，而不是在Java语言中实现的。原生方法可以绕过Java语言的访问控制机制。这是一种特殊的解决方法，你自己编写程序时不要模仿这种做法。</p></blockquote><h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><blockquote><p>静态方法是不在对象上执行的方法。例如，<strong>Math</strong>类的<strong>pow</strong>方法就是一个静态方法。表达式</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Math.pow(x, a)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>会计算幂x^3。在完成运算时，它并不使用任何<strong>Math</strong>对象。换句话说，它没有隐式参数。</p><p>可以认为静态方法是没有<strong>this</strong>参数的方法（在一个非静态的方法中，<strong>this</strong>参数指示这个方法的隐式参数）。</p><p><strong>Employee</strong>类的静态方法不能访问<strong>id</strong>实例字段，因为它不能在对象上执行操作。但是，静态方法可以访问静态字段。下面是这样一个静态方法的示例：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public static int getNextId()
+&#123;
+    return nextId;    &#x2F;&#x2F;returns static field
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>可以提供类名来调用这个方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int n &#x3D; Employee.getNextId();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这个方法可以省略关键字<strong>static</strong>吗？答案是肯定的。但是，这样一来，你就需要通过<strong>Employee</strong>类对象的引用来调用这个方法。</p></blockquote><h3 id="程序示例-2"><a href="#程序示例-2" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   int x &#x3D; 2;
+	   double a &#x3D; Math.pow(x, 3);
+	   System.out.println(a);
+	   
+	   Huangzihan_Employee huangzihan &#x3D; new Huangzihan_Employee();
+	   int huangzihan_n &#x3D; huangzihan.huangzihan_getNextId();
+	   System.out.println(huangzihan_n);
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private static int huangzihan_nextId &#x3D; 3;
+	
+	public static int huangzihan_getNextId() 
+	&#123;
+		return huangzihan_nextId;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">8.0
+3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="注释-2"><a href="#注释-2" class="headerlink" title="注释"></a>注释</h3><blockquote><p>可以使用对象调用静态方法，这是合法的。例如，如果<strong>harry</strong>是一个<strong>Employee</strong>对象，可以用<code>harry.getNextId()</code>代替<code>Employee.getNextId()</code>。不过，这种写法很容易造成混淆，其原因是<strong>getNextId</strong>方法计算的结果与<strong>harry</strong>毫无关系。我们建议使用类名而不是对象来调用静态方法。</p></blockquote><h4 id="两种情况下可以使用静态方法"><a href="#两种情况下可以使用静态方法" class="headerlink" title="两种情况下可以使用静态方法"></a>两种情况下可以使用静态方法</h4><blockquote><p>在下面两种情况下可以使用静态方法：</p></blockquote><ul><li><p>方法不需要访问对象状态，因为它需要的所有参数都通过显式参数提供（例如：<strong>Math.pow</strong>）。</p></li><li><p>方法只需要访问类的静态字段（例如：<strong>Employee.getNextId</strong>）。</p></li></ul><h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><blockquote><p>静态方法还有另外一种常见的用途。类似<strong>LocalDate</strong>和<strong>NumberFormat</strong>的类使用静态<strong>工厂方法</strong>（factory method）来构造对象。你已经见过工厂方法<strong>LocalDate.now</strong>和<strong>LocalDate.of</strong>。<strong>NumberFormat</strong>类如下生成不同风格的格式化对象：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">NumberFormat currencyFormatter &#x3D; NumberFormat.getCurrencyInstance();
+NumberFormat percentFormatter &#x3D; NumberFormat.getPercentInstance();
+double x &#x3D; 0.1;
+System.out.println(currencyFormatter.format(x));    &#x2F;&#x2F; prints $0.10
+System.out.println(percentFormatter.format(x));     &#x2F;&#x2F; prints 10%<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="NumberFormat类不利用构造器的两个原因"><a href="#NumberFormat类不利用构造器的两个原因" class="headerlink" title="NumberFormat类不利用构造器的两个原因"></a>NumberFormat类不利用构造器的两个原因</h3><blockquote><p>为什么<strong>NumberFormat</strong>类不利用构造器完成这些操作呢？这主要有两个原因：</p></blockquote><ul><li><p>无法命名构造器。构造器的名字必须与类名相同。但是，这里希望有两个不同的名字，分别得到货币实例和百分比实例。</p></li><li><p>使用构造器时，无法改变所构造对象的类型。而工厂方法实际上将返回<strong>DecimalFormat</strong>类的对象，这是<strong>NumberFormat</strong>的一个子类。</p></li></ul><h3 id="程序示例-3"><a href="#程序示例-3" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.text.NumberFormat;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   NumberFormat currencyFormatter &#x3D; NumberFormat.getCurrencyInstance();
+	   NumberFormat percentFormatter &#x3D; NumberFormat.getPercentInstance();
+	   double x &#x3D; 0.1;
+	   System.out.println(currencyFormatter.format(x));
+	   System.out.println(percentFormatter.format(x));
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-3"><a href="#运行结果-3" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">¥0.10
+10%<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h2><blockquote><p>需要注意，可以调用静态方法而不需要任何对象。例如，不需要构造<strong>Math</strong>类的任何对象就可以调用<strong>Math.pow</strong>。</p><p>同理，<strong>main</strong>方法也是一个静态方法。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Application 
+&#123;
+    public static void main(String[] args)
+    &#123;
+        &#x2F;&#x2F; construct objects here
+        . . .
+    &#125;    
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p><strong>main</strong>方法不对任何对象进行操作。事实上，在启动程序时还没有任何对象。静态的<strong>main</strong>方法将执行并构造程序所需要的对象。</p></blockquote><h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><blockquote><p>每一个类可以有一个<strong>main</strong>方法。这是常用于对类进行单元测试的一个技巧。例如，可以在<strong>Employee</strong>类中添加一个<strong>main</strong>方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    public Employee(String n, double s, int year, int month, int day)
+    &#123;
+        name &#x3D; n;
+        salary &#x3D; s;
+        hireDay &#x3D; LocalDate.of(year, month, day);
+    &#125;    
+    . . .
+    
+    public static void main(String[] args)  &#x2F;&#x2F; unit test 
+    &#123;
+        var e &#x3D; new Employee(&quot;Romeo&quot;, 50000, 2003, 3, 31);
+        e.raiseSalary(10);
+        System.out.println(e.getName() + &quot; &quot; + e.getSalary());
+    &#125;    
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>如果想要独立地测试<strong>Employee</strong>类，只需要执行</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">java Employee<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>如果<strong>Employee</strong>类是一个更大型应用程序的一部分，就可以使用下面这条语句运行程序</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">java Application <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p><strong>Employee</strong>类的<strong>main</strong>方法永远不会执行。</p><p>下面中的程序包含了<strong>Employee</strong>类的一个简单版本，其中有一个静态字段<strong>nextId</strong>和一个静态方法<strong>getNextId</strong>。这里将三个<strong>Employee</strong>对象填入一个数组，然后打印员工信息。最后，打印出下一个可用的员工标识码来展示静态方法。</p><p>需要注意，<strong>Employee</strong>类也有一个静态的<strong>main</strong>方法用于单元测试。试试运行</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">java Employee<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>和</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">java StaticTest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>执行两个<strong>main</strong>方法。</p></blockquote><h4 id="程序示例-4"><a href="#程序示例-4" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">&#x2F;*
+ * 功能：
+ * @版本：1.02
+ * @时间：2021-07-16
+ * @作者：黄子涵
+ * 
+ *&#x2F;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   var huangzihan &#x3D; new Huangzihan_Employee[4];
+	   
+	   huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;, 40000);
+	   huangzihan[1] &#x3D; new Huangzihan_Employee(&quot;Huangzihan&quot;, 60000);
+	   huangzihan[2] &#x3D; new Huangzihan_Employee(&quot;huang_zihan&quot;, 80000);
+	   huangzihan[3] &#x3D; new Huangzihan_Employee(&quot;Huang_zihan&quot;, 100000);
+	   
+	   for(Huangzihan_Employee Huangzihan : huangzihan) 
+	   &#123;
+		   Huangzihan.huangzihan_setId();
+		   System.out.println(&quot;名字&#x3D;&quot; + Huangzihan.huangzihan_getName() + &quot;,ID&#x3D;&quot; + 
+		   Huangzihan.huangzihan_getId() + &quot;,工资&#x3D;&quot; + Huangzihan.huangzihan_getSalary());
+	   &#125;
+	   
+	   int huangzihan_n &#x3D; Huangzihan_Employee.huangzihan_getNextId();
+	   System.out.println(&quot;下一个有效的ID&#x3D;&quot; + huangzihan_n);
+   &#125;   
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private static int huangzihan_nextId &#x3D; 1;
+	
+	private String huangzihan_name;
+	private double huangzihan_salary;
+	private int huangzihan_id;
+	
+	public Huangzihan_Employee(String huangzihan_n, double huangzihan_s) 
+	&#123;
+		huangzihan_name &#x3D; huangzihan_n;
+		huangzihan_salary &#x3D; huangzihan_s;
+		huangzihan_id &#x3D; 0;
+	&#125;
+	
+	public String huangzihan_getName() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public double huangzihan_getSalary() 
+	&#123;
+		return huangzihan_salary;
+	&#125;
+	
+	public int huangzihan_getId() 
+	&#123;
+		return huangzihan_id;
+	&#125;
+	
+	public void huangzihan_setId() 
+	&#123;
+		huangzihan_id &#x3D; huangzihan_nextId;
+		huangzihan_nextId++;
+	&#125;
+	
+	public static int huangzihan_getNextId() 
+	&#123;
+		return huangzihan_nextId;
+	&#125;
+	
+	public static void main(String[] huangzihan_args) 
+	&#123;
+		var huangzihan_e &#x3D; new Huangzihan_Employee(&quot;黄子涵&quot;, 50000);
+		System.out.println(huangzihan_e.huangzihan_getName() + &quot;&quot; + huangzihan_e.huangzihan_getSalary());;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-4"><a href="#运行结果-4" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">名字&#x3D;huangzihan,ID&#x3D;1,工资&#x3D;40000.0
+名字&#x3D;Huangzihan,ID&#x3D;2,工资&#x3D;60000.0
+名字&#x3D;huang_zihan,ID&#x3D;3,工资&#x3D;80000.0
+名字&#x3D;Huang_zihan,ID&#x3D;4,工资&#x3D;100000.0
+下一个有效的ID&#x3D;5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5%E4%B8%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">静态字段与静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text">静态字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.3.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%AD%97%E6%AE%B5"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">类字段</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%B8%B8%E9%87%8F"><span class="toc-number">1.2.</span> <span class="toc-text">静态常量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5%E4%B8%8B%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">两种情况下可以使用静态方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">工厂方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NumberFormat%E7%B1%BB%E4%B8%8D%E5%88%A9%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.4.1.</span> <span class="toc-text">NumberFormat类不利用构造器的两个原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-3"><span class="toc-number">1.4.2.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-3"><span class="toc-number">1.4.3.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">main方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">1.5.1.</span> <span class="toc-text">提示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-4"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-4"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

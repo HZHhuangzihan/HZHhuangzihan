@@ -1,0 +1,579 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>数组 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="数组
+数组存储相同类型值的序列。
+
+声明数组下标（index，或称索引）
+数组是一种数据结构，用来存储同一类型值的集合。通过一个整型下标（index，或称索引）可以访问数组中的每一个值。例如，如果 ,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">数组</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">数组</h1><div class="stuff"><span>七月 12, 2021</span></div><div class="content markdown"><h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><blockquote><p>数组存储相同类型值的序列。</p></blockquote><h2 id="声明数组"><a href="#声明数组" class="headerlink" title="声明数组"></a>声明数组</h2><h3 id="下标（index，或称索引）"><a href="#下标（index，或称索引）" class="headerlink" title="下标（index，或称索引）"></a>下标（index，或称索引）</h3><blockquote><p>数组是一种数据结构，用来存储同一类型值的集合。通过一个整型<strong>下标</strong>（index，或称索引）可以访问数组中的每一个值。例如，如果 <strong>a</strong> 是一个整型数组，<code>a[i]</code>就是数组中下标为 <strong>i</strong> 的整数。</p><p>在声明数组变量时，需要指出数组类型（数据元素类型紧跟[]）和数组变量的名字。下面声明了整型数组 <strong>a</strong> ：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] a;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_a;
+	   int[] huangzihan_b;
+	   int[] huangzihan_c;
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><span id="more"></span><h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><blockquote><p>不过，这条语句只声明了变量 <strong>a</strong> ，并没有将 <strong>a</strong> 初始化为一个真正的数组。应该使用 <strong>new</strong> 操作符创建数组。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] a &#x3D; new int[100];     &#x2F;&#x2F;or var a &#x3D; new int[100];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这条语句声明并初始化了一个可以存储100个整数的数组。</p></blockquote><h4 id="程序示例-1"><a href="#程序示例-1" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_a &#x3D; new int[0];
+	   int[] huangzihan_b &#x3D; new int[5];
+	   int[] huangzihan_c &#x3D; new int[10];
+	   
+	   System.out.println(huangzihan_a);
+	   System.out.println(huangzihan_b);
+	   System.out.println(huangzihan_c);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">[I@24d46ca6
+[I@4517d9a3
+[I@372f7a8d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h3><blockquote><p>数组长度不要求是常量：<code>new int[n]</code>会创建一个长度为 <strong>n</strong> 的数组。</p></blockquote><h4 id="程序示例-2"><a href="#程序示例-2" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_a &#x3D; new int[0];
+	   int[] huangzihan_b &#x3D; new int[5];
+	   int[] huangzihan_c &#x3D; new int[10];
+	   
+	   System.out.println(huangzihan_a.length);
+	   System.out.println(huangzihan_b.length);
+	   System.out.println(huangzihan_c.length);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">0
+5
+10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="数组列表（array-list）"><a href="#数组列表（array-list）" class="headerlink" title="数组列表（array list）"></a>数组列表（array list）</h3><blockquote><p>一旦创建了数组，就不能再改变它的长度（不过，当然可以改变单个的数组元素）。如果程序运行中需要经常扩展数组的大小，就应该使用另一种数据结构——<strong>数组列表</strong>（array list）。</p></blockquote><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><blockquote><p>可以使用下面两种形式定义一个数组变量：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] a;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>或</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int a[];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>大多数Java应用程序员喜欢使用第一种风格，因为它可以将类型int[]（整型数组）与变量名清晰地分开。</p></blockquote><h3 id="初始化数组对象"><a href="#初始化数组对象" class="headerlink" title="初始化数组对象"></a>初始化数组对象</h3><blockquote><p>在Java中，提供了一种创建数组对象并同时提供初始值的简写形式。下面是一个例子：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] smallPrimes &#x3D; &#123;2, 3, 5, 7, 11, 13&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="程序示例-3"><a href="#程序示例-3" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_a &#x3D; &#123;&#125;;
+	   int[] huangzihan_b &#x3D; &#123;1, 2, 3, 4, 5&#125;;
+	   int[] huangzihan_c &#x3D; &#123;10, 11, 12, 13, 14, 15, 16, 17, 18, 19&#125;;
+	   
+	   System.out.println(huangzihan_a);
+	   
+	   System.out.println();
+	   
+	   System.out.println(huangzihan_b[0]);
+	   System.out.println(huangzihan_b[1]);
+	   System.out.println(huangzihan_b[2]);
+	   System.out.println(huangzihan_b[3]);
+	   System.out.println(huangzihan_b[4]);
+	   
+	   System.out.println();
+	   
+	   System.out.println(huangzihan_c[0]);
+	   System.out.println(huangzihan_c[1]);
+	   System.out.println(huangzihan_c[2]);
+	   System.out.println(huangzihan_c[3]);
+	   System.out.println(huangzihan_c[4]);
+	   System.out.println(huangzihan_c[5]);
+	   System.out.println(huangzihan_c[6]);
+	   System.out.println(huangzihan_c[7]);
+	   System.out.println(huangzihan_c[8]);
+	   System.out.println(huangzihan_c[9]);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-3"><a href="#运行结果-3" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">[I@24d46ca6
+
+1
+2
+3
+4
+5
+
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>请注意，这个语法中不需要使用<strong>new</strong>，甚至不用指定长度。</p></blockquote><h3 id="数组增加值"><a href="#数组增加值" class="headerlink" title="数组增加值"></a>数组增加值</h3><blockquote><p>最后一个值后面允许有逗号，如果你要不断为数组增加值，这会很方便：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">String[] authors &#x3D; &#123;
+   &quot;James Gosling&quot;,
+   &quot;Bil1 Joy&quot;,
+   &quot;Guy Steele&quot;,
+   &#x2F;&#x2F; add more names here and put a comma after each name
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="程序示例-4"><a href="#程序示例-4" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   String[] huangzihan_authors &#x3D; 
+	   &#123;
+			   &quot;Huangzihan&quot;,
+			   &quot;Huang_zihan&quot;,
+			   &quot;HuangZihan&quot;,
+			   &quot;Huang_Zihan&quot;,
+			   &quot;huangzihan&quot;,
+			   &quot;huang_zihan&quot;,
+	   &#125;;
+	   
+	   System.out.println(huangzihan_authors[0]);
+	   System.out.println(huangzihan_authors[1]);
+	   System.out.println(huangzihan_authors[2]);
+	   System.out.println(huangzihan_authors[3]);
+	   System.out.println(huangzihan_authors[4]);
+	   System.out.println(huangzihan_authors[5]);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-4"><a href="#运行结果-4" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Huangzihan
+Huang_zihan
+HuangZihan
+Huang_Zihan
+huangzihan
+huang_zihan<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="匿名数组"><a href="#匿名数组" class="headerlink" title="匿名数组"></a>匿名数组</h3><blockquote><p>还可以声明一个<strong>匿名数组</strong>：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">new int[] &#123; 17, 19, 23, 29, 31, 37 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这会分配一个新数组并填入大括号中提供的值。它会统计初始值个数，并相应地设置数组大小。可以使用这种语法重新初始化一个数组而无须创建新变量。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">smallPrimes &#x3D; new int[] &#123; 17, 19, 23, 29, 31, 37&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这是下列语句的简写形式：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] anonymous &#x3D; &#123; 17, 19, 23, 29, 31, 37 &#125;;
+smallPrimes &#x3D; anonymous;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="程序示例-5"><a href="#程序示例-5" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_a &#x3D; new int[] &#123;17, 19, 23, 29, 31, 37&#125;;
+	   int[] huangzihan_b &#x3D; huangzihan_a;
+	   
+	   System.out.println(huangzihan_a[0]);
+	   System.out.println(huangzihan_a[1]);
+	   System.out.println(huangzihan_a[2]);
+	   System.out.println(huangzihan_a[3]);
+	   System.out.println(huangzihan_a[4]);
+	   System.out.println();
+	   System.out.println(huangzihan_b[0]);
+	   System.out.println(huangzihan_b[1]);
+	   System.out.println(huangzihan_b[2]);
+	   System.out.println(huangzihan_b[3]);
+	   System.out.println(huangzihan_b[4]);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-5"><a href="#运行结果-5" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">17
+19
+23
+29
+31
+
+17
+19
+23
+29
+31<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="注释-1"><a href="#注释-1" class="headerlink" title="注释"></a>注释</h3><blockquote><p>在Java中，允许有长度为0的数组。在编写一个结果为数组的方法时，如果碰巧结果为空，这样一个长度为0的数组就很有用。可以如下创建长度为0的数组：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">new elementType[0]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>或</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">new elementType[] &#123;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>注意，长度为0的数组与null并不相同。</p></blockquote><h2 id="访问数组元素"><a href="#访问数组元素" class="headerlink" title="访问数组元素"></a>访问数组元素</h2><blockquote><p>前面的数组元素的<strong>下标</strong>为从0 ~ 99（不是1 ~ 100）。一旦创建了数组，就可以在数组中填入元素。例如，使用一个循环：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/访问数组元素程序示例一.png" width="60%" height="60%"> 访问数组元素程序示例一</center><h3 id="程序示例-6"><a href="#程序示例-6" class="headerlink" title="程序示例"></a>程序示例</h3><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/访问数组元素程序示例二.png" width="80%" height="80%"> 访问数组元素程序示例二</center><h3 id="运行结果-6"><a href="#运行结果-6" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">0
+1
+2
+3
+4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="boolean数组与null"><a href="#boolean数组与null" class="headerlink" title="boolean数组与null"></a>boolean数组与null</h3><blockquote><p>创建一个数字数组时，所有元素都初始化为0。 <strong>boolean</strong> 数组的元素会初始化为 <strong>false</strong> 。对象数组的元素则初始化为一个特殊值 <strong>null</strong> ，表示这些元素（还）未存放任何对象。初学者对此可能有些不解。例如，</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">String[] names &#x3D; new String[10];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="程序示例-7"><a href="#程序示例-7" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   String[] huangzihan_a &#x3D; new String[5];
+	   boolean[] huangzihan_b &#x3D; new boolean[5]; 
+	   
+	   System.out.println(huangzihan_a[0]);
+	   System.out.println(huangzihan_a[1]);
+	   System.out.println(huangzihan_a[2]);
+	   System.out.println(huangzihan_a[3]);
+	   System.out.println(huangzihan_a[4]);
+	   System.out.println();
+	   System.out.println(huangzihan_b[0]);
+	   System.out.println(huangzihan_b[1]);
+	   System.out.println(huangzihan_b[2]);
+	   System.out.println(huangzihan_b[3]);
+	   System.out.println(huangzihan_b[4]);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-7"><a href="#运行结果-7" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">null
+null
+null
+null
+null
+
+false
+false
+false
+false
+false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>会创建一个包含10个字符串的数组，所有字符串都为 <strong>null</strong> 。如果希望这个数组包含空串，必须为元素指定空串：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/boolean数组与null程序示例一.png" width="60%" height="60%"> boolean数组与null程序示例一</center><h4 id="程序示例-8"><a href="#程序示例-8" class="headerlink" title="程序示例"></a>程序示例</h4><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/boolean数组与null程序示例二.png" width="80%" height="80%"> boolean数组与null程序示例二</center><h4 id="运行结果-8"><a href="#运行结果-8" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h3><blockquote><p>如果创建了一个100个元素的数组，并且试图访问元素a[100]（或在0 ~ 99之外的任何下标），就会引发“array index out of bounds”异常。</p><p>要想获得数组中的元素个数，可以使用 <strong>array.length</strong> 。例如，</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/警告程序示例一.png" width="50%" height="50%"> 警告程序示例一</center><h4 id="程序示例-9"><a href="#程序示例-9" class="headerlink" title="程序示例"></a>程序示例</h4><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/警告程序示例二.png" width="90%" height="90%"> 警告程序示例二</center><h4 id="运行结果-9"><a href="#运行结果-9" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">null
+
+Exception in thread &quot;main&quot; java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
+	at HuangZiHanTest.main(HuangZiHanTest.java:11)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="for-each循环"><a href="#for-each循环" class="headerlink" title="for each循环"></a>for each循环</h2><blockquote><p>Java有一种功能很强的循环结构，可以用来依次处理数组（或者其他元素集合）中的每个元素，而不必考虑指定下标值。</p><p>这种<strong>增强</strong>的 <strong>for</strong> 循环的语句格式为：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">for(variable:collection)   statement<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>它定义一个变量用于暂存集合中的每一个元素，并执行相应的语句（当然，也可以是语句块）。<em>collection</em> 这一集合表达式必须是一个数组或者是一个实现了 <strong>Iterable</strong> 接口的类对象（例如 <strong>ArrayList</strong> ）。</p><p>例如，</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">for(int element:a)
+   System.out.println(element);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>打印数组 <strong>a</strong> 的每一个元素，一个元素占一行。</p><p>这个循环应该读作“循环a中的每一个元素”（for each element in<br>a）。Java语言的设计者认为应该使用诸如 <strong>foreach</strong> 、 <strong>in</strong> 这样的关键字，但这种循环语句并不是最初就包含在Java语言中的，而是后来添加进去的，而且没有人希望破坏已经包含同名（例如 <strong>Systen.in</strong> ）方法或变量的旧代码。</p><p>当然，使用传统的 <strong>for</strong> 循环也可以获得同样的效果：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/for each循环程序示例一.png" width="50%" height="50%"> for each循环程序示例一</center><blockquote><p>但是，<strong>for each</strong>循环语句显得更加简洁、更不易出错，因为你不必为下标的起始值和终止值而操心。</p></blockquote><h3 id="程序示例-10"><a href="#程序示例-10" class="headerlink" title="程序示例"></a>程序示例</h3><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/for each循环程序示例二.png" width="90%" height="90%"> for each循环程序示例二</center><h3 id="运行结果-10"><a href="#运行结果-10" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">1
+2
+3
+4
+5
+
+1
+2
+3
+4
+5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="注释-2"><a href="#注释-2" class="headerlink" title="注释"></a>注释</h3><blockquote><p><strong>for each</strong> 循环语句的循环变量将会遍历数组中的每个元素，而不是下标值。</p><p>如果需要处理一个集合中的所有元素，<strong>for each</strong> 循环语句相对于传统循环语句所做的改进很让人欣喜。然而，在很多情况下还是需要使用传统的 <strong>for</strong> 循环。例如，如果不希望遍历整个集合，或者在循环内部需要使用下标值时。</p></blockquote><h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><blockquote><p>有一个更加简单的方式可以打印数组中的所有值，即利用 <strong>Arrays</strong> 类的 <strong>toString</strong> 方法。调用 <strong>Arrays.toString(a)</strong> ，返回一个包含数组元素的字符串，这些元素包围在中括号内，并用逗号分隔，例如，”[2,3,5,7,11,13]”。要想打印数组，只需要调用</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">System.out.println(Arrays.toString(a));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="程序示例-11"><a href="#程序示例-11" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Arrays;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_int &#x3D; &#123;11, 12, 13, 14, 15&#125;;
+	   double[] huangzihan_double &#x3D; &#123;1.0, 2.0, 3.0, 4.0, 5.0&#125;;
+	   char[] huangzihan_char &#x3D; &#123;&#39;黄&#39;,&#39;子&#39;,&#39;涵&#39;,&#39;是&#39;,&#39;帅&#39;,&#39;哥&#39;,&#39;！&#39;&#125;;
+	   boolean[] huangzihan_boolean &#x3D; &#123;true,false&#125;;
+	   byte[] huangzihan_byte &#x3D; &#123;1, 2, 3, 4, 5&#125;;
+	   System.out.println(Arrays.toString(huangzihan_int));
+	   System.out.println(Arrays.toString(huangzihan_double));
+	   System.out.println(Arrays.toString(huangzihan_char));
+	   System.out.println(Arrays.toString(huangzihan_boolean));
+	   System.out.println(Arrays.toString(huangzihan_byte));
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-11"><a href="#运行结果-11" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">[11, 12, 13, 14, 15]
+[1.0, 2.0, 3.0, 4.0, 5.0]
+[黄, 子, 涵, 是, 帅, 哥, ！]
+[true, false]
+[1, 2, 3, 4, 5]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="数组拷贝"><a href="#数组拷贝" class="headerlink" title="数组拷贝"></a>数组拷贝</h2><blockquote><p>在Java中，允许将一个数组变量拷贝到另一个数组变量。这时，两个变量将引用同一个数组：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] luckyNumbers &#x3D; smallPrimes;
+luckyNumbers[5] &#x3D; 12;    &#x2F;&#x2F;now smallPrimes[5] is also 12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="程序示例-12"><a href="#程序示例-12" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   int[] huangzihan_smallPrimes &#x3D; new int[6];
+	   int[] huangzihan_luckyNumbers &#x3D; huangzihan_smallPrimes;
+	   huangzihan_luckyNumbers[5] &#x3D; 12;
+	   
+	   System.out.println(huangzihan_luckyNumbers[5]);
+	   System.out.println(huangzihan_smallPrimes[5]);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-12"><a href="#运行结果-12" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">12
+12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="copyOf方法"><a href="#copyOf方法" class="headerlink" title="copyOf方法"></a>copyOf方法</h3><blockquote><p>图（拷贝一个数组变量）显示了拷贝的结果。如果希望将一个数组的所有值拷贝到一个新的数组中去，就要使用 <strong>Arrays</strong> 类的 <strong>copyOf</strong> 方法：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/拷贝一个数组变量.png" width="90%" height="90%"> 拷贝一个数组变量</center><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] copiedLuckyNumbers &#x3D;
+Arrays.copyOf(LuckyNumbers,LuckyNumbers.length);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>第2个参数是新数组的长度。这个方法通常用来增加数组的大小：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">luckyNumbers &#x3D; Arrays.copyOf(luckyNumbers,2*luckyNumbers.length);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>如果数组元素是数值型，那么额外的元素将被赋值为0；如果数组元素是布尔型，则将赋值为 <strong>false</strong> 。相反，如果长度小于原始数组的长度，则只拷贝前面的值。</p></blockquote><h4 id="程序示例-13"><a href="#程序示例-13" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Arrays;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] args)
+   &#123;   
+	   System.out.println(&quot;第一部分测试开始！&quot;);
+	   int[] huangzihan_smallPrimes_int &#x3D; &#123;1, 2, 3, 4, 5, 6&#125;;
+	   System.out.println(&quot;huangzihan_smallPrimes_int[]&#x3D;&quot;+Arrays.toString(huangzihan_smallPrimes_int));
+	   int[] huangzihan_luckyNumbers_int &#x3D; huangzihan_smallPrimes_int;
+	   System.out.println(&quot;huangzihan_luckyNumbers_int[5]&#x3D;&quot;+huangzihan_luckyNumbers_int[5]);	
+	   System.out.println(&quot;huangzihan_smallPrimes_int[5]&#x3D;&quot;+huangzihan_smallPrimes_int[5]);
+	   huangzihan_luckyNumbers_int[5] &#x3D; 12;
+	   System.out.println(&quot;&quot;);
+	   System.out.println(&quot;huangzihan_smallPrimes_int[5]&#x3D;&quot;+huangzihan_smallPrimes_int[5]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_int[5]&#x3D;&quot;+huangzihan_luckyNumbers_int[5]);
+	   System.out.println(&quot;第一部分测试结束！&quot;);
+	   System.out.println(&quot;&quot;);
+	   
+	   System.out.println(&quot;第二部分测试开始！&quot;);
+	   char[] huangzihan_smallPrimes_char &#x3D; &#123;&#39;黄&#39;,&#39;子&#39;,&#39;涵&#39;,&#39;是&#39;,&#39;帅&#39;,&#39;哥&#39;,&#39;！&#39;&#125;;
+	   System.out.println(&quot;huangzihan_smallPrimes_char[]&#x3D;&quot;+Arrays.toString(huangzihan_smallPrimes_char));
+	   char[] huangzihan_luckyNumbers_char &#x3D; huangzihan_smallPrimes_char;
+	   System.out.println(&quot;huangzihan_smallPrimes_char[5]&#x3D;&quot;+huangzihan_smallPrimes_char[5]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_char[5]&#x3D;&quot;+huangzihan_luckyNumbers_char[5]);
+	   huangzihan_luckyNumbers_char[5] &#x3D; &#39;黄&#39;;
+	   System.out.println(&quot;&quot;);
+	   System.out.println(&quot;huangzihan_luckyNumbers_char[5]&#x3D;&quot;+huangzihan_luckyNumbers_char[5]);
+	   System.out.println(&quot;huangzihan_smallPrimes_char[5]&#x3D;&quot;+huangzihan_smallPrimes_char[5]);
+	   System.out.println(&quot;第二部分测试结束！&quot;);
+	   System.out.println(&quot;&quot;);
+	   
+	   System.out.println(&quot;第三部分测试开始！&quot;);
+	   boolean[] huangzihan_smallPrimes_boolean &#x3D; &#123;true, false, true, false, true, false&#125;;
+	   System.out.println(&quot;huangzihan_smallPrimes_boolean[]&#x3D;&quot;+Arrays.toString(huangzihan_smallPrimes_boolean));
+	   System.out.println(&quot;&quot;);
+	   boolean[] huangzihan_luckyNumbers_boolean &#x3D; huangzihan_smallPrimes_boolean;
+	   System.out.println(&quot;huangzihan_luckyNumbers_boolean[5]&#x3D;&quot;+huangzihan_luckyNumbers_boolean[5]);	
+	   System.out.println(&quot;huangzihan_smallPrimes_boolean[5]&#x3D;&quot;+huangzihan_smallPrimes_boolean[5]);
+	   System.out.println(&quot;&quot;);
+	   huangzihan_luckyNumbers_boolean[5] &#x3D; true;
+	   System.out.println(&quot;huangzihan_smallPrimes_boolean[5]&#x3D;&quot;+huangzihan_smallPrimes_boolean[5]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_boolean[5]&#x3D;&quot;+huangzihan_luckyNumbers_boolean[5]);
+	   System.out.println(&quot;第三部分测试结束！&quot;);
+	   System.out.println(&quot;&quot;);
+	   
+	   System.out.println(&quot;第四部分测试开始！&quot;);
+	   int[] huangzihan_int &#x3D; Arrays.copyOf(huangzihan_luckyNumbers_int, huangzihan_luckyNumbers_int.length);
+	   char[] huangzihan_char &#x3D; Arrays.copyOf(huangzihan_luckyNumbers_char, huangzihan_luckyNumbers_char.length);
+	   boolean[] huangzihan_boolean &#x3D; Arrays.copyOf(huangzihan_luckyNumbers_boolean, huangzihan_luckyNumbers_boolean.length);
+	   
+	   System.out.println(&quot;huangzihan_int[5]&#x3D;&quot;+huangzihan_int[5]);
+	   System.out.println(&quot;huangzihan_char[5]&#x3D;&quot;+huangzihan_char[5]);
+	   System.out.println(&quot;huangzihan_boolean[5]&#x3D;&quot;+huangzihan_boolean[5]);
+	   System.out.println(&quot;第四部分测试结束！&quot;);
+	   System.out.println(&quot;&quot;);
+	   
+	   System.out.println(&quot;第五部分测试开始！&quot;);
+	   huangzihan_luckyNumbers_int &#x3D; Arrays.copyOf(huangzihan_luckyNumbers_int, 2*huangzihan_luckyNumbers_int.length);
+	   huangzihan_luckyNumbers_char &#x3D; Arrays.copyOf(huangzihan_luckyNumbers_char, 2*huangzihan_luckyNumbers_char.length);
+	   huangzihan_luckyNumbers_boolean &#x3D; Arrays.copyOf(huangzihan_luckyNumbers_boolean, 2*huangzihan_luckyNumbers_boolean.length);
+	   System.out.println(&quot;huangzihan_luckyNumbers_int[5]&#x3D;&quot;+huangzihan_luckyNumbers_int[5]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_char[5]&#x3D;&quot;+huangzihan_luckyNumbers_char[5]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_boolean[5]&#x3D;&quot;+huangzihan_luckyNumbers_boolean[5]);
+	   System.out.println(&quot;&quot;);
+	   System.out.println(&quot;huangzihan_luckyNumbers_int[10]&#x3D;&quot;+huangzihan_luckyNumbers_int[10]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_char[10]&#x3D;&quot;+huangzihan_luckyNumbers_char[10]);
+	   System.out.println(&quot;huangzihan_luckyNumbers_boolean[10]&#x3D;&quot;+huangzihan_luckyNumbers_boolean[10]);
+	   System.out.println(&quot;第五部分测试结束！&quot;);
+	   System.out.println(&quot;&quot;);
+	   
+	   System.out.println(&quot;第六部分测试开始！&quot;);
+	   int[] Huangzihan_int &#x3D; &#123;1, 2, 3, 4, 5, 6&#125;;
+	   System.out.println(&quot;Huangzihan_int[]&#x3D;&quot;+Arrays.toString(Huangzihan_int));
+	   int[] Huangzihan_copyOf_int &#x3D; Arrays.copyOf(Huangzihan_int, 3);
+	   System.out.println(&quot;Huangzihan_copyOf_int[]&#x3D;&quot;+Arrays.toString(Huangzihan_copyOf_int));
+	   System.out.println(&quot;&quot;);
+	   char[] Huangzihan_char &#x3D; &#123;&#39;黄&#39;,&#39;子&#39;,&#39;涵&#39;,&#39;是&#39;,&#39;帅&#39;,&#39;哥&#39;,&#39;！&#39;&#125;;
+	   System.out.println(&quot;Huangzihan_char[]&#x3D;&quot;+Arrays.toString(Huangzihan_char));
+	   char[] Huangzihan_copyOf_char &#x3D; Arrays.copyOf(Huangzihan_char, 3);
+	   System.out.println(&quot;Huangzihan_copyOf_char[]&#x3D;&quot;+Arrays.toString(Huangzihan_copyOf_char));
+	   System.out.println(&quot;&quot;);
+	   boolean[] Huangzihan_boolean &#x3D; &#123;true, false, true, false, true, false&#125;;
+	   System.out.println(&quot;Huangzihan_boolean[]&#x3D;&quot;+Arrays.toString(Huangzihan_boolean));
+	   boolean[] Huangzihan_copyOf_boolean &#x3D; Arrays.copyOf(Huangzihan_boolean, 3);
+	   System.out.println(&quot;Huangzihan_copyOf_boolean[]&#x3D;&quot;+Arrays.toString(Huangzihan_copyOf_boolean));	      
+	   System.out.println(&quot;第六部分测试结束！&quot;);
+	   System.out.println(&quot;&quot;);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-13"><a href="#运行结果-13" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">第一部分测试开始！
+huangzihan_smallPrimes_int[]&#x3D;[1, 2, 3, 4, 5, 6]
+huangzihan_luckyNumbers_int[5]&#x3D;6
+huangzihan_smallPrimes_int[5]&#x3D;6
+
+huangzihan_smallPrimes_int[5]&#x3D;12
+huangzihan_luckyNumbers_int[5]&#x3D;12
+第一部分测试结束！
+
+第二部分测试开始！
+huangzihan_smallPrimes_char[]&#x3D;[黄, 子, 涵, 是, 帅, 哥, ！]
+huangzihan_smallPrimes_char[5]&#x3D;哥
+huangzihan_luckyNumbers_char[5]&#x3D;哥
+
+huangzihan_luckyNumbers_char[5]&#x3D;黄
+huangzihan_smallPrimes_char[5]&#x3D;黄
+第二部分测试结束！
+
+第三部分测试开始！
+huangzihan_smallPrimes_boolean[]&#x3D;[true, false, true, false, true, false]
+
+huangzihan_luckyNumbers_boolean[5]&#x3D;false
+huangzihan_smallPrimes_boolean[5]&#x3D;false
+
+huangzihan_smallPrimes_boolean[5]&#x3D;true
+huangzihan_luckyNumbers_boolean[5]&#x3D;true
+第三部分测试结束！
+
+第四部分测试开始！
+huangzihan_int[5]&#x3D;12
+huangzihan_char[5]&#x3D;黄
+huangzihan_boolean[5]&#x3D;true
+第四部分测试结束！
+
+第五部分测试开始！
+huangzihan_luckyNumbers_int[5]&#x3D;12
+huangzihan_luckyNumbers_char[5]&#x3D;黄
+huangzihan_luckyNumbers_boolean[5]&#x3D;true
+
+huangzihan_luckyNumbers_int[10]&#x3D;0
+huangzihan_luckyNumbers_char[10]&#x3D;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><h3 id="Stringarg-参数"><a href="#Stringarg-参数" class="headerlink" title="Stringarg[]参数"></a>Stringarg[]参数</h3><blockquote><p>前面已经看到一个Java数组重复出现过很多次。每一个Java应用程序都有一个带 <code>Stringarg[]</code>参数的 <strong>main</strong><br>方法。这个参数表明main方法将接收一个字符串数组，也就是命令行上指定的参数。</p><p>例如，来看下面这个程序：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/Stringarg[]参数程序示例一.png" width="70%" height="70%"> Stringarg[]参数程序示例一</center><blockquote><p>如果使用下面这种形式调用这个程序：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">java Message -g cruel world <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p><strong>args</strong> 数组将包含以下内容：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">args[0]: &quot;-g&quot;
+args[1]：&quot;cruel&quot;
+args[2]：&quot;world&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>这个程序会显示下面这个消息：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Goodbye,cruel world！<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="程序示例-14"><a href="#程序示例-14" class="headerlink" title="程序示例"></a>程序示例</h4><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/Stringarg[]参数程序示例二.png" width="90%" height="90%"> Stringarg[]参数程序示例二</center><h4 id="运行结果-14"><a href="#运行结果-14" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Hello,!<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h2><h3 id="sort方法"><a href="#sort方法" class="headerlink" title="sort方法"></a>sort方法</h3><blockquote><p>要想对数值型数组进行排序，可以使用 <strong>Arrays</strong> 类中的 <strong>sort</strong> 方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] a &#x3D; new int[10000];
+. . .
+Arrays.sort(a)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><blockquote><p>这个方法使用了优化的快速排序（QuickSort）算法。快速排序算法对于大多数数据集合来说都是效率比较高的。</p><p>程序清单3-7中的程序具体使用了数组，它产生一个抽彩游戏中的随机数字组合。假如抽彩是从49个数字中抽取6个，那么程序可能的输出结果为：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Bet the following combination.It&#39;ll make you rich！
+4
+7
+8
+19
+30
+44<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>要想选择这样一个随机的数字集合，就要首先将值 <strong>1,2,…,n</strong> 存入数组 <strong>numbers</strong> 中：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/sort方法程序示例二.png" width="90%" height="90%"> sort方法程序示例二</center><blockquote><p>而用第二个数组存放抽取出来的数：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[] result &#x3D; new int[k];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>现在，就可以开始抽取 <strong>k</strong> 个数了。<strong>Math.random</strong> 方法将返回一个 <strong>0</strong> 到 <strong>1</strong> 之间（包含0、不包含1）的随机浮点数。用 <strong>n</strong> 乘以这个浮点数，就可以得到从 <strong>0</strong> 到 <strong>n-1</strong> 之间的一个随机数。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int r &#x3D;(int)(Math.random() * n);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>下面将 <strong>result</strong> 的第 <strong>i</strong> 个元素设置为<code>numbers[r]</code>存放的数值，最初是 <strong>r+1</strong> 。但正如所看到的，<strong>numbers</strong> 数组的内容在每一次抽取之后都会发生变化。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">result[i] &#x3D; numbers[r];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>现在，必须确保不会再次抽取到那个数，因为所有抽彩的数必须不相同。因此，这里用数组中的<strong>最后一个数</strong>覆盖<code>number[r]</code>，并将 <strong>n</strong> 减 <strong>1</strong> 。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">numbers[r] &#x3D; numbers[n - 1];
+n--;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>关键在于每次抽取的都是<strong>下标</strong>，而不是实际的值。下标指向数组中包含尚未抽取过的值。</p><p>在抽取了 <strong>k</strong> 个数之后，可以对<strong>result</strong>数组进行排序，这样可以让输出效果更好：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Arrays.sort(result);
+for(int r : result)
+    System.out.println(r);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="程序示例-15"><a href="#程序示例-15" class="headerlink" title="程序示例"></a>程序示例</h4><h4 id="运行结果-15"><a href="#运行结果-15" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">你需要画多少个数字？
+5
+huangzihan_k&#x3D;5
+你能画5个数字
+
+你能画最高的数字是多少？
+10
+huangzihan_n&#x3D;10
+你能画最高的数字是10
+
+huangzihan_numbers.length&#x3D;10
+
+第1次循环
+1
+
+第2次循环
+2
+
+第3次循环
+3
+
+第4次循环
+4
+
+第5次循环
+5
+
+第6次循环
+6
+
+第7次循环
+7
+
+第8次循环
+8
+
+第9次循环
+9
+
+第10次循环
+10
+
+huangzihan_numbers[]&#x3D;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+huangzihan_result.length&#x3D;5
+
+第1次循环
+10
+10
+9
+9
+
+第2次循环
+9
+9
+8
+8
+
+第3次循环
+2
+8
+1
+7
+
+第4次循环
+7
+7
+6
+6
+
+第5次循环
+1
+6
+0
+5
+
+huangzihan_result[]&#x3D;[10, 9, 2, 7, 1]
+快速排序之后：[1, 2, 7, 9, 10]
+
+127910<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><blockquote><p>多维数组将使用多个下标访问数组元素，它适用于表示表格或更加复杂的排列形式。假设需要建立一个数值表格，用来显示在不同利率下投资10000美元会增长多少，利息每年兑现并复投（见表（不同利率下的投资增长情况））。</p></blockquote><h3 id="不同利率下的投资增长情况"><a href="#不同利率下的投资增长情况" class="headerlink" title="不同利率下的投资增长情况"></a>不同利率下的投资增长情况</h3><div class="table-container"><table><thead><tr><th>10%</th><th>11%</th><th>12%</th><th>13%</th><th>14%</th><th>15%</th></tr></thead><tbody><tr><td>10 000.00</td><td>10 000.00</td><td>10 000.00</td><td>10 000.00</td><td>10 000.00</td><td>10 000.00</td></tr><tr><td>11 000.00</td><td>11 100.00</td><td>11 200.00</td><td>11 300.00</td><td>11 400.00</td><td>11 500.00</td></tr><tr><td>12 100.00</td><td>12 321.00</td><td>12 544.00</td><td>12 769.00</td><td>12 996.00</td><td>13 225.00</td></tr><tr><td>13 310.00</td><td>13 676.31</td><td>14 049.28</td><td>14 428.97</td><td>14 815.44</td><td>15 208.75</td></tr><tr><td>14 641.00</td><td>15 180.70</td><td>15 735.19</td><td>16 304.74</td><td>16 889.60</td><td>17 490.06</td></tr><tr><td>16 105.10</td><td>16 850.58</td><td>17 623.42</td><td>18 424.35</td><td>19 254.15</td><td>20 113.57</td></tr><tr><td>17 715.61</td><td>18 704.15</td><td>19 738.23</td><td>20 819.52</td><td>21 949.73</td><td>23 130.61</td></tr><tr><td>19 487.17</td><td>20 761.60</td><td>22 106.81</td><td>23 526.05</td><td>25 022.69</td><td>26 600.20</td></tr><tr><td>21 435.89</td><td>23 045.38</td><td>24 759.63</td><td>26 584.44</td><td>28 525.86</td><td>30 590.23</td></tr><tr><td>23 579.48</td><td>25 580.37</td><td>27 730.79</td><td>30 040.42</td><td>32 519.49</td><td>35 178.76</td></tr></tbody></table></div><blockquote><p>可以使用一个二维数组（也称为矩阵）来存储这些信息。这个数组被命名为<strong>balances</strong>。</p></blockquote><h3 id="声明二维数组"><a href="#声明二维数组" class="headerlink" title="声明二维数组"></a>声明二维数组</h3><blockquote><p>在Java中，声明一个二维数组相当简单。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">double[][] balances;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="程序示例-16"><a href="#程序示例-16" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+	public static void main(String[] huangzihan_args)
+    &#123;   
+	   double[][] balances;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-16"><a href="#运行结果-16" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="初始化二维数组"><a href="#初始化二维数组" class="headerlink" title="初始化二维数组"></a>初始化二维数组</h3><blockquote><p>对数组进行初始化之前是不能使用的。在这里可以如下初始化：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">balances &#x3D; new double[NYEARS][NRATES];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>另外，如果知道数组元素，就可以不调用<strong>new</strong>，而直接使用简写形式对多维数组进行初始化。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[][] magicSquare &#x3D;
+&#123;
+    &#123;16, 3, 2, 13&#125;,
+    &#123;5, 10, 11, 8&#125;,
+    &#123;9, 6, 7, 12&#125;,
+    &#123;4, 15, 14, 1&#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>一旦数组初始化，就可以利用两个中括号访问各个元素，例如，<code>balances[i][j]</code>。</p><p>在示例程序中用到了一个存储利率的一维数组<strong>interest</strong>与一个存储余额的二维数组<strong>balances</strong>，一维用于表示年，另一维表示利率，使用初始余额来初始化这个数组的第一行：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/初始化二维数组程序示例一.png" width="60%" height="60%"> 初始化二维数组程序示例一</center><blockquote><p>然后计算其他行，如下所示：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/初始化二维数组程序示例二.png" width="60%" height="60%"> 初始化二维数组程序示例二</center><h4 id="程序示例-17"><a href="#程序示例-17" class="headerlink" title="程序示例"></a>程序示例</h4><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/初始化二维数组程序示例三.png" width="90%" height="90%"> 初始化二维数组程序示例三</center><h4 id="运行结果-17"><a href="#运行结果-17" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">huangzihan_balances[][]&#x3D;[[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+
+huangzihan_magicSquare[][]&#x3D;[[16, 3, 2, 13], [5, 10, 11, 8], [9, 6, 7, 12], [4, 15, 14, 1]]
+
+[[10000.0, 10000.0, 10000.0, 10000.0, 10000.0, 10000.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="注释-3"><a href="#注释-3" class="headerlink" title="注释"></a>注释</h2><blockquote><p>for each循环语句不能自动处理二维数组的每一个元素。它会循环处理行，而这些行本身就是一维数组。要想访问二维数组 <strong>a</strong> 的所有元素，需要使用两个嵌套的循环，如下所示：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">for (double[] row : a)
+    for (double value : row)
+        do something with value
+&#96;&#96;&#96;        
+
+## 提示
+
+&gt; 要想快速地打印一个二维数组的数据元素列表，可以调用：
+
+&#96;&#96;&#96;C&#x2F;C++
+System.out.println(Arrays.deepToString(a));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>输出格式为：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">[[16, 3, 2, 13], [5, 10, 11, 8], [9, 6, 7, 12], [4, 15, 14, 1]]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="程序示例-18"><a href="#程序示例-18" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Arrays;
+
+public class HuangZiHanTest
+&#123;  
+	public static void main(String[] huangzihan_args)
+    &#123;   
+	    double[][] huangzihan_a &#x3D;
+	    &#123;
+	    		&#123;1, 2, 3, 4&#125;,
+	    		&#123;5, 6, 7, 8&#125;,
+	    		&#123;4, 3, 2, 1&#125;,
+	    		&#123;8, 7, 6, 5&#125;,
+	    &#125;;		
+		for(double[] row : huangzihan_a) 
+		&#123;
+			for(double huangzihan_value : row) 
+			&#123;
+				System.out.println(Arrays.deepToString(huangzihan_a));
+			&#125;
+		&#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-18"><a href="#运行结果-18" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]
+[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [4.0, 3.0, 2.0, 1.0], [8.0, 7.0, 6.0, 5.0]]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="不规则数组"><a href="#不规则数组" class="headerlink" title="不规则数组"></a>不规则数组</h2><blockquote><p>到目前为止，我们看到的数组与其他程序设计语言中提供的数组没有多大区别。但在底层实际存在着一些细微的差异，有时你可以充分利用这一点：Java实际上<strong>没有</strong>多维数组，只有一维数组。多维数组被解释为“数组的数组”。</p><p>例如，在前面的示例中，<strong>balances</strong>数组实际上是一个包含10个元素的数组，而每个元素</p><p>又是一个由6个浮点数组成的数组（请参看图（一个二维数组））。</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/一个二维数组.png" width="90%" height="90%"> 一个二维数组</center><blockquote><p>表达式<code>balances[i]</code>引用第 <strong>i</strong> 个子数组，也就是表格的第 <strong>i</strong> 行。它本身也是一个数组，<code>balances[i][j]</code>引用这个数组的第 <strong>j</strong> 个元素。</p><p>由于可以单独地访问数组的某一行，所以可以让两行交换。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">double[] temp &#x3D; balances[i];
+balances[i] &#x3D; balances[i + 1];
+balances[i + 1] &#x3D; temp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="程序示例-19"><a href="#程序示例-19" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Arrays;
+
+public class HuangZiHanTest
+&#123;  
+	public static void main(String[] huangzihan_args)
+    &#123;   
+	    double[] huangzihan_temp;
+		int huangzihan_i&#x3D;0;
+		double[][] huangzihan_balances &#x3D; 
+		&#123;
+				&#123;1, 2, 3, 4&#125;,
+				&#123;4, 3, 2, 1&#125;,
+				&#123;5, 6, 7, 8&#125;,
+				&#123;8, 7, 6, 5&#125;,
+		&#125;;
+		huangzihan_temp &#x3D; huangzihan_balances[huangzihan_i];
+		huangzihan_balances[huangzihan_i] &#x3D; huangzihan_balances[huangzihan_i + 1];
+		huangzihan_balances[huangzihan_i + 1] &#x3D; huangzihan_temp;
+	    System.out.println(Arrays.deepToString(huangzihan_balances));
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-19"><a href="#运行结果-19" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">[[4.0, 3.0, 2.0, 1.0], [1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [8.0, 7.0, 6.0, 5.0]]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>还可以方便地构造一个“不规则”数组，即数组的每一行有不同的长度。下面是一个标准的示例。我们将创建一个数组，第 <strong>i</strong> 行第 <strong>j</strong> 列将存放“从 <strong>i</strong> 个数中抽取 <strong>j</strong> 个数”可能的结果数。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">1
+1  1
+1  2  1
+1  3  3  1
+1  4  6  4  1
+1  5  10 10 5  1
+1  6  15 20 15 6  1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>由于 <strong>j</strong> 不可能大于 <strong>i</strong>，所以矩阵是三角形的。第 <strong>i</strong> 行有 <strong>i + 1</strong> 个元素（允许抽取 <strong>0</strong> 个元素，这种选择只有一种可能）。要想创建这样一个不规则的数组，首先需要分配一个数组包含这些行：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">int[][] odds &#x3D; new int[NMAx + 1][];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>接下来，分配这些行：</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/不规则数组程序示例三.png" width="40%" height="40%"> 不规则数组程序示例三</center><blockquote><p>在分配了数组之后，假定没有超出边界，就可以采用通常的方式访问其中的元素了。</p></blockquote><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/不规则数组程序示例一.png" width="60%" height="60%"> 不规则数组程序示例一</center><h3 id="程序示例-20"><a href="#程序示例-20" class="headerlink" title="程序示例"></a>程序示例</h3><center><img src="/2021/07/12/%E6%95%B0%E7%BB%84/不规则数组程序示例二.png" width="90%" height="90%"> 不规则数组程序示例二</center><h3 id="运行结果-20"><a href="#运行结果-20" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">5
+
+[[0], [0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0, 0]]
+
+huangzihan_lotteryoOdds&#x3D;1
+huangzihan_lotteryoOdds&#x3D;2
+huangzihan_lotteryoOdds&#x3D;2
+huangzihan_lotteryoOdds&#x3D;1
+huangzihan_lotteryoOdds&#x3D;3
+huangzihan_lotteryoOdds&#x3D;3
+huangzihan_lotteryoOdds&#x3D;3
+huangzihan_lotteryoOdds&#x3D;3
+huangzihan_lotteryoOdds&#x3D;3
+huangzihan_lotteryoOdds&#x3D;1
+huangzihan_lotteryoOdds&#x3D;4
+huangzihan_lotteryoOdds&#x3D;4
+huangzihan_lotteryoOdds&#x3D;6
+huangzihan_lotteryoOdds&#x3D;4
+huangzihan_lotteryoOdds&#x3D;6
+huangzihan_lotteryoOdds&#x3D;4
+huangzihan_lotteryoOdds&#x3D;4
+huangzihan_lotteryoOdds&#x3D;6
+huangzihan_lotteryoOdds&#x3D;4
+huangzihan_lotteryoOdds&#x3D;1
+
+huangzihan_odds&#x3D;[[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
+
+   1
+   1   1
+   1   2   1
+   1   3   3   1
+   1   4   6   4   1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E6%95%B0%E7%BB%84"><span class="toc-number">1.1.</span> <span class="toc-text">声明数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%A0%87%EF%BC%88index%EF%BC%8C%E6%88%96%E7%A7%B0%E7%B4%A2%E5%BC%95%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">下标（index，或称索引）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">创建数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="toc-number">1.1.3.</span> <span class="toc-text">数组长度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-2"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8%EF%BC%88array-list%EF%BC%89"><span class="toc-number">1.1.4.</span> <span class="toc-text">数组列表（array list）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.5.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.6.</span> <span class="toc-text">初始化数组对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-3"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-3"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%A2%9E%E5%8A%A0%E5%80%BC"><span class="toc-number">1.1.7.</span> <span class="toc-text">数组增加值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-4"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-4"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E6%95%B0%E7%BB%84"><span class="toc-number">1.1.8.</span> <span class="toc-text">匿名数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-5"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-5"><span class="toc-number">1.1.8.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-1"><span class="toc-number">1.1.9.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="toc-number">1.2.</span> <span class="toc-text">访问数组元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-6"><span class="toc-number">1.2.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-6"><span class="toc-number">1.2.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boolean%E6%95%B0%E7%BB%84%E4%B8%8Enull"><span class="toc-number">1.2.3.</span> <span class="toc-text">boolean数组与null</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-7"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-7"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-8"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-8"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A"><span class="toc-number">1.2.4.</span> <span class="toc-text">警告</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-9"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-9"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for-each%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.3.</span> <span class="toc-text">for each循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-10"><span class="toc-number">1.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-10"><span class="toc-number">1.3.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">1.3.4.</span> <span class="toc-text">提示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-11"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-11"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%8B%B7%E8%B4%9D"><span class="toc-number">1.4.</span> <span class="toc-text">数组拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-12"><span class="toc-number">1.4.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-12"><span class="toc-number">1.4.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copyOf%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.3.</span> <span class="toc-text">copyOf方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-13"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-13"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">命令行参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stringarg-%E5%8F%82%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">Stringarg[]参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-14"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-14"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F"><span class="toc-number">1.6.</span> <span class="toc-text">数组排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sort%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.1.</span> <span class="toc-text">sort方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-15"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-15"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.7.</span> <span class="toc-text">多维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%88%A9%E7%8E%87%E4%B8%8B%E7%9A%84%E6%8A%95%E8%B5%84%E5%A2%9E%E9%95%BF%E6%83%85%E5%86%B5"><span class="toc-number">1.7.1.</span> <span class="toc-text">不同利率下的投资增长情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.7.2.</span> <span class="toc-text">声明二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-16"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-16"><span class="toc-number">1.7.2.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">1.7.3.</span> <span class="toc-text">初始化二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-17"><span class="toc-number">1.7.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-17"><span class="toc-number">1.7.3.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-3"><span class="toc-number">1.8.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-18"><span class="toc-number">1.8.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-18"><span class="toc-number">1.8.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E8%A7%84%E5%88%99%E6%95%B0%E7%BB%84"><span class="toc-number">1.9.</span> <span class="toc-text">不规则数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-19"><span class="toc-number">1.9.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-19"><span class="toc-number">1.9.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-20"><span class="toc-number">1.9.3.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-20"><span class="toc-number">1.9.4.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

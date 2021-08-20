@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>Linux内核学习 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="Linux内核学习前言为什么要看从Unix看起呢？因为Linux之父是参考Unix写出Linux的，所以追根溯源我就找到这里，打算从Unix源码看起，加上自己学习操作系统的学得很烂，不知道是自己的学,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">Linux内核学习</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">Linux内核学习</h1><div class="stuff"><span>四月 20, 2021</span><ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Unix-V6/" rel="tag">Unix V6</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%86%85%E6%A0%B8/" rel="tag">内核</a></li></ul></div><div class="content markdown"><h1 id="Linux内核学习"><a href="#Linux内核学习" class="headerlink" title="Linux内核学习"></a>Linux内核学习</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为什么要看从Unix看起呢？因为Linux之父是参考Unix写出Linux的，所以追根溯源我就找到这里，打算从Unix源码看起，加上自己学习操作系统的学得很烂，不知道是自己的学习问题？还是操作系统理论知识本身就很抽象？于是，我就找到了《Unix内核源码剖析》这本书，从看源码然后再回头翻操作系统理论的书，沿着Unix-&gt;Linux-&gt;Android这条路走下去，逐步地对操作系统有进一步地理解。</p><h2 id="Unix源码阅读"><a href="#Unix源码阅读" class="headerlink" title="Unix源码阅读"></a>Unix源码阅读</h2><h3 id="前期环境搭建"><a href="#前期环境搭建" class="headerlink" title="前期环境搭建"></a>前期环境搭建</h3><h4 id="资料下载"><a href="#资料下载" class="headerlink" title="资料下载"></a>资料下载</h4><p>在网上找到书上学习Unix内核的材料，网盘地址如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1upOLt8h0U93spDuSEz4C4g 
+提取码：34cb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="Simh-中配置安装-Unix-V6"><a href="#Simh-中配置安装-Unix-V6" class="headerlink" title="Simh 中配置安装 Unix V6"></a>Simh 中配置安装 Unix V6</h3><h4 id="下载解压Unix-V6"><a href="#下载解压Unix-V6" class="headerlink" title="下载解压Unix V6"></a>下载解压Unix V6</h4><p>上面的网盘地址如果失效，请联系本人更新地址，然后下载<code>Unix V6</code>解压里面的三个压缩文件到本地，应该看到这样的三个文件夹：</p><ul><li>simhv39-0-exe</li><li>Unix-v6-Ken-Wellsch.tap</li><li>v6src</li></ul><h4 id="重命名Unix-v6-Ken-Wellsch-tap"><a href="#重命名Unix-v6-Ken-Wellsch-tap" class="headerlink" title="重命名Unix-v6-Ken-Wellsch.tap"></a>重命名Unix-v6-Ken-Wellsch.tap</h4><p>将<code>Unix-v6-Ken-Wellsch.tap</code>这个文件夹中的<code>Unix-v6-Ken-Wellsch.tap</code>这个文件首先<strong>重命名</strong>为<code>dist.tap</code>，再<strong>复制黏贴</strong>到<code>simhv39-0-exe</code>这个文件夹里。这里为什么要重命名呢？因为在后面<a href="#加载boot">加载boot</a>这段代码中有这样一行代码<code>sim&gt; attach tm0 dist.tap</code>，这里的<code>dist.tap</code>在我们下载到的三个文件夹中都没有，所以由此可以推断它是重命名来的，但是它有什么作用呢？<strong>暂时留下一个疑问。</strong></p><span id="more"></span><h4 id="查看simhv39-0-exe文件目录下的文件"><a href="#查看simhv39-0-exe文件目录下的文件" class="headerlink" title="查看simhv39-0-exe文件目录下的文件"></a>查看simhv39-0-exe文件目录下的文件</h4><p>为什么这里会有一步查看这个文件夹下的所有文件呢？因为我发现配置参数之后，会在这个文件夹目录下新生成一些文件，所以在这里先把原有的所有文件做一个记录，到时候方便分析生成的过程发生了什么。</p><h5 id="cmd方式查看"><a href="#cmd方式查看" class="headerlink" title="cmd方式查看"></a>cmd方式查看</h5><p>考虑到有些同学没有在电脑里安装Git，就使用Windows最原始的方法去查看，快捷键<code>win+R</code>，在这里<code>win</code>一般表示的是在键盘左下方的微软图标，然后弹出来的运行窗口输入<code>cmd</code>，一般一开始的路径是：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">C:\Users\Administrator&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后我们需要切换到<code>simhv39-0-exe</code>这个文件夹的磁盘下，所以我们要光标处输入磁盘符，我这个文件夹在e盘，我的输入是这样的：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">C:\Users\Administrator&gt;e:<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后显示代码是这样的：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">C:\Users\Administrator&gt;e:
+
+E:\&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>这个就表示我们已经进入到e盘的路径下，接着切换到该文件夹路径下，<code>Tab</code>键对文件夹的名字进行补全，由于我是在百度网盘下载的，所以我这里e盘的根目录下是<code>BaiduNetdiskDownload</code>文件夹，使用<code>cd 文件名</code>（注意这里有个空格）进入文件夹目录下，由于cmd窗口的代码不能复制黏贴，所以整个过程大致输入如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">C:\Users\Administrator&gt;e:
+
+E:\&gt;BaiduNetdiskDownload&gt;cd &quot;Unix V6&quot;
+
+E:\&gt;BaiduNetdiskDownload\Unix V6&gt;cd simhv39-0-exe&gt;
+
+E:\&gt;BaiduNetdiskDownload\Unix V6\simhv39-0-exe&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>最后，成功显示这样的路径<code>***:\&gt;***\Unix V6\simhv39-0-exe&gt;</code>就表示已经进入<code>simhv39-0-exe</code>文件夹中了，然后使用<code>dir</code>命令查看这个文件夹中的所有文件,由于文件比较多，所以就截图了：</p><h5 id="Git-Bash-Here方式"><a href="#Git-Bash-Here方式" class="headerlink" title="Git Bash Here方式"></a>Git Bash Here方式</h5><p>Git Bash Here方式就比较简单，这个要在电脑上事先安装Git软件，直接进入到<code>simhv39-0-exe</code>文件夹下，右键点击该文件夹选择<code>Git Bash Here</code>，然后使用<code>ls -lt</code>命令进行查看：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Administrator@PC-20210109IEYU MINGW64 &#x2F;d&#x2F;simhv39-0-exe
+$ ls -lt
+total 13984
+-rw-r--r-- 1 Administrator 197121 6291996 四月   19 14:54 dist.tap
+-rwxr-xr-x 1 Administrator 197121  201223 五月    4  2012 swtp6800mp-a2.exe*
+-rwxr-xr-x 1 Administrator 197121  198732 五月    4  2012 swtp6800mp-a.exe*
+-rwxr-xr-x 1 Administrator 197121  192894 五月    4  2012 h316.exe*
+-rwxr-xr-x 1 Administrator 197121  158566 五月    4  2012 lgp.exe*
+-rwxr-xr-x 1 Administrator 197121  214245 五月    4  2012 sds.exe*
+-rwxr-xr-x 1 Administrator 197121  244623 五月    4  2012 id32.exe*
+-rwxr-xr-x 1 Administrator 197121  234367 五月    4  2012 id16.exe*
+-rwxr-xr-x 1 Administrator 197121  233236 五月    4  2012 ibm1130.exe*
+-rwxr-xr-x 1 Administrator 197121  293948 五月    4  2012 i7094.exe*
+-rwxr-xr-x 1 Administrator 197121  161305 五月    4  2012 gri.exe*
+-rwxr-xr-x 1 Administrator 197121  661949 五月    4  2012 altairz80.exe*
+-rwxr-xr-x 1 Administrator 197121  161691 五月    4  2012 altair.exe*
+-rwxr-xr-x 1 Administrator 197121  182294 五月    4  2012 s3.exe*
+-rwxr-xr-x 1 Administrator 197121  193458 五月    4  2012 i1620.exe*
+-rwxr-xr-x 1 Administrator 197121  188159 五月    4  2012 i1401.exe*
+-rwxr-xr-x 1 Administrator 197121  437997 五月    4  2012 hp2100.exe*
+-rwxr-xr-x 1 Administrator 197121  263665 五月    4  2012 eclipse.exe*
+-rwxr-xr-x 1 Administrator 197121  199700 五月    4  2012 nova.exe*
+-rwxr-xr-x 1 Administrator 197121  563019 五月    4  2012 vax780.exe*
+-rwxr-xr-x 1 Administrator 197121  497421 五月    4  2012 vax.exe*
+-rwxr-xr-x 1 Administrator 197121  341096 五月    4  2012 pdp10.exe*
+-rwxr-xr-x 1 Administrator 197121  584150 五月    4  2012 pdp11.exe*
+-rwxr-xr-x 1 Administrator 197121  241230 五月    4  2012 pdp15.exe*
+-rwxr-xr-x 1 Administrator 197121  233454 五月    4  2012 pdp9.exe*
+-rwxr-xr-x 1 Administrator 197121  262525 五月    4  2012 pdp8.exe*
+-rwxr-xr-x 1 Administrator 197121  226422 五月    4  2012 pdp7.exe*
+-rwxr-xr-x 1 Administrator 197121  224715 五月    4  2012 pdp4.exe*
+-rwxr-xr-x 1 Administrator 197121  199295 五月    4  2012 pdp1.exe*
+-rw-r--r-- 1 Administrator 197121  131072 四月    1  2008 ka655x.bin
+-rwxr-xr-x 1 Administrator 197121   44544 五月    5  2005 vmb.exe*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="配置-Unix-V6-的系统启动参数"><a href="#配置-Unix-V6-的系统启动参数" class="headerlink" title="配置 Unix V6 的系统启动参数"></a>配置 Unix V6 的系统启动参数</h4><h5 id="运行pdp11-exe可执行程序"><a href="#运行pdp11-exe可执行程序" class="headerlink" title="运行pdp11.exe可执行程序"></a>运行pdp11.exe可执行程序</h5><p>打开<code>simhv39-0-exe</code>这个文件夹，找到可执行程序<code>pdp11.exe</code>，点击该程序，然后会弹出这个一个窗口，然后我们就可以配置 Unix V6 的系统启动参数。本来按照网上的教程应该是，复制下面这段代码，这里的复制是指一行一行地复制，而不是一整段复制，鼠标右键黏贴到弹出的窗口后的光标处，但是不知道是不是我是win7，教程博主用的是win10，所以我这里是黏贴不了的。</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">set cpu 11&#x2F;40
+set tm0 locked
+attach tm0 dist.tap
+attach rk0 rk0
+attach rk1 rk1
+attach rk2 rk2
+d cpu 100000 012700 
+d cpu 100002 172526
+d cpu 100004 010040
+d cpu 100006 012740 
+d cpu 100010 060003
+d cpu 100012 000777 
+g 100000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="加载boot"><a href="#加载boot" class="headerlink" title="加载boot"></a>加载boot</h5><p>于是，我就按照上面这段代码的顺序在弹出窗口的光标处依次输入，直到最后一行，我这里的窗口与显示的代码大致如下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">PDP-11 simulator V3.9-0
+sim&gt; set cpu 11&#x2F;40
+Disabling XQ
+sim&gt; set tm0 locked
+sim&gt; attach tm0 dist.tap
+sim&gt; attach rk0 rk0
+RK:creating new file
+sim&gt; attach rk1 rk1
+RK:creating new file
+sim&gt;attach rk2 rk2
+RK:creating new file
+sim&gt;d cpu 100000 012700 
+sim&gt;d cpu 100002 172526
+sim&gt;d cpu 100004 010040
+sim&gt;d cpu 100006 012740 
+sim&gt;d cpu 100010 060003
+sim&gt;d cpu 100012 000777 
+sim&gt;g 100000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><ul><li>加载引导块</li><li>将根分区加载到 rk 文件上去</li></ul></blockquote><p><strong>这是网摘对这个过程的解释，先找照着做，以后再回来进行补充说明。</strong></p><h5 id="再次查看所有文件"><a href="#再次查看所有文件" class="headerlink" title="再次查看所有文件"></a>再次查看所有文件</h5><p>到这里我们看到的是光标在那里闪，我们再用上面的两种方法去查看经过这次输入之后会生成那些文件，我这里用的是第二种方式，回到<code>simhv39-0-exe</code>目录下右键选择<code>Git Bash Here</code></p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Administrator@PC-20210109IEYU MINGW64 &#x2F;e&#x2F;BaiduNetdiskDownload&#x2F;Unix V6&#x2F;simhv39-0-
+$ ls -lt
+total 13984
+-rw-r--r-- 1 Administrator 197121       0 四月   19 14:43 rk2
+-rw-r--r-- 1 Administrator 197121       0 四月   19 14:42 rk1
+-rw-r--r-- 1 Administrator 197121       0 四月   19 14:41 rk0
+-rw-r--r-- 1 Administrator 197121 6291996 四月   19 11:20 dist.tap
+-rwxr-xr-x 1 Administrator 197121  201223 五月    4  2012 swtp6800mp-a2.exe*
+-rwxr-xr-x 1 Administrator 197121  198732 五月    4  2012 swtp6800mp-a.exe*
+-rwxr-xr-x 1 Administrator 197121  192894 五月    4  2012 h316.exe*
+-rwxr-xr-x 1 Administrator 197121  158566 五月    4  2012 lgp.exe*
+-rwxr-xr-x 1 Administrator 197121  214245 五月    4  2012 sds.exe*
+-rwxr-xr-x 1 Administrator 197121  244623 五月    4  2012 id32.exe*
+-rwxr-xr-x 1 Administrator 197121  234367 五月    4  2012 id16.exe*
+-rwxr-xr-x 1 Administrator 197121  233236 五月    4  2012 ibm1130.exe*
+-rwxr-xr-x 1 Administrator 197121  293948 五月    4  2012 i7094.exe*
+-rwxr-xr-x 1 Administrator 197121  161305 五月    4  2012 gri.exe*
+-rwxr-xr-x 1 Administrator 197121  661949 五月    4  2012 altairz80.exe*
+-rwxr-xr-x 1 Administrator 197121  161691 五月    4  2012 altair.exe*
+-rwxr-xr-x 1 Administrator 197121  182294 五月    4  2012 s3.exe*
+-rwxr-xr-x 1 Administrator 197121  193458 五月    4  2012 i1620.exe*
+-rwxr-xr-x 1 Administrator 197121  188159 五月    4  2012 i1401.exe*
+-rwxr-xr-x 1 Administrator 197121  437997 五月    4  2012 hp2100.exe*
+-rwxr-xr-x 1 Administrator 197121  263665 五月    4  2012 eclipse.exe*
+-rwxr-xr-x 1 Administrator 197121  199700 五月    4  2012 nova.exe*
+-rwxr-xr-x 1 Administrator 197121  563019 五月    4  2012 vax780.exe*
+-rwxr-xr-x 1 Administrator 197121  497421 五月    4  2012 vax.exe*
+-rwxr-xr-x 1 Administrator 197121  341096 五月    4  2012 pdp10.exe*
+-rwxr-xr-x 1 Administrator 197121  584150 五月    4  2012 pdp11.exe*
+-rwxr-xr-x 1 Administrator 197121  241230 五月    4  2012 pdp15.exe*
+-rwxr-xr-x 1 Administrator 197121  233454 五月    4  2012 pdp9.exe*
+-rwxr-xr-x 1 Administrator 197121  262525 五月    4  2012 pdp8.exe*
+-rwxr-xr-x 1 Administrator 197121  226422 五月    4  2012 pdp7.exe*
+-rwxr-xr-x 1 Administrator 197121  224715 五月    4  2012 pdp4.exe*
+-rwxr-xr-x 1 Administrator 197121  199295 五月    4  2012 pdp1.exe*
+-rw-r--r-- 1 Administrator 197121  131072 四月    1  2008 ka655x.bin
+-rwxr-xr-x 1 Administrator 197121   44544 五月    5  2005 vmb.exe*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="对比差异"><a href="#对比差异" class="headerlink" title="对比差异"></a>对比差异</h5><p>对比上次的输出，我们会发现新生成三个文件分别是<code>rk0</code>、<code>rk1</code>、<code>rk2</code>：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">-rw-r--r-- 1 Administrator 197121       0 四月   19 14:43 rk2
+-rw-r--r-- 1 Administrator 197121       0 四月   19 14:42 rk1
+-rw-r--r-- 1 Administrator 197121       0 四月   19 14:41 rk0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>其实，我们在PDP-11那个窗口输入时，所输出的这行代码<code>RK:creating new file</code>，也可以知道这三个文件是新生成的。</p><h5 id="退出加载，配置磁盘"><a href="#退出加载，配置磁盘" class="headerlink" title="退出加载，配置磁盘"></a>退出加载，配置磁盘</h5><p>我们接着这里的输出代码：<br><a href="#加载boot">加载boot</a>，快捷键<code>Ctrl + E</code>退出加载过程，然后窗口会输出这样一段代码<code>Simulation stopped,PC:100012&lt;BR 100012&gt;</code>,表示模拟器已经停止了，我们接着输入<code>g 0</code>进行配置磁盘信息，然后窗口输出<code>=</code>，在光标处接着输入以下代码：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">sim&gt; g 0
+&#x3D;tmrk
+disk offset
+0
+tape offset
+100
+count
+1
+&#x3D;tmrk
+disk offset
+1
+tape offset
+101
+count
+3999
+&#x3D;                                              [## Hit CTRL-E here]
+Simulation stopped, PC: 137300 (BGE 137274)
+sim&gt; q<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>就这一段代码</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">&#x3D;                                              [## Hit CTRL-E here]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>有点坑，我还照着上面进行输入，结果不是，应该是在显示<code>=</code>后，我们快捷键<code>Ctrl + E</code>,退出配置过程，最后在光标处输入<code>q</code>，到目前为止，窗口显示的情况如下：</p><h5 id="安装磁盘"><a href="#安装磁盘" class="headerlink" title="安装磁盘"></a>安装磁盘</h5><p>在上一步我们在光标处输入<code>q</code>，再按下<code>Enter</code>键就可以退出<code>pdp11.exe</code>这个可执行程序，我们再重新点击这个可执行文件，输入以下代码进行：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">set cpu 11&#x2F;40
+set tto 7b
+set tm0 locked
+attach tm0 dist.tap
+attach rk0 rk0
+attach rk1 rk1
+attach rk2 rk2
+dep system sr 173030
+boot rk0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>当我们输完上面的代码，新一行会显示一个<code>@</code>，我们输入以下代码，告诉模拟器我们要加载 Unix 核心模块：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">rkunix<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>到这里为止，PDP-11可执行程序窗口的运行情况如图所示：</p><h5 id="修改大小写"><a href="#修改大小写" class="headerlink" title="修改大小写"></a>修改大小写</h5><p>为什么要修改大小写呢？因为无论我们在<code>#</code>后面的光标处输入什么，它都输出大写，所以我们这里需要把它改为小写，输入以下代码修改为小写：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># STTY -LCASE<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h5 id="重新构建内核"><a href="#重新构建内核" class="headerlink" title="重新构建内核"></a>重新构建内核</h5><p>在<code>#</code>后的光标处接着输入以下代码进行重构内核，记得每输完一行按<code>Enter</code>进行确认：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">chdir &#x2F;usr&#x2F;sys&#x2F;conf
+cc mkconf.c
+mv a.out mkconf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h5 id="配置mkconf"><a href="#配置mkconf" class="headerlink" title="配置mkconf"></a>配置mkconf</h5><p>输入以下代码配置mkconf：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># .&#x2F;mkconf
+rk
+tm
+tc
+8dc
+lp
+done
+#<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>编译配置，将其余的库文件进行链接，最后复制到unix目录下：</p><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">as m40.s
+mv a.out m40.o
+cc -c c.c
+as l.s
+ld -x a.out m40.o c.o ..&#x2F;lib1 ..&#x2F;lib2
+mv a.out &#x2F;unix<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">Linux内核学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unix%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB"><span class="toc-number">1.2.</span> <span class="toc-text">Unix源码阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">前期环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E6%96%99%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">资料下载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simh-%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%AE%89%E8%A3%85-Unix-V6"><span class="toc-number">1.2.2.</span> <span class="toc-text">Simh 中配置安装 Unix V6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E8%A7%A3%E5%8E%8BUnix-V6"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">下载解压Unix V6</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%91%BD%E5%90%8DUnix-v6-Ken-Wellsch-tap"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">重命名Unix-v6-Ken-Wellsch.tap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bsimhv39-0-exe%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">查看simhv39-0-exe文件目录下的文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#cmd%E6%96%B9%E5%BC%8F%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">cmd方式查看</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Git-Bash-Here%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">Git Bash Here方式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Unix-V6-%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">配置 Unix V6 的系统启动参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Cpdp11-exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.2.2.4.1.</span> <span class="toc-text">运行pdp11.exe可执行程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BDboot"><span class="toc-number">1.2.2.4.2.</span> <span class="toc-text">加载boot</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%8D%E6%AC%A1%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.4.3.</span> <span class="toc-text">再次查看所有文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E5%B7%AE%E5%BC%82"><span class="toc-number">1.2.2.4.4.</span> <span class="toc-text">对比差异</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%80%E5%87%BA%E5%8A%A0%E8%BD%BD%EF%BC%8C%E9%85%8D%E7%BD%AE%E7%A3%81%E7%9B%98"><span class="toc-number">1.2.2.4.5.</span> <span class="toc-text">退出加载，配置磁盘</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%A3%81%E7%9B%98"><span class="toc-number">1.2.2.4.6.</span> <span class="toc-text">安装磁盘</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="toc-number">1.2.2.4.7.</span> <span class="toc-text">修改大小写</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E6%9E%84%E5%BB%BA%E5%86%85%E6%A0%B8"><span class="toc-number">1.2.2.4.8.</span> <span class="toc-text">重新构建内核</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEmkconf"><span class="toc-number">1.2.2.4.9.</span> <span class="toc-text">配置mkconf</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

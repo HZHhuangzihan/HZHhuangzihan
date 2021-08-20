@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>ls命令剖析 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="ls资料翻译
+ls  -  list contents of directory
+
+ls - 列出目录的内容
+SYNOPSIS 使用方式ls [ -ltasdruifg ] name ...
+DES,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">ls命令剖析</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">ls命令剖析</h1><div class="stuff"><span>四月 25, 2021</span></div><div class="content markdown"><h1 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h1><h2 id="资料翻译"><a href="#资料翻译" class="headerlink" title="资料翻译"></a>资料翻译</h2><blockquote><p>ls - list contents of directory</p></blockquote><p>ls - 列出目录的内容</p><h3 id="SYNOPSIS-使用方式"><a href="#SYNOPSIS-使用方式" class="headerlink" title="SYNOPSIS 使用方式"></a>SYNOPSIS 使用方式</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">ls [ -ltasdruifg ] name ...<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="DESCRIPTION-说明"><a href="#DESCRIPTION-说明" class="headerlink" title="DESCRIPTION 说明"></a>DESCRIPTION 说明</h3><h4 id="参数的说明"><a href="#参数的说明" class="headerlink" title="参数的说明"></a>参数的说明</h4><blockquote><p>For each directory argument, ls lists the contents of the directory; for each file argument, ls repeats its name and<br>any other information requested. The output is sorted alphabetically by default. When no argument is given, the current directory is listed. When several arguments are given, the arguments are first sorted appropriately, but file arguments appear before directories and their contents.<br>There are several options:</p></blockquote><p>对于每个目录参数，ls列出目录内容；对于每个文件参数，ls重复其名称和要求的任何其他信息。输出已排序默认按字母顺序排列。当没有给出任何论据时，当前目录已列出。当几个参数给定，参数首先被适当地排序，但是文件参数出现在目录及其内容之前。有几种选择：</p><blockquote><p>-l list in long format, giving mode, number of links,owner, size in bytes, and time of last modification for each file. (See below.) If the file is a special file<br>the size field will instead contain the major and minor device numbers.</p></blockquote><p>-l 长格式列表，给出模式，链接数，所有者、字节大小和每个文件上次修改的时间(如果文件是特殊文件“大小”字段将改为包含“主要”和“次要”字段设备编号。</p><blockquote><p>-t sort by time modified (latest first) instead of by name,as is normal.</p></blockquote><p>-t 按修改的时间（最新的第一个）排序，而不是按名称排序，一切正常</p><blockquote><p>-a list all entries; usually those beginning with `.’ are suppressed</p></blockquote><p>-a 列出所有条目；通常以“.”开头的被发表</p><blockquote><p>-s give size in blocks for each entry</p></blockquote><p>-s 为每个条目提供块大小</p><blockquote><p>-d if argument is a directory, list only its name, not its contents (mostly used with -l to get status on directory)</p></blockquote><p>-d 如果参数是目录，则只列出它的名称，而不列出它的内容（主要与-l一起使用以获取目录的状态）</p><blockquote><p>-r reverse the order of sort to get reverse alphabetic or oldest first as appropriate</p></blockquote><p>-r 颠倒排序顺序，以获得颠倒的字母顺序或最早的优先顺序（视情况而定）</p><blockquote><p>-u use time of last access instead of last modification for sorting (-t) or printing (-l)</p></blockquote><p>-u 使用上次访问的时间而不是上次修改<br>排序（-t）或打印（-l）</p><blockquote><p>-i print i-number in first column of the report for each file listed</p></blockquote><p>-i 在报告的第一列中为列出的每个文件打印i号</p><blockquote><p>-f force each argument to be interpreted as a directory and list the name found in each slot. This option turns off -l, -t, -s, and -r, and turns on -a; the order is the order in which entries appear in the directory.</p></blockquote><p>-f 强制将每个参数解释为目录和<br>列出每个插槽中找到的名称。此选项将关闭<br>-l、 -t、-s和-r，并打开-a；顺序是<br>条目在目录中出现的顺序。</p><blockquote><p>-g Give group ID instead of owner ID in long listing.</p></blockquote><p>-g 在长列表中提供组ID而不是所有者ID。</p><span id="more"></span><h4 id="l-参数字符的解释"><a href="#l-参数字符的解释" class="headerlink" title="-l 参数字符的解释"></a>-l 参数字符的解释</h4><blockquote><p>The mode printed under the -l option contains 11 characters which are interpreted as follows: the first character is</p></blockquote><p>在-l选项下打印的模式包含11个字符，解释如下：第一个字符是:</p><blockquote><ol><li>d if the entry is a directory;</li><li>b if the entry is a block-type special file;</li><li>c if the entry is a character-type special file;</li><li>(-) if the entry is a plain file.</li></ol></blockquote><ol><li>d 如果条目是目录；</li><li>b 如果条目是块类型特殊文件；</li><li>c 如果条目是字符类型的特殊文件；</li><li>(-) 如果条目是普通文件。</li></ol><h4 id="文件权限的解释"><a href="#文件权限的解释" class="headerlink" title="文件权限的解释"></a>文件权限的解释</h4><blockquote><p>The next 9 characters are interpreted as three sets of three bits each. The first set refers to owner permissions; the next to permissions to others in the same user-group; and the last to all others. Within each set the three characters indicate permission respectively to read, to write, or to execute the file as a program. For a directory, `execute’ permission is interpreted to mean permission to search the directory for a specified file. The permissions are indicated as follows:</p></blockquote><p>接下来的9个字符被解释为三组三个字符<br>每一位。第一组是所有者权限；同一用户组中其他用户的权限旁边的；最后一个给所有其他人。在每个集合中，三个字符分别表示读取、写入或作为程序执行文件的权限。对于目录，“execute”权限被解释为在目录中搜索指定文件的权限。权限如下所示：</p><blockquote><ol><li>r if the file is readable</li><li>w if the file is writable</li><li>x if the file is executable</li><li>(-) if if the indicated permission is not granted</li></ol></blockquote><ol><li>r if 如果文件可读</li><li>w 如果文件是可写的</li><li>x 如果文件是可执行的</li><li>(-) 如果未授予指定的权限</li></ol><blockquote><p>The group-execute permission character is given as s if the file has set-group-ID mode; likewise the user-execute permission character is given as s if the file has set-user-ID mode.</p></blockquote><p>如果文件已设置组ID模式；同样地，如果文件设置了用户ID，则用户执行权限字符被赋予s<br>模式。</p><blockquote><p>The last character of the mode is normally blank but is printed as ``t’’ if the 1000 bit of the mode is on. See<br>chmod (I) for the current meaning of this mode.</p></blockquote><p>模式的最后一个字符通常为空，但为空<br>如果模式的1000位为on，则打印为“t”。看到了吗<br>chmod（I）表示该模式的当前含义。</p><h3 id="FILES-文件夹"><a href="#FILES-文件夹" class="headerlink" title="FILES 文件夹"></a>FILES 文件夹</h3><blockquote><p>/etc/passwd</p></blockquote><p>获取ls-l的用户ID</p><h2 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h2><h3 id="ls-命令"><a href="#ls-命令" class="headerlink" title="ls 命令"></a>ls 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls
+bin
+dev
+etc
+hpunix
+lib
+mnt
+rkunix
+rpunix
+tmp
+unix
+usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-l-命令"><a href="#ls-l-命令" class="headerlink" title="ls -l 命令"></a>ls -l 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -l
+total 247
+drwxrwxr-x  2 bin      1104 May 14 00:47 bin
+drwxrwxr-x  2 bin      1824 Oct 10 12:35 dev
+drwxrwxr-x  2 bin       496 Oct 10 12:53 etc
+-rwxrwxrwx  1 root    29074 Oct 10 12:28 hpunix
+drwxrwxr-x  2 bin       464 May 13 23:35 lib
+drwxrwxr-x  2 bin        32 May 13 20:01 mnt
+-rwxrwxrwx  1 root    28836 Oct 10 12:22 rkunix
+-rwxrwxrwx  1 root    29020 Oct 10 12:25 rpunix
+drwxrwxrwx  2 bin       272 Oct 10 13:43 tmp
+-rwxrwxrwx  1 root    30346 Oct 10 12:32 unix
+drwxrwxr-x 15 bin       240 Oct 10 12:36 usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-t-命令"><a href="#ls-t-命令" class="headerlink" title="ls -t 命令"></a>ls -t 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -t
+total 247
+tmp
+etc
+usr
+dev
+unix
+hpunix
+rpunix
+rkunix
+bin
+lib
+mnt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-a-命令"><a href="#ls-a-命令" class="headerlink" title="ls -a 命令"></a>ls -a 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -a
+.
+..
+bin
+dev
+etc
+hpunix
+lib
+mnt
+rkunix
+rpunix
+tmp
+unix
+usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-s-命令"><a href="#ls-s-命令" class="headerlink" title="ls -s 命令"></a>ls -s 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -s
+total 247
+   3 bin
+   4 dev
+   1 etc
+  58 hpunix
+   1 lib
+   1 mnt
+  58 rkunix
+  58 rpunix
+   1 tmp
+  61 unix
+   1 usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-d-命令"><a href="#ls-d-命令" class="headerlink" title="ls -d 命令"></a>ls -d 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -d
+.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="ls-r-命令"><a href="#ls-r-命令" class="headerlink" title="ls -r 命令"></a>ls -r 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -r
+usr
+unix
+tmp
+rpunix
+rkunix
+mnt
+lib
+hpunix
+etc
+dev
+bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-u-命令"><a href="#ls-u-命令" class="headerlink" title="ls -u 命令"></a>ls -u 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -u
+bin
+dev
+etc
+hpunix
+lib
+mnt
+rkunix
+rpunix
+tmp
+unix
+usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-i-命令"><a href="#ls-i-命令" class="headerlink" title="ls -i 命令"></a>ls -i 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -i
+  101 bin
+  100 dev
+   99 etc
+  397 hpunix
+   98 lib
+   97 mnt
+  198 rkunix
+  396 rpunix
+   96 tmp
+  363 unix
+   95 usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="ls-g-命令"><a href="#ls-g-命令" class="headerlink" title="ls -g 命令"></a>ls -g 命令</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++"># ls -g
+bin
+dev
+etc
+hpunix
+lib
+mnt
+rkunix
+rpunix
+tmp
+unix
+usr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ls"><span class="toc-number">1.</span> <span class="toc-text">ls</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99%E7%BF%BB%E8%AF%91"><span class="toc-number">1.1.</span> <span class="toc-text">资料翻译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SYNOPSIS-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">SYNOPSIS 使用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DESCRIPTION-%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.2.</span> <span class="toc-text">DESCRIPTION 说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">参数的说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#l-%E5%8F%82%E6%95%B0%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">-l 参数字符的解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">文件权限的解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FILES-%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">1.1.3.</span> <span class="toc-text">FILES 文件夹</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83"><span class="toc-number">1.2.</span> <span class="toc-text">实战演练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.1.</span> <span class="toc-text">ls 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-l-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.2.</span> <span class="toc-text">ls -l 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-t-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.3.</span> <span class="toc-text">ls -t 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-a-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.4.</span> <span class="toc-text">ls -a 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-s-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.5.</span> <span class="toc-text">ls -s 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-d-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.6.</span> <span class="toc-text">ls -d 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-r-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.7.</span> <span class="toc-text">ls -r 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-u-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.8.</span> <span class="toc-text">ls -u 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-i-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.9.</span> <span class="toc-text">ls -i 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ls-g-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.10.</span> <span class="toc-text">ls -g 命令</span></a></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

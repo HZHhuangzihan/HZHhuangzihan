@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>对象构造 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="对象构造
+构造器可以定义对象的初始状态。但是，由于对象构造非常重要，所以Java提供了多种编写构造器的机制。下面将详细介绍这些机制。
+
+重载
+有些类有多个构造器。例如，可以如下构造一个空的Strin,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">对象构造</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">对象构造</h1><div class="stuff"><span>七月 19, 2021</span></div><div class="content markdown"><h1 id="对象构造"><a href="#对象构造" class="headerlink" title="对象构造"></a>对象构造</h1><blockquote><p>构造器可以定义对象的初始状态。但是，由于对象构造非常重要，所以Java提供了多种编写构造器的机制。下面将详细介绍这些机制。</p></blockquote><h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><blockquote><p>有些类有多个构造器。例如，可以如下构造一个空的<strong>StringBuilder</strong>对象：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">var messages &#x3D; new StringBuilder();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>或者，可以指定一个初始字符串：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">var todolist &#x3D; new StringBuilder(&quot;To do:\n&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这种功能叫做<strong>重载</strong>（overloading）。如果多个方法（比如，<strong>StringBuilder</strong>构造器方法）有相同的名字、不同的参数，便出现了重载。编译器必须挑选出具体调用哪个方法。它用各个方法首部中的参数类型与特定方法调用中所使用的值类型进行匹配，来选出正确的方法。如果编译器找不到匹配的参数，就会产生编译时错误，因为根本不存在匹配，或者没有一个比其他的更好（这个查找匹配的过程被称为<strong>重载解析</strong>（overloading resolution））。</p></blockquote><h3 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	  var huangzihan_messages &#x3D; new StringBuilder(&quot;黄子涵&quot;);
+	  var huangzihan_todoList &#x3D; new StringBuilder(&quot;黄子涵是帅哥！！！\n&quot;);
+	  
+	  System.out.println(huangzihan_messages);
+	  System.out.println(huangzihan_todoList);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><span id="more"></span><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">黄子涵
+黄子涵是帅哥！！！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><h4 id="方法的签名（signature）"><a href="#方法的签名（signature）" class="headerlink" title="方法的签名（signature）"></a>方法的签名（signature）</h4><blockquote><p>Java允许重载任何方法，而不只是构造器方法。因此，要完整地描述一个方法，需要指定方法名以及参数类型。这叫作方法的<strong>签名</strong>（signature）。例如，<strong>String</strong>类有4个名为<strong>indexOf</strong>的公共方法。它们的签名是</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">indexOf(int)
+indexOf(int, int)
+indexOf(String)
+indexOf(String, int)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>返回类型不是方法签名的一部分。也就是说，不能有两个名字相同、参数类型也相同却有不同返回类型的方法。</p></blockquote><h5 id="程序示例-1"><a href="#程序示例-1" class="headerlink" title="程序示例"></a>程序示例</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	  String huangzihan &#x3D; new String(&quot;黄子涵&quot;);
+	  
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println(&quot;测试huangzihan.indexOf(int ch)&quot;);
+	  System.out.println(huangzihan.indexOf(&#39;黄&#39;));
+	  System.out.println(huangzihan.indexOf(&#39;子&#39;));
+	  System.out.println(huangzihan.indexOf(&#39;涵&#39;));
+	  System.out.println(huangzihan.indexOf(&#39;!&#39;));         &#x2F;&#x2F;原字符串不包含“！”
+	  System.out.println(huangzihan.indexOf(&#39;\u9ec4&#39;));    &#x2F;&#x2F;“黄”字的Unicode编码是\u9ec4
+	  System.out.println(huangzihan.indexOf(&#39;\u5b50&#39;));    &#x2F;&#x2F;“子”字的Unicode编码是\u5b50    
+	  System.out.println(huangzihan.indexOf(&#39;\u6db5&#39;));    &#x2F;&#x2F;“涵”字的Unicode编码是\u6db5          
+	  System.out.println(huangzihan.indexOf(&#39;\u0021&#39;));    &#x2F;&#x2F;“！”字的Unicode编码是\u0021 
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println();
+	  
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println(&quot;测试huangzihan.indexOf(int ch, int fromIndex)&quot;);
+	  System.out.println(&quot;返回值为指定索引查找指定字符中第一个的索引：&quot;);
+	  System.out.println(huangzihan.indexOf(&#39;涵&#39;, 2));
+	  System.out.println(huangzihan.indexOf(&#39;涵&#39;, 1));
+	  System.out.println(huangzihan.indexOf(&#39;涵&#39;, 0));
+	  System.out.println(huangzihan.indexOf(&#39;子&#39;, 1));
+	  System.out.println(huangzihan.indexOf(&#39;子&#39;, 0));
+	  System.out.println(huangzihan.indexOf(&#39;黄&#39;, 0));
+	  System.out.println();
+	  System.out.println(&quot;返回值为-1：&quot;);
+	  System.out.println(huangzihan.indexOf(&#39;黄&#39;, 1));
+	  System.out.println(huangzihan.indexOf(&#39;黄&#39;, 2));
+	  System.out.println(huangzihan.indexOf(&#39;子&#39;, 2));
+	  System.out.println(huangzihan.indexOf(&#39;！&#39;, 0));
+	  System.out.println(huangzihan.indexOf(&#39;！&#39;, 1));
+	  System.out.println(huangzihan.indexOf(&#39;！&#39;, 2));
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println();
+	  
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println(&quot;测试huangzihan.indexOf(String str)&quot;);
+	  System.out.println(&quot;返回值为第一个字符的索引：&quot;);
+	  System.out.println(huangzihan.indexOf(&quot;黄&quot;));        &#x2F;&#x2F;返回“黄”的索引
+	  System.out.println(huangzihan.indexOf(&quot;子&quot;));        &#x2F;&#x2F;返回“子”的索引
+	  System.out.println(huangzihan.indexOf(&quot;涵&quot;));        &#x2F;&#x2F;返回“涵”的索引
+	  System.out.println(huangzihan.indexOf(&quot;黄子&quot;));      &#x2F;&#x2F;返回“黄子”中“黄”的索引
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵&quot;));     &#x2F;&#x2F;返回“黄子涵”中“黄”的索引
+	  System.out.println(huangzihan.indexOf(&quot;子涵&quot;));      &#x2F;&#x2F;返回“子涵”中“子”的索引
+	  System.out.println(&quot;返回值为-1：&quot;);
+	  System.out.println(huangzihan.indexOf(&quot;！&quot;));       &#x2F;&#x2F;原字符串不包含“！”
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵！&quot;));   &#x2F;&#x2F;原字符串不包含“！”
+	  System.out.println(huangzihan.indexOf(&quot;黄涵&quot;));      &#x2F;&#x2F;比原字符串少了“子”
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println();
+	  
+	  System.out.println(&quot;************************************************&quot;);
+	  System.out.println(&quot;测试huangzihan.indexOf(String str, int fromIndex)&quot;);
+	  System.out.println(&quot;返回值为指定索引查找指定字符串中第一个的索引：&quot;);
+	  System.out.println(huangzihan.indexOf(&quot;黄&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;黄子&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;子涵&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;涵&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;子涵&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;涵&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;涵&quot;, 2));
+	  System.out.println(&quot;返回值为-1&quot;);
+	  System.out.println(huangzihan.indexOf(&quot;黄&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;黄子&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;黄&quot;, 2));
+	  System.out.println(huangzihan.indexOf(&quot;黄子&quot;, 2));
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵&quot;, 2));
+	  System.out.println(huangzihan.indexOf(&quot;子涵&quot;, 2));
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵！&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵！&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;黄子涵！&quot;, 2));
+	  System.out.println(huangzihan.indexOf(&quot;黄涵&quot;, 0));
+	  System.out.println(huangzihan.indexOf(&quot;黄涵！&quot;, 1));
+	  System.out.println(huangzihan.indexOf(&quot;黄涵！&quot;, 2));
+	  System.out.println(&quot;************************************************&quot;);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">************************************************
+测试huangzihan.indexOf(int ch)
+0
+1
+2
+-1
+0
+1
+2
+-1
+************************************************
+
+************************************************
+测试huangzihan.indexOf(int ch, int fromIndex)
+返回值为指定索引查找指定字符中第一个的索引：
+2
+2
+2
+1
+1
+0
+
+返回值为-1：
+-1
+-1
+-1
+-1
+-1
+-1
+************************************************
+
+************************************************
+测试huangzihan.indexOf(String str)
+返回值为第一个字符的索引：
+0
+1
+2
+0
+0
+1
+返回值为-1：
+-1
+-1
+-1
+************************************************
+
+************************************************
+测试huangzihan.indexOf(String str, int fromIndex)
+返回值为指定索引查找指定字符串中第一个的索引：
+0
+0
+0
+1
+2
+1
+2
+2
+返回值为-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+************************************************
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="默认字段初始化"><a href="#默认字段初始化" class="headerlink" title="默认字段初始化"></a>默认字段初始化</h2><blockquote><p>如果在构造器中没有显式地为字段设置初值，那么就会被自动地赋为默认值：数值为<strong>0</strong>、布尔值为<strong>false</strong>、对象引用为<strong>null</strong>。有些人认为依赖默认值的做法是一种不好的编程实践。确实，如果不明确地对字段进行初始化，就会影响程序代码的可读性。</p></blockquote><h3 id="注释-1"><a href="#注释-1" class="headerlink" title="注释"></a>注释</h3><blockquote><p>这是字段与局部变量的一个重要区别。方法中的局部变量必须明确地初始化。但是在类中，如果没有初始化类中的字段，将会自动初始化为默认值（<strong>0</strong>、<strong>false</strong>或<strong>null</strong>）。</p><p>例如，考虑<strong>Employee</strong>类。假定没有在构造器中指定如何初始化某些字段，默认情况下，就会将<strong>salary</strong>字段初始化为<strong>0</strong>，将<strong>name</strong>和<strong>hireDay</strong>字段初始化为<strong>null</strong>。</p><p>但是，这并不是一个好主意。如果此时调用<strong>getName</strong>方法或<strong>getHireDay</strong>方法，就会得到一个<strong>null</strong>引用，这应该不是我们所希望的结果：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">LocalDate h &#x3D; harry.getHireDay();
+int year &#x3D; h.getYear();  &#x2F;&#x2F; throws exception if h is null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="无参数的构造器"><a href="#无参数的构造器" class="headerlink" title="无参数的构造器"></a>无参数的构造器</h2><blockquote><p>很多类都包含一个无参数的构造器，由无参数构造器创建对象时，对象的状态会设置为适当的默认值。例如，以下是<strong>Employee</strong>类的无参数构造器：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee()
+&#123;
+    name &#x3D; &quot;&quot;;
+    salary &#x3D; 0;
+    hireDay &#x3D; LocalDate.now();
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>如果写一个类时没有编写构造器，就会为你提供一个无参数构造器。这个构造器将<strong>所有的</strong>实例字段设置为默认值。于是，实例字段中的数值型数据设置为<strong>0</strong>，布尔型数据设置为<strong>false</strong>，所有对象变量将设置为<strong>null</strong>。</p><p>如果类中提供了至少一个构造器，但是没有提供无参数的构造器，那么构造对象时如果不提供参数就是不合法的。例如，下面程序中的<strong>Employee</strong>类提供了一个简单的构造器：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s, int year, int month, int day)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>对于这个类，构造默认的员工就是不合法的。也就是说，调用</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">e &#x3D; new Employee();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>将会产生错误。</p></blockquote><h3 id="程序示例-2"><a href="#程序示例-2" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.time.LocalDate;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   Huangzihan_Employee huangzihan_e &#x3D; new Huangzihan_Employee(null, 0, 0, 0, 0);
+	   System.out.println(huangzihan_e.huangzihan_getName());
+	   System.out.println(huangzihan_e.huangzihan_getSalary());
+	   System.out.println(huangzihan_e.getHireDay());
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+    &#x2F;&#x2F; instance fields
+    private String huangzihan_name;
+    private double huangzihan_salary;
+    private LocalDate huangzihan_hireDay;
+
+    &#x2F;&#x2F; constructor
+    public Huangzihan_Employee(String huangzihan_n, double huangzihan_s, int huangzihan_year, int huangzihan_month, int huangzihan_day) 
+    &#123;
+        huangzihan_name &#x3D; &quot;&quot;;
+        huangzihan_salary &#x3D; 0;
+        huangzihan_hireDay &#x3D; LocalDate.now();
+    &#125;
+
+    &#x2F;&#x2F; a method
+    public String huangzihan_getName() 
+    &#123;
+        return huangzihan_name;
+    &#125;
+
+    public double huangzihan_getSalary() 
+    &#123;
+         return huangzihan_salary;
+    &#125;
+
+    public LocalDate getHireDay() 
+    &#123;
+        return huangzihan_hireDay;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">
+0.0
+2021-07-18<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h3><blockquote><p>请记住，<strong>仅</strong>当类没有任何其他构造器的时候，你才会得到一个默认的无参数构造器。编写类的时候，如果写了一个你自己的构造器，要想让这个类的用户能够通过以下调用构造一个实例：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">new ClassName()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>你就必须提供一个无参数的构造器。当然，如果希望所有字段<strong>被赋予默认值</strong>，只需要提供以下代码：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public ClassName()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="显式字段初始化"><a href="#显式字段初始化" class="headerlink" title="显式字段初始化"></a>显式字段初始化</h2><blockquote><p>通过重载类的构造器方法，可以采用多种形式设置类的实例字段的初始状态。不管怎样调用构造器，每个实例字段都要设置为一个有意义的初值，确保这一点总是一个好主意。</p><p>可以在类定义中直接为任何字段赋值。例如：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    private String name &#x3D; &quot;&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>在执行构造器之前先完成这个赋值操作。如果一个类的所有构造器都希望把某个特定的实例字段设置为同一个值，这个语法就特别有用。</p><p>初始值不一定是常量值。在下面的例子中，就是利用方法调用初始化一个字段。考虑以下<strong>Employee</strong>类，其中每个员工有一个<strong>id</strong>字段。可以使用下列方式进行初始化：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    private static int nextId;
+    private int id &#x3D; assignId();
+    . . .
+    private static int assignId()
+    &#123;
+        int r &#x3D; nextId; 
+        nextId++; 
+        return r;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="参数名"><a href="#参数名" class="headerlink" title="参数名"></a>参数名</h2><blockquote><p>在编写很小的构造器时（这十分常见），常常在参数命名时感到困惑。</p></blockquote><h3 id="用单个字母作为参数名"><a href="#用单个字母作为参数名" class="headerlink" title="用单个字母作为参数名"></a>用单个字母作为参数名</h3><blockquote><p>我们通常喜欢用单个字母作为参数名：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s)
+&#123;
+    name &#x3D; n;
+    salary &#x3D; s;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>但这样做有一个缺点：只有阅读代码才能够了解参数<strong>n</strong>和参数<strong>s</strong>的含义。</p></blockquote><h3 id="参数名前面加前缀“a”"><a href="#参数名前面加前缀“a”" class="headerlink" title="参数名前面加前缀“a”"></a>参数名前面加前缀“a”</h3><blockquote><p>有些程序员在每个参数前面加上一个前缀“<strong>a</strong>”：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String aName, double aSalary)
+&#123;
+    name &#x3D; aName;
+    salary &#x3D; aSalary;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>这样很清晰。读者一眼就能够看懂参数的含义。</p><p>还一种常用的技巧，它基于这样的事实：参数变量会<strong>遮蔽</strong>同名的实例字段。例如，如果将参数命名为<strong>salary</strong>，<strong>salary</strong>将指示这个参数，而不是实例字段。但是，还是可以用<strong>this.salary</strong>访问实例字段。回想一下，<strong>this</strong>指示隐式参数，也就是所构造的对象。下面是一个示例：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String name, double salary)
+&#123;
+    this.name &#x3D; name;
+    this.salary &#x3D; salary;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="调用另一个构造器"><a href="#调用另一个构造器" class="headerlink" title="调用另一个构造器"></a>调用另一个构造器</h2><h3 id="关键字this"><a href="#关键字this" class="headerlink" title="关键字this"></a>关键字this</h3><blockquote><p>关键字<strong>this</strong>指示一个方法的隐式参数。不过，这个关键字还有另外一个含义。</p><p>如果<strong>构造器的第一个语句</strong>形如<strong>this</strong>（…），这个构造器将调用同一个类的另一个构造器。下面是一个典型的例子：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(double s)
+&#123;
+    &#x2F;&#x2F; calls Employee(String, double)
+    this(&quot;Employee #&quot; + nextId, s);
+    nextId++;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>当调用<code>new Employe(60000)</code>时，<code>Employee(double)</code>构造器将调用<code>Employee(String, double)</code>构造器。</p><p>采用这种方式使用<strong>this</strong>关键字非常有用，这样对公共的构造器代码只需要编写一次即可。</p></blockquote><h2 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h2><h3 id="两种初始化数据字段的方法"><a href="#两种初始化数据字段的方法" class="headerlink" title="两种初始化数据字段的方法"></a>两种初始化数据字段的方法</h3><blockquote><p>前面已经讲过两种初始化数据字段的方法：</p></blockquote><ul><li>在构造器中设置值；</li><li>在声明中赋值。</li></ul><blockquote><p>实际上，Java还有第三种机制，称为<strong>初始化块</strong>（initialization block）。在一个类的声明中，可以包含任意多个代码块。只要构造这个类的对象，这些块就会被执行。例如，</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    private static int nextId;
+    
+    private int id;
+    private String name;
+    private double salary;
+
+    &#x2F;&#x2F; object initialization block 
+    &#123;
+        id &#x3D; nextId;
+        nextId++;
+    &#125;    
+    
+    public Employee(String n, double s)
+    &#123;
+        name &#x3D; n;
+        salary &#x3D; s;
+    &#125;    
+    
+    public Employee()
+    &#123;
+        name &#x3D; &quot;&quot;;
+        salary &#x3D; 0;
+    &#125;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>在这个示例中，无论使用哪个构造器构造对象，<strong>id</strong>字段都会在对象初始化块中初始化。首先运行初始化块，然后才运行构造器的主体部分。</p><p>这种机制不是必需的，也不常见。通常会直接将初始化代码放在构造器中。</p></blockquote><h3 id="注释-2"><a href="#注释-2" class="headerlink" title="注释"></a>注释</h3><blockquote><p>可以在初始化块中设置字段，即使这些字段在类后面才定义，这是合法的。但是，为了避免循环定义，不允许读取在后面初始化的字段。具体规则请参看Java语言规范的网址（<strong><a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/specs">http://docs.oracle.com/javase/specs</a></strong>）。这些规则太过复杂，让编译器的实现者都很头疼，所以较早的Java版本中这些规则的实现存在一些小错误。因此建议总是将初始化块放在字段定义之后。</p></blockquote><h4 id="调用构造器的具体处理步骤"><a href="#调用构造器的具体处理步骤" class="headerlink" title="调用构造器的具体处理步骤"></a>调用构造器的具体处理步骤</h4><blockquote><p>由于初始化数据字段有多种途径，所以列出构造过程的所有路径可能让人很困惑。下面是调用构造器的具体处理步骤：</p></blockquote><ol><li>如果构造器的第一行调用了另一个构造器，则基于所提供的参数执行第二个构造器。</li><li>否则，</li></ol><ul><li>a） 所有数据字段初始化为其默认值（0、false或nul）。</li><li>b）按照在类声明中出现的顺序，执行所有字段初始化方法和初始化块。</li></ul><ol><li>执行构造器主体代码。</li></ol><blockquote><p>当然，应该精心地组织好初始化代码，这样有利于其他程序员理解。例如，如果让类的构造器依赖于数据字段声明的顺序，那就会显得很奇怪并且容易引起错误。</p><p>可以通过提供一个初始值，或者使用一个静态的初始化块来初始化静态字段。前面已经介绍过第一种机制：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">private static int nextId &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>如果类的静态字段需要很复杂的初始化代码，那么可以使用静态的初始化块。</p><p>将代码放在一个块中，并标记关键字<strong>static</strong>。下面是一个示例。其功能是将员工ID的起始值赋予一个小于10 000的随机整数。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">&#x2F;&#x2F; static initialization block 
+static 
+&#123;
+    var generator &#x3D; new Random();
+    nextId &#x3D; generator.nextInt(10000);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>在类第一次加载的时候，将会进行静态字段的初始化。与实例字段一样，除非将静态字段显式地设置成其他值，否则默认的初始值是<strong>0</strong>、<strong>false</strong>或<strong>null</strong>。所有的静态字段初始化方法以及静态初始化块都将依照类声明中出现的顺序执行。</p></blockquote><h3 id="注释-3"><a href="#注释-3" class="headerlink" title="注释"></a>注释</h3><blockquote><p>让人惊讶的是，在JDK6之前，都可以用Java编写一个没有<strong>main</strong>方法的“Hello, World”程序。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class Hello 
+&#123;
+    static
+    &#123;
+        System.out.println(&quot;Hello, World&quot;);
+    &#125;    
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>当用<strong>java Hello</strong>调用这个类时，就会加载这个类，静态初始化块将会打印“Hello, World”。在此之后才会显示一个消息指出<strong>main</strong>未定义。从Java 7以后，<strong>java</strong>程序首先会检查是否有一个<strong>main</strong>方法。</p><p>下面程序展示了本节讨论的很多特性：</p></blockquote><ul><li>重载构造器；</li><li>用this(…)调用另一个构造器；</li><li>无参数构造器；</li><li>对象初始化块；</li><li>静态初始化块；</li><li>实例字段初始化。</li></ul><h4 id="程序示例-3"><a href="#程序示例-3" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.time.LocalDate;
+import java.util.Random;
+
+&#x2F;*
+ * @功能：该程序演示了对象构造。
+ * @版本：1.02
+ * @时间：2021-07-19
+ * @作者：黄子涵
+ * 
+ *&#x2F;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   &#x2F;&#x2F;用三个Employee对象填充人员数组
+	   var huangzihan &#x3D; new Huangzihan_Employee[3];
+	   
+	   huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;, 40000);
+	   huangzihan[1] &#x3D; new Huangzihan_Employee(60000);
+	   huangzihan[2] &#x3D; new Huangzihan_Employee();
+	   
+	   &#x2F;&#x2F;打印出所有Employee对象的信息
+	   for(Huangzihan_Employee huangzihan_e : huangzihan) 
+	   &#123;
+		   System.out.println(&quot;名字&#x3D;&quot; + huangzihan_e.huangzihan_getName() + &quot;,id&#x3D;&quot; + 
+	       huangzihan_e.huangzihan_getId() + &quot;,工资&#x3D;&quot; + huangzihan_e.huangzihan_getSalary());
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+    private static int huangzihan_nextId;
+    
+    private int huangzihan_id;
+    private String huangzihan_name &#x3D; &quot;&quot;;  &#x2F;&#x2F;实例字段初始化
+    private double huangzihan_salary;
+    
+    &#x2F;&#x2F;静态初始化块
+    static 
+    &#123;
+    	var huangzihan_generator &#x3D; new Random();
+    	&#x2F;&#x2F;将 nextId 设置为 0 到 9999 之间的随机数
+    	huangzihan_nextId &#x3D; huangzihan_generator.nextInt(10000);
+    &#125;
+    
+    &#x2F;&#x2F;对象初始化块
+    &#123;
+    	huangzihan_id &#x3D; huangzihan_nextId;
+    	huangzihan_nextId++;
+    &#125;
+    
+    &#x2F;&#x2F;三个重载构造函数
+    public Huangzihan_Employee(String huangzihan_n, double huangzihan_s) 
+    &#123;
+    	huangzihan_name &#x3D; huangzihan_n;
+    	huangzihan_salary &#x3D; huangzihan_s;
+    &#125;
+    
+    public Huangzihan_Employee(double huangzihan_s) 
+    &#123;
+    	&#x2F;&#x2F;调用Employee(String,double)构造函数
+    	this(&quot;Huangzihan_Employee #&quot; + huangzihan_nextId, huangzihan_s);
+    &#125;
+    
+    &#x2F;&#x2F;默认构造函数
+    public Huangzihan_Employee() 
+    &#123;
+    	&#x2F;&#x2F;名称初始化为&quot;&quot;。--见上文
+        &#x2F;&#x2F;工资未明确设置--初始化为0
+        &#x2F;&#x2F;id在初始化块中初始化
+    &#125;
+    
+    public String huangzihan_getName() 
+    &#123;
+    	return huangzihan_name;
+    &#125;
+    
+    public double huangzihan_getSalary() 
+    &#123;
+    	return huangzihan_salary;
+    &#125;
+    
+    public int huangzihan_getId() 
+    &#123;
+    	return huangzihan_id;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-3"><a href="#运行结果-3" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">名字&#x3D;huangzihan,id&#x3D;4294,工资&#x3D;40000.0
+名字&#x3D;Huangzihan_Employee #4295,id&#x3D;4295,工资&#x3D;60000.0
+名字&#x3D;,id&#x3D;4296,工资&#x3D;0.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="对象析构与finalize方法"><a href="#对象析构与finalize方法" class="headerlink" title="对象析构与finalize方法"></a>对象析构与finalize方法</h2><blockquote><p>有些面向对象的程序设计语言，特别是C++，有显式的析构器方法，其中放置一些当对象不再使用时需要执行的清理代码。在析构器中，最常见的操作是回收分配给对象的存储空间。由于Java会完成自动的垃圾回收，不需要人工回收内存，所以Java不支持析构器。</p><p>当然，某些对象使用了内存之外的其他资源，例如，文件或使用了系统资源的另一个对象的句柄。在这种情况下，当资源不再需要时，将其回收和再利用显得十分重要。</p><p>如果一个资源一旦使用完就需要立即关闭，那么应当提供一个<strong>close</strong>方法来完成必要的清理工作。可以在对象使用完时调用这个<strong>close</strong>方法。</p><p>如果可以等到虚拟机退出，那么可以用方法<strong>Runtime.addShutdownHook</strong>增加一个“关闭钩”（shutdown hook）。在Java 9中，可以使用<strong>Cleaner</strong>类注册一个动作，当对象不再可达时（除了清洁器还能访问，其他对象都无法访问这个对象），就会完成这个动作。在实际中这些情况很少见。可以参见API文档来了解这两种方法的详细内容。</p></blockquote><h3 id="警告-1"><a href="#警告-1" class="headerlink" title="警告"></a>警告</h3><blockquote><p>不要使用<strong>finalize</strong>方法来完成清理。这个方法原本要在垃圾回收器清理对象之前调用。不过，你并不能知道这个方法到底什么时候调用，而且该方法已经被废弃。</p></blockquote><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%9E%84%E9%80%A0"><span class="toc-number">1.</span> <span class="toc-text">对象构造</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD"><span class="toc-number">1.1.</span> <span class="toc-text">重载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.3.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E7%AD%BE%E5%90%8D%EF%BC%88signature%EF%BC%89"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">方法的签名（signature）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%AD%97%E6%AE%B5%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">默认字段初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%8F%82%E6%95%B0%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">无参数的构造器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A"><span class="toc-number">1.3.3.</span> <span class="toc-text">警告</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E5%AD%97%E6%AE%B5%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.4.</span> <span class="toc-text">显式字段初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E5%90%8D"><span class="toc-number">1.5.</span> <span class="toc-text">参数名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E5%8D%95%E4%B8%AA%E5%AD%97%E6%AF%8D%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0%E5%90%8D"><span class="toc-number">1.5.1.</span> <span class="toc-text">用单个字母作为参数名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E5%90%8D%E5%89%8D%E9%9D%A2%E5%8A%A0%E5%89%8D%E7%BC%80%E2%80%9Ca%E2%80%9D"><span class="toc-number">1.5.2.</span> <span class="toc-text">参数名前面加前缀“a”</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%9E%84%E9%80%A0%E5%99%A8"><span class="toc-number">1.6.</span> <span class="toc-text">调用另一个构造器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97this"><span class="toc-number">1.6.1.</span> <span class="toc-text">关键字this</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="toc-number">1.7.</span> <span class="toc-text">初始化块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.7.1.</span> <span class="toc-text">两种初始化数据字段的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-2"><span class="toc-number">1.7.2.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E5%85%B7%E4%BD%93%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">调用构造器的具体处理步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-3"><span class="toc-number">1.7.3.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-3"><span class="toc-number">1.7.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-3"><span class="toc-number">1.7.3.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%9E%90%E6%9E%84%E4%B8%8Efinalize%E6%96%B9%E6%B3%95"><span class="toc-number">1.8.</span> <span class="toc-text">对象析构与finalize方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A-1"><span class="toc-number">1.8.1.</span> <span class="toc-text">警告</span></a></li></ol></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>

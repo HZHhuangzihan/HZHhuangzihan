@@ -1,0 +1,496 @@
+<!DOCTYPE html><html lang="zh-CN" class="loading"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>用户自定义类 - 黄子涵</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="google" content="notranslate"><meta name="keywords" content="黄子涵,"><meta name="description" content="用户自定义类
+简单的类只包含一个简单的main方法。现在来学习如何编写复杂应用程序所需要的那种主力类（workhorse class）。通常，这些类没有main方法，却有自己的实例字段和实例方法。要,"><meta name="author" content="黄子涵"><link rel="alternative" href="atom.xml" title="黄子涵" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/diaspora.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><body class="loading"><span id="config-title" style="display:none">黄子涵</span><div id="loader"></div><div id="single"><div id="top" style="display:block"><div class="bar" style="width:0"></div><a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://www.huangzihan.top"></a><div title="播放/暂停" class="iconfont icon-play"></div><h3 class="subtitle">用户自定义类</h3><div class="social"><div><div class="share"><a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a></div><div id="qr"></div></div></div><div class="scrollbar"></div></div><div class="section"><div class="article"><div class="main"><h1 class="title">用户自定义类</h1><div class="stuff"><span>七月 15, 2021</span></div><div class="content markdown"><h1 id="用户自定义类"><a href="#用户自定义类" class="headerlink" title="用户自定义类"></a>用户自定义类</h1><blockquote><p>简单的类只包含一个简单的<strong>main</strong>方法。现在来学习如何编写复杂应用程序所需要的那种主力类（workhorse class）。通常，这些类没有<strong>main</strong>方法，却有自己的实例字段和实例方法。要想构建一个完整的程序，会结合使用多个类，其中只有一个类有<strong>main</strong>方法。</p></blockquote><h2 id="Employee类"><a href="#Employee类" class="headerlink" title="Employee类"></a>Employee类</h2><blockquote><p>在Java中，最简单的类定义形式为：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class ClassName
+&#123;
+    field1
+    field2 
+    . . .
+    constructor1
+    constructor2
+    . . .
+    method1
+    method2
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>下面看一个非常简单的<strong>Employee</strong>类。在编写工资管理系统时可能会用到。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee
+&#123;
+    &#x2F;&#x2F; instance fields 
+    private String name;
+    private double salary;
+    private LocalDate hireDay;
+    
+    &#x2F;&#x2F; constructor 
+    public Employee(String n, double s, int year, int month, int day)
+    &#123;
+        name &#x3D; n;
+        salary &#x3D; s;
+        hireDay &#x3D; LocalDate.of(year, month, day);
+    &#125;
+    
+    &#x2F;&#x2F; a method 
+    public String getName()
+    &#123;
+        return name;
+    &#125;
+
+    &#x2F;&#x2F; more methods
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><span id="more"></span><blockquote><p>在这个程序中，我们构造了一个<strong>Employee</strong>数组，并填入了3个<strong>Employee</strong>对象：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Employee[] staff &#x3D; new Employee[3];
+
+staff[0] &#x3D; new Employee(&quot;Carl Cracker&quot;, . . .);
+staff[1] &#x3D; new Employee(&quot;Harry Hacker&quot;, . . .);
+staff[2] &#x3D; new Employee(&quot;Tony Tester&quot;, . . .);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>接下来，使用<strong>Employee</strong>类的<strong>raiseSalary</strong>方法将每个员工的薪水提高5%：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">for(Employee e : staff)
+    e.raiseSalary(5);
+&#96;&#96;&#96;    
+    
+&gt; 最后，调用**getName**方法、**getSalary**方法和**getHireDay**方法打印各个员工的信息：
+
+&#96;&#96;&#96;C&#x2F;C++
+for(Employee e : staff)
+    System.out.println(&quot;name&#x3D;&quot; + e.getName()
+        +&quot;,salary&#x3D;&quot; + e.getSalary()
+        +&quot;,hireDay&#x3D;&quot; + e.getHireDay());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>注意，在这个示例程序中包含<strong>两个</strong>类：<strong>Employee</strong>类和带有<strong>public</strong>访问修饰符的<strong>EmployeeTest</strong>类。<strong>EmployeeTest</strong>类包含了<strong>main</strong>方法，其中使用了前面介绍的指令。</p><p>源文件名是<strong>EmployeeTest.java</strong>，这是因为文件名必须与<strong>public</strong>类的名字相匹配。在一个源文件中，只能有一个公共类，但可以有任意数目的非公共类。</p><p>接下来，当编译这段源代码的时候，编译器将在目录下创建两个类文件：<strong>EmployeeTest.class</strong>和<strong>Employee.class</strong>。</p><p>将程序中包含<strong>main</strong>方法的类名提供给字节码解释器，以启动这个程序：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">java EmployeeTest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>字节码解释器开始运行<strong>EmployeeTest</strong>类的<strong>main</strong>方法中的代码。在这段代码中，先后构造了3个新<strong>Employee</strong>对象，并显示它们的状态。</p></blockquote><h3 id="程序示例"><a href="#程序示例" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.time.LocalDate;
+
+&#x2F;*
+ * 功能：这个程序测试这个Huangzihan_Employee类
+ * @版本：1.13
+ * @时间：2018-04-10
+ * @作者：黄子涵
+ * 
+ *&#x2F;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   Huangzihan_Employee[] huangzihan_staff &#x3D; new Huangzihan_Employee[4];
+	   
+	   huangzihan_staff[0] &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;, 75000, 1987, 12, 15);
+	   huangzihan_staff[1] &#x3D; new Huangzihan_Employee(&quot;Huangzihan&quot;, 50000, 1989, 10, 1);
+	   huangzihan_staff[2] &#x3D; new Huangzihan_Employee(&quot;huang_zihan&quot;, 40000, 1990, 3, 15);
+	   huangzihan_staff[3] &#x3D; new Huangzihan_Employee(&quot;Huang_zihan&quot;, 30000, 1996, 7, 10);
+	   
+	   for(Huangzihan_Employee huangzihan_e : huangzihan_staff) 
+	   &#123;
+		   huangzihan_e.huangzihan_raiseSalary(5);
+	   &#125;
+	   
+	   for(Huangzihan_Employee huangzihan_e : huangzihan_staff) 
+	   &#123;
+		   System.out.println(&quot;名字&#x3D;&quot;+huangzihan_e.huangzihan_getName()+&quot;,工资&#x3D;&quot;+huangzihan_e.huangzihan_getSalary()+&quot;,雇佣天数&#x3D;&quot; + huangzihan_e.getHireDay());
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	&#x2F;&#x2F; instance fields
+	private String huangzihan_name;
+	private double huangzihan_salary;
+	private LocalDate huangzihan_hireDay;
+	
+	&#x2F;&#x2F; constructor
+	public Huangzihan_Employee(String huangzihan_n, double huangzihan_s, int huangzihan_year, int huangzihan_month, int huangzihan_day) 
+	&#123;
+		huangzihan_name &#x3D; huangzihan_n;
+		huangzihan_salary &#x3D; huangzihan_s;
+		huangzihan_hireDay &#x3D; LocalDate.of(huangzihan_year, huangzihan_month, huangzihan_day);
+	&#125;
+	
+	&#x2F;&#x2F; a method
+	public String huangzihan_getName() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public double huangzihan_getSalary() 
+	&#123;
+		 return huangzihan_salary;
+	&#125;
+	
+	public LocalDate getHireDay() 
+	&#123;
+		return huangzihan_hireDay;
+	&#125;
+	
+	public void huangzihan_raiseSalary(double huangzihan_byPercent) 
+	&#123;
+		double huangzihan_raise &#x3D; huangzihan_salary * huangzihan_byPercent &#x2F; 100;
+		huangzihan_salary +&#x3D; huangzihan_raise;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">名字&#x3D;huangzihan,工资&#x3D;78750.0,雇佣天数&#x3D;1987-12-15
+名字&#x3D;Huangzihan,工资&#x3D;52500.0,雇佣天数&#x3D;1989-10-01
+名字&#x3D;huang_zihan,工资&#x3D;42000.0,雇佣天数&#x3D;1990-03-15
+名字&#x3D;Huang_zihan,工资&#x3D;31500.0,雇佣天数&#x3D;1996-07-10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="多个源文件的使用"><a href="#多个源文件的使用" class="headerlink" title="多个源文件的使用"></a>多个源文件的使用</h2><blockquote><p>许多程序员习惯于将每一个类存放在一个单独的源文件中。例如，将<strong>Employee</strong>类存放在文件<strong>Employee.java</strong>中，将<strong>EmployeeTest</strong>类存放在文件<strong>EmployeeTest.java</strong>中。</p></blockquote><h3 id="两种编译源程序的方法"><a href="#两种编译源程序的方法" class="headerlink" title="两种编译源程序的方法"></a>两种编译源程序的方法</h3><h4 id="使用通配符调用Java编译器"><a href="#使用通配符调用Java编译器" class="headerlink" title="使用通配符调用Java编译器"></a>使用通配符调用Java编译器</h4><blockquote><p>如果喜欢这样组织文件，可以有两种编译源程序的方法。一种是使用通配符调用Java编译器：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">javac Employee*.java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="键入命令"><a href="#键入命令" class="headerlink" title="键入命令"></a>键入命令</h4><blockquote><p>这样一来，所有与通配符匹配的源文件都将被编译成类文件。或者键入以下命令：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">javac EmployeeTest.java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>你可能会感到惊讶，使用第二种方式时并没有显式地编译<strong>Employee.java</strong>。不过，当Java编译器发现<strong>EmployeeTest.java</strong>使用了<strong>Employee</strong>类时，它会查找名为<strong>Employee.class</strong>的文件。如果没有找到这个文件，就会自动地搜索<strong>Employee.java</strong>，然后，对它进行编译。更重要的是：如果<strong>Employee.java</strong>版本较已有的<strong>Employee.class</strong>文件版本更新，Java编译器就会<strong>自动地</strong>重新编译这个文件。</p></blockquote><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><blockquote><p>如果熟悉UNIX的<strong>make</strong>工具（或者是Windows中的<strong>nmake</strong>等工具），可以认为Java编译器内置了make功能。</p></blockquote><h2 id="剖析Employee类"><a href="#剖析Employee类" class="headerlink" title="剖析Employee类"></a>剖析Employee类</h2><blockquote><p>首先从这个类的方法开始。通过查看源代码会发现，这个类包含一个构造器和4个方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s, int year, int month, int day)
+public String getName()
+public double getSalary()
+public LocalDate getHireDay()
+public void raiseSalary(double byPercent)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><blockquote><p>这个类的所有方法都被标记为<strong>public</strong>。关键字<strong>public</strong>意味着任何类的任何方法都可以调用这些方法（共有4种访问级别）。</p><p>接下来，需要注意在<strong>Employee</strong>类的实例中有3个实例字段用来存放将要操作的数据：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">private String name;
+private double salary;
+private LocalDate hireDay;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="private"><a href="#private" class="headerlink" title="private"></a>private</h3><blockquote><p>关键字<strong>private</strong>确保<strong>只有Employee</strong>类自身的方法能够访问这些实例字段，而其他类的方法不能够读写这些字段。</p></blockquote><h3 id="注释-1"><a href="#注释-1" class="headerlink" title="注释"></a>注释</h3><blockquote><p>可以用<strong>public</strong>标记实例字段，但这是一种很不好的做法。<strong>public</strong>数据字段允许程序中的任何方法对其进行读取和修改，这就完全破坏了封装。任何类的任何方法都可以修改<strong>public</strong>字段，从我们的经验来看，有些<strong>代码</strong>将利用这种存取权限，而这是我们最不希望看到的。因此，这里强烈建议将实例字段标记为<strong>private</strong>。</p><p>最后，请注意，有两个实例字段本身就是对象：<strong>name</strong>字段是<strong>String</strong>类对象，<strong>hireDay</strong>字段是<strong>LocalDate</strong>类对象。这种情况十分常见：类包含的实例字段通常属于某个类类型。</p></blockquote><h4 id="程序示例一"><a href="#程序示例一" class="headerlink" title="程序示例一"></a>程序示例一</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   String huangzihan_name&#x3D;&quot;黄子涵是帅哥！&quot;;
+	   System.out.println(huangzihan_name);
+	   
+	   Huangzihan_Employee huangzihan &#x3D; new Huangzihan_Employee();
+	   System.out.println(huangzihan.huangzihan_getName1());
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private String huangzihan_name&#x3D;&quot;黄子涵&quot;;
+
+	public String huangzihan_getName1() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果一"><a href="#运行结果一" class="headerlink" title="运行结果一"></a>运行结果一</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">黄子涵是帅哥！
+黄子涵<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="程序示例二"><a href="#程序示例二" class="headerlink" title="程序示例二"></a>程序示例二</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   System.out.println(huangzihan_name);  
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private String huangzihan_name&#x3D;&quot;黄子涵&quot;;
+
+	public String huangzihan_getName1() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果二"><a href="#运行结果二" class="headerlink" title="运行结果二"></a>运行结果二</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Exception in thread &quot;main&quot; java.lang.Error: Unresolved compilation problem: 
+	huangzihan_name cannot be resolved to a variable
+
+	at HuangZiHanTest.main(HuangZiHanTest.java:5)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="从构造器开始"><a href="#从构造器开始" class="headerlink" title="从构造器开始"></a>从构造器开始</h2><blockquote><p>下面先看看<strong>Employee</strong>类的构造器：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s, int year, int month, int day)
+&#123;
+    name &#x3D; n;
+    salary &#x3D; s;
+    hireDay &#x3D; LocalDate.of(year, month, day);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="构造器与类同名"><a href="#构造器与类同名" class="headerlink" title="构造器与类同名"></a>构造器与类同名</h3><blockquote><p>可以看到，构造器与类同名。在构造<strong>Employee</strong>类的对象时，构造器会运行，从而将实例字段初始化为所希望的初始状态。</p><p>例如，当使用下面这条代码创建<strong>Employee</strong>类的实例时：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">new Employee(&quot;James Bond&quot;, 100000, 1950, 1, 1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>将会把实例字段设置为：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">name &#x3D; &quot;James Bond&quot;;
+salary &#x3D; 100000;
+hireDay &#x3D; LocalDate.of(1950, 1, 1);    &#x2F;&#x2F;January 1, 1950<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="构造器结合new运算符来调用"><a href="#构造器结合new运算符来调用" class="headerlink" title="构造器结合new运算符来调用"></a>构造器结合<strong>new</strong>运算符来调用</h3><blockquote><p>构造器与其他方法有一个重要的不同。构造器总是结合<strong>new</strong>运算符来调用。不能对一个已经存在的对象调用构造器来达到重新设置实例字段的目的。例如，</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">james.Employee(&quot;James Bond&quot;, 250000, 1950, 1, 1)  &#x2F;&#x2F;ERROR<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>将产生编译错误。</p></blockquote><h3 id="有关构造器的内容"><a href="#有关构造器的内容" class="headerlink" title="有关构造器的内容"></a>有关构造器的内容</h3><blockquote><p>现在只需要记住：</p></blockquote><ul><li>构造器与类同名。</li><li>每个类可以有一个以上的构造器。</li><li>构造器可以有0个、1个或多个参数。</li><li>构造器没有返回值。</li><li>构造器总是伴随着<strong>new</strong>操作符一起调用。</li></ul><h3 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h3><blockquote><p>请注意，不要在构造器中定义与实例字段同名的局部变量。例如，下面的构造器将不会设置<strong>salary</strong>。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s, . . .)
+&#123;
+    String name &#x3D; n; &#x2F;&#x2F; ERROR 
+    double salary &#x3D; s; &#x2F;&#x2F; ERROR
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>这个构造器声明了<strong>局部</strong>变量<strong>name</strong>和<strong>salary</strong>。这些变量只能在构造器内部访问。这些变量会<strong>遮蔽</strong>（shadow）同名的实例字段。有些程序员偶尔会不假思索地写出这类代码，因为他们的手指会不自觉地增加数据类型。这种错误很难检查出来，因此，必须注意在所有的方法中都不要使用与实例字段同名的变量。</p></blockquote><h2 id="用var声明局部变量"><a href="#用var声明局部变量" class="headerlink" title="用var声明局部变量"></a>用var声明局部变量</h2><blockquote><p>在Java 10中，如果可以从变量的初始值推导出它们的类型，那么可以用<strong>var</strong>关键字声明局部变量，而无须指定类型。例如，可以不这样声明：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Employee harry &#x3D; new Employee(&quot;Harry Hacker&quot;, 50000, 1989, 18, 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>只需要写以下代码：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">var harry &#x3D; new Employee(&quot;Harry Hacker&quot;, 50000, 1989, 10, 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这一点很好，因为这样可以避免重复写类型名<strong>Employee</strong>。</p><p>从现在开始，倘若无须了解任何Java API就能从等号右边明显看出类型，在这种情况下我们都将使用<strong>var</strong>表示法。不过我们不会对数值类型使用<strong>var</strong>，如<strong>int</strong>、<strong>long</strong>或<strong>double</strong>，使你不用当心<strong>0</strong>、<strong>0L</strong>和<strong>0.0</strong>之间的区别。对Java API有了更多使用经验后，你可能会希望更多地使用<strong>var</strong>关键字。</p><p>注意<strong>var</strong>关键字只能用于方法中的<strong>局部</strong>变量。参数和字段的类型必须声明。</p></blockquote><h3 id="程序示例-1"><a href="#程序示例-1" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   var huangzihan &#x3D; new Huangzihan_Employee[1];
+	   huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;黄子涵&quot;,123);
+	   for(Huangzihan_Employee a1 : huangzihan)
+	   &#123;   
+	       System.out.println(&quot;使用var变量：&quot;+a1.get_name()+a1.get_number());
+	   &#125;
+	   
+	   System.out.println();
+	   
+	   Huangzihan_Employee[] Huangzihan &#x3D; new Huangzihan_Employee[1];
+	   Huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;黄子涵&quot;,123);
+	   for(Huangzihan_Employee a2 : huangzihan)
+	   &#123;   
+	       System.out.println(&quot;不使用var变量：&quot;+a2.get_name()+a2.get_number());
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private String huangzihan_name;
+	private int huangzihan_number;
+	
+	public Huangzihan_Employee(String huangzihan_s, int huangzihan_n)
+	&#123;
+		huangzihan_name &#x3D; huangzihan_s;
+		huangzihan_number &#x3D; huangzihan_n;
+	&#125;
+	
+	public String get_name()
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public int get_number()
+	&#123;
+		return huangzihan_number;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">使用var变量：黄子涵123
+
+不使用var变量：黄子涵123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="使用null引用"><a href="#使用null引用" class="headerlink" title="使用null引用"></a>使用null引用</h2><blockquote><p>一个对象变量包含一个对象的引用，或者包含一个特殊值<strong>null</strong>，后者表示没有引用任何对象。</p><p>听上去这是一种处理特殊情况的便捷机制，如未知的名字或雇用日期。不过使用<strong>null</strong>值时要非常小心。</p></blockquote><h3 id="NullPointerException异常"><a href="#NullPointerException异常" class="headerlink" title="NullPointerException异常"></a>NullPointerException异常</h3><blockquote><p>如果对<strong>null</strong>值应用一个方法，会产生一个<strong>NullPointerException</strong>异常。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">LocalDate birthday &#x3D; null;
+String s &#x3D; birthday.toString(); &#x2F;&#x2F; NullPointerException<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="程序示例-2"><a href="#程序示例-2" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.time.LocalDate;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123;
+	   LocalDate birthday &#x3D; null;
+	   String s &#x3D; birthday.toString(); &#x2F;&#x2F; NullPointerException
+	   
+	   System.out.println(s);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Exception in thread &quot;main&quot; java.lang.NullPointerException: Cannot invoke &quot;java.time.LocalDate.toString()&quot; because &quot;birthday&quot; is null
+	at HuangZiHanTest.main(HuangZiHanTest.java:8)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>这是一个很严重的错误，类似于“索引越界”异常。如果你的程序没有“捕获”异常，程序就会终止。正常情况下，程序并不捕获这些异常，而是依赖于程序员从一开始就不要带来异常。</p><p>定义一个类时，最好清楚地知道哪些字段可能为<strong>null</strong>。在我们的例子中，我们不希望<strong>name</strong>或<strong>hireDay</strong>字段为<strong>null</strong>。（不用担心<strong>salary</strong>字段。这个字段是基本类型，所以不可能是<strong>null</strong>。）</p><p><strong>hireDay</strong>字段肯定是非<strong>null</strong>的，因为它初始化为一个新的<strong>LocalDate</strong>对象。但是<strong>name</strong>可能为<strong>null</strong>，如果调用构造器时为<strong>n</strong>提供的实参是<strong>null</strong>，<strong>name</strong>就会是<strong>null</strong>。</p></blockquote><h3 id="处理null值的两种解决方法"><a href="#处理null值的两种解决方法" class="headerlink" title="处理null值的两种解决方法"></a>处理null值的两种解决方法</h3><h4 id="处理null值的宽容型方法"><a href="#处理null值的宽容型方法" class="headerlink" title="处理null值的宽容型方法"></a>处理null值的宽容型方法</h4><blockquote><p>对此有两种解决方法。“宽容型”方法是把<strong>null</strong>参数转换为一个适当的非<strong>null</strong>值：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">if(n &#x3D;&#x3D; null) name &#x3D; &quot;unknown&quot;; else name &#x3D; n;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>在Java 9中，<strong>Objects</strong>类对此提供了一个便利方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s, int year, int month, int day)
+&#123;
+    name &#x3D; Objects.requireNonNullElse(n, &quot;unknown&quot;);
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="程序示例-3"><a href="#程序示例-3" class="headerlink" title="程序示例"></a>程序示例</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Objects;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   Huangzihan_Employee[] huangzihan &#x3D; new Huangzihan_Employee[1];
+	   huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;,123);
+	   for(Huangzihan_Employee Huangzihan : huangzihan) 
+	   &#123;
+		   System.out.println(Huangzihan.get_name());
+		   System.out.println(Huangzihan.get_number());
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private Object huangzihan_name;
+	private int huangzihan_number;
+	
+	public Huangzihan_Employee(String huangzihan_s, int huangzihan_n)
+	&#123;
+		huangzihan_number &#x3D; huangzihan_n;
+		huangzihan_name &#x3D; Objects.requireNonNullElse(huangzihan_n, &quot;unknown&quot;);
+	&#125;
+	
+	public Object get_name()
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public int get_number()
+	&#123;
+		return huangzihan_number;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="运行结果-3"><a href="#运行结果-3" class="headerlink" title="运行结果"></a>运行结果</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">123
+123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="处理null值的严格型方法"><a href="#处理null值的严格型方法" class="headerlink" title="处理null值的严格型方法"></a>处理null值的严格型方法</h3><blockquote><p>“严格型”方法则是干脆拒绝<strong>null</strong>参数：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public Employee(String n, double s, int year, int month, int day)
+&#123;
+    Objects.requireNonNull(n, &quot;The name cannot be null&quot;);
+    name &#x3D; n;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="程序示例-4"><a href="#程序示例-4" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Objects;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   Huangzihan_Employee[] huangzihan &#x3D; new Huangzihan_Employee[1];
+	   huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;huangzihan&quot;,123);
+	   for(Huangzihan_Employee Huangzihan : huangzihan) 
+	   &#123;
+		   System.out.println(Huangzihan.get_name());
+		   System.out.println(Huangzihan.get_number());
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private Object huangzihan_name;
+	private int huangzihan_number;
+	
+	public Huangzihan_Employee(String huangzihan_s, int huangzihan_n)
+	&#123;
+		Objects.requireNonNull(huangzihan_n, &quot;黄子涵是帅哥！&quot;);
+		huangzihan_name &#x3D; huangzihan_n;
+	&#125;
+	
+	public Object get_name()
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public int get_number()
+	&#123;
+		return huangzihan_number;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-4"><a href="#运行结果-4" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">123
+0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="null名字构造对象"><a href="#null名字构造对象" class="headerlink" title="null名字构造对象"></a>null名字构造对象</h3><blockquote><p>如果有人用一个<strong>null</strong>名字构造了一个<strong>Employee</strong>对象，就会产生<strong>NullPointerException</strong>异常。乍看上去这种做法好像不太有用。不过这种方法有两个好处：</p></blockquote><ul><li>1.异常报告会提供这个问题的描述。</li><li>2.异常报告会准确地指出问题所在的位置，否则<strong>NullPointerException</strong>异常可能在其他地方出现，而很难追踪到真正导致问题的这个构造器参数。</li></ul><h3 id="注释-2"><a href="#注释-2" class="headerlink" title="注释"></a>注释</h3><blockquote><p>如果要接受一个对象引用作为构造参数，就要问问自己：是不是真的希望接受可有可无的值。如果不是，那么“严格型”方法更合适。</p></blockquote><h2 id="隐式参数与显式参数（这里不太懂！！！）"><a href="#隐式参数与显式参数（这里不太懂！！！）" class="headerlink" title="隐式参数与显式参数（这里不太懂！！！）"></a>隐式参数与显式参数（这里不太懂！！！）</h2><blockquote><p>方法用于操作对象以及存取它们的实例字段。例如，以下方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public void raiseSalary(double byPercent)
+&#123;
+    double raise &#x3D; salary * byPercent &#x2F; 100;
+    salary +&#x3D; raise;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>将调用这个方法的对象的<strong>salary</strong>实例字段设置为一个新值。考虑下面这个调用：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">number007.raiseSalary(5);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>它的结果是将<strong>nunber007.salary</strong>字段的值增加5%。具体地说，这个调用将执行下列指令：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">double raise &#x3D; number007.salary * 5 &#x2F; 100;
+numbere007.salary +&#x3D; raise;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p><strong>raiseSalary</strong>方法有两个参数。第一个参数称为<strong>隐式</strong>（implicit）参数，是出现在方法名前的<strong>Employee</strong>类型的对象。第二个参数是位于方法名后面括号中的数值，这是一个<strong>显式</strong>（explicit）参数。（有人把隐式参数称为方法调用的<strong>目标</strong>或<strong>接收者</strong>。）可以看到，显式参数显式地列在方法声明中，例如<strong>double byPercent</strong>。隐式参数没有出现在方法声明中。</p></blockquote><h3 id="关键字this"><a href="#关键字this" class="headerlink" title="关键字this"></a>关键字this</h3><blockquote><p>在每一个方法中，关键字<strong>this</strong>指示隐式参数。如果喜欢的话，可以如下改写<strong>raiseSalary</strong>方法：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public void raiseSalary(double byPercent) 
+&#123;
+    double raise &#x3D; this.salary * byPercent &#x2F; 100; 
+    this.salary +&#x3D; raise;
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>有些程序员更偏爱这样的风格，因为这样可以将实例字段与局部变量明显地区分开来。</p></blockquote><h2 id="封装的优点"><a href="#封装的优点" class="headerlink" title="封装的优点"></a>封装的优点</h2><blockquote><p>最后再仔细看一下非常简单的<strong>getName</strong>方法、<strong>getSalary</strong>方法和<strong>getHireDay</strong>方法。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public String getName()
+&#123;
+    return name;
+&#125;
+&#96;&#96;&#96;   
+   
+&#96;&#96;&#96;C&#x2F;C++   
+public double getSalary()
+&#123;
+    return salary;
+&#125;    
+&#96;&#96;&#96;    
+
+&#96;&#96;&#96;C&#x2F;C++    
+public LocalDate getHireDay()
+&#123;
+    return hireDay;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="字段访问器"><a href="#字段访问器" class="headerlink" title="字段访问器"></a>字段访问器</h3><blockquote><p>这些都是典型的访问器方法。由于它们只返回实例字段值，因此又称为<strong>字段访问器</strong>。</p><p>如果将<strong>name</strong>、<strong>salary</strong>和<strong>hireDay</strong>字段标记为公共，而不是编写单独的访问器方法，难道不是更容易一些吗？</p><p>不过，<strong>name</strong>是一个只读字段。一旦在构造器中设置，就没有任何办法可以对它进行修改，这样我们可以确保<strong>name</strong>字段不会受到外界的破坏。</p><p>虽然<strong>salary</strong>不是只读字段，但是它只能用<strong>raiseSalary</strong>方法修改。特别是一旦这个值出现了错误，只需要调试这个方法就可以了。如果<strong>salary</strong>字段是公共的，破坏这个字段值的捣乱者有可能会出没在任何地方（那就很难调试了）。</p></blockquote><h3 id="获得或设置实例字段的值"><a href="#获得或设置实例字段的值" class="headerlink" title="获得或设置实例字段的值"></a>获得或设置实例字段的值</h3><blockquote><p>有些时候，可能想要获得或设置实例字段的值。那么你需要提供下面三项内容：</p></blockquote><ul><li>一个私有的数据字段；</li><li>一个公共的字段访问器方法；</li><li>一个公共的字段更改器方法。</li></ul><blockquote><p>这样做要比提供一个简单的公共数据字段复杂些，但却有着下列明显的好处：</p><p>首先，可以改变内部实现，而除了该类的方法之外，这不会影响其他代码。例如，如果将存储名字的字段改为：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">String firstName;
+String lastName;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><blockquote><p>那么<strong>getName</strong>方法可以改为返回</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">firstName + &quot; &quot; + lastName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这个改变对于程序的其他部分是完全不可见的。</p><p>当然，为了进行新旧数据表示之间的转换，访问器方法和更改器方法可能需要做许多工作。但是，这将为我们带来第二点好处：更改器方法可以完成错误检查，而只对字段赋值的代码可能没有这个麻烦。例如，<strong>setSalary</strong>方法可以检查工资是否小于0。</p></blockquote><h4 id="程序示例-5"><a href="#程序示例-5" class="headerlink" title="程序示例"></a>程序示例</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   Huangzihan_Employee[] huangzihan &#x3D; new Huangzihan_Employee[1];
+	   huangzihan[0] &#x3D; new Huangzihan_Employee(&quot;黄&quot;, &quot;子涵&quot;);
+	   for(Huangzihan_Employee Huangzihan : huangzihan) 
+	   &#123;
+		   System.out.println(Huangzihan.get_name());
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private String huangzihan_firstname;
+	private String huangzihan_lastname;
+	
+	public Huangzihan_Employee(String huangzihan_fn, String huangzihan_ln)
+	&#123;
+		huangzihan_firstname &#x3D; huangzihan_fn;
+		huangzihan_lastname &#x3D; huangzihan_ln;
+	&#125;
+	
+	public String get_name()
+	&#123;
+		return huangzihan_firstname+huangzihan_lastname;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="运行结果-5"><a href="#运行结果-5" class="headerlink" title="运行结果"></a>运行结果</h4><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">黄子涵<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="警告-1"><a href="#警告-1" class="headerlink" title="警告"></a>警告</h3><blockquote><p>注意不要编写返回可变对象引用的访问器方法。下面的<strong>Employee</strong>类就违反了这个设计原则，其中的<strong>getHireDay</strong>方法返回了一个Date类对象：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    private Date hireDay;
+    . . .
+    public Date getHireDay()
+    &#123;
+        return hireDay;   &#x2F;&#x2F;  BAD
+    &#125;
+    . . .
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="更改器方法setTime"><a href="#更改器方法setTime" class="headerlink" title="更改器方法setTime"></a>更改器方法setTime</h4><blockquote><p><strong>LocalDate</strong>类没有更改器方法，与之不同，<strong>Date</strong>类有一个更改器方法<strong>setTime</strong>，可以在这里设置毫秒数。</p><p><strong>Date</strong>对象是可变的，这一点就破坏了封装性！请看下面这段代码：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Employee harry &#x3D; . . .;
+Date d &#x3D; harry.getHireDay();
+double tenYearsInMilliSeconds &#x3D; 10 * 365.25 * 24 * 60 * 60 * 1000;
+d.setTime(d.getTime() -(long) tenYearsInMilliSeconds);
+&#x2F;&#x2F; let&#39;s give Harry ten years of added seniority<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>出错的原因很微妙。<strong>d</strong>和<strong>harry.hireDay</strong>引用同一个对象（请参见图（返回可变数据字段的引用））。对<strong>d</strong>调用更改器方法就可以自动地改变这个<strong>Employee</strong>对象的私有状态！</p></blockquote><center><img src="/2021/07/15/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB/返回可变数据字段的引用.png" width="100%" height="100%"> 返回可变数据字段的引用</center><h5 id="程序示例-6"><a href="#程序示例-6" class="headerlink" title="程序示例"></a>程序示例</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">import java.util.Date;
+
+public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   Huangzihan_Employee huangzihan &#x3D; new Huangzihan_Employee(null, 0, null);
+	   Date huangzihan_d &#x3D; huangzihan.get_day();
+	   double tenYearsInMilliSecons &#x3D; 10*365.25*24*60*60*1000;
+	   huangzihan_d.setTime(huangzihan_d.getTime()-(long)tenYearsInMilliSecons);
+	   System.out.println(huangzihan);
+	   System.out.println(huangzihan_d);
+	   System.out.println(tenYearsInMilliSecons);
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private Date huangzihan_day;
+	private String huangzihan_name;
+	private int huangzihan_salary;
+	
+	public Huangzihan_Employee(String huangzihan_n, int huangzihan_s, Date huangzihan_d)
+	&#123;
+		huangzihan_name &#x3D; huangzihan_n;
+		huangzihan_salary &#x3D; huangzihan_s;
+		huangzihan_day &#x3D; huangzihan_d;
+	&#125;
+
+	public Date get_day()
+	&#123;
+		return huangzihan_day;
+	&#125;
+	
+	public String get_name() 
+	&#123;
+		return huangzihan_name;
+	&#125;
+	
+	public int get_salary() 
+	&#123;
+		return huangzihan_salary;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="运行结果-6"><a href="#运行结果-6" class="headerlink" title="运行结果"></a>运行结果</h5><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">Exception in thread &quot;main&quot; java.lang.NullPointerException: Cannot invoke &quot;java.util.Date.getTime()&quot; because &quot;huangzihan_d&quot; is null
+	at HuangZiHanTest.main(HuangZiHanTest.java:10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="克隆（clone）"><a href="#克隆（clone）" class="headerlink" title="克隆（clone）"></a>克隆（clone）</h4><blockquote><p>如果需要返回一个可变对象的引用，首先应该对它进行<strong>克隆</strong>（clone）。对象克隆是指存放在另一个新位置上的对象副本。下面是修改后的代码：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    . . .
+    public Date getHireDay()
+    &#123;
+        return(Date)  hireDay.clone();   &#x2F;&#x2F;OK
+    &#125;
+&#125;
+&#96;&#96;&#96;       
+        
+&gt; 这里有一个经验，如果需要返回一个可变数据字段的副本，就应该使用**clone**。
+
+## 基于类的访问权限
+
+&gt; 从前面已经知道，方法可以访问调用这个方法的对象的私有数据。一个方法可以访问**所属类的所有对象**的私有数据，这令很多人感到奇怪！例如，下面看一下用来比较两个员工的equals方法。
+
+&#96;&#96;&#96;C&#x2F;C++
+class Employee 
+&#123;
+    . . .
+    public boolean equals(Employee other)
+    &#123;
+        return name.equals(other.name);
+    &#125;    
+&#125;   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>典型的调用方式是</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">if(harry.equals(boss)) . . .<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>这个方法访问<strong>harry</strong>的私有字段，这点并不会让人奇怪，不过，它还访问了<strong>boss</strong>的私有字段。这是合法的，其原因是<strong>boss</strong>是<strong>Employee</strong>类型的对象，而<strong>Employee</strong>类的方法可以访问任何<strong>Employee</strong>类型对象的私有字段。</p></blockquote><h3 id="程序示例-7"><a href="#程序示例-7" class="headerlink" title="程序示例"></a>程序示例</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public class HuangZiHanTest
+&#123;  
+   public static void main(String[] huangzihan_args)
+   &#123; 
+	   String huangzihan&#x3D;&quot;黄子涵&quot;;
+	   String Boss_huangzihan &#x3D;&quot;老板黄子涵&quot;;
+	   Huangzihan_Employee Huangzihan &#x3D; new Huangzihan_Employee(huangzihan);
+	   Huangzihan_Employee Boss_Huangzihan &#x3D; new Huangzihan_Employee(Boss_huangzihan);
+	   
+	   if(Huangzihan.equals(Boss_Huangzihan)) 
+	   &#123;
+		   System.out.println(&quot;黄子涵是帅哥！！！&quot;);
+	   &#125;
+	   else 
+	   &#123;
+		   System.out.println(&quot;黄子涵是帅哥！&quot;);
+	   &#125;
+   &#125;
+&#125;
+
+class Huangzihan_Employee
+&#123;
+	private String huangzihan_name;
+	
+	public Huangzihan_Employee(String huangzihan_n)
+	&#123;
+		huangzihan_name &#x3D; huangzihan_n;
+	&#125;
+
+	public boolean huangzihan_equals(Huangzihan_Employee other) 
+	&#123;
+		return huangzihan_name.equals(huangzihan_name);
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运行结果-7"><a href="#运行结果-7" class="headerlink" title="运行结果"></a>运行结果</h3><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">黄子涵是帅哥！<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h2><blockquote><p>在实现一个类时，由于公共数据非常危险，所以应该将所有的数据字段都设置为私有的。然而，方法又应该如何设计呢？尽管绝大多数方法都被设计为公共的，但在某些特殊情况下，将方法设计为私有可能很有用。有时，你可能希望将一个计算代码分解成若干个独立的辅助方法。通常，这些辅助方法不应该成为公共接口的一部分，这是由于它们往往与当前实现关系非常紧密，或者需要一个特殊协议或者调用次序。最好将这样的方法设计为私有方法。</p><p>在Java中，要实现私有方法，只需将关键字<strong>public</strong>改为<strong>private</strong>即可。</p><p>通过将方法设计为私有，如果你改变了方法的实现方式，将没有义务保证这个方法依然可用。如果数据的表示发生了变化，这个方法可能会变得<strong>难以实现</strong>，或者<strong>不再需要</strong>；这并不重要。重点在于，只要方法是私有的，类的设计者就可以确信它不会在别处使用，所以可以将其删去。如果一个方法是公共的，就不能简单地将其删除，因为可能会有其他代码依赖这个方法。</p></blockquote><h2 id="final实例字段（这个不太懂！！！）"><a href="#final实例字段（这个不太懂！！！）" class="headerlink" title="final实例字段（这个不太懂！！！）"></a>final实例字段（这个不太懂！！！）</h2><blockquote><p>可以将实例字段定义为<strong>final</strong>。这样的字段必须在构造对象时初始化。也就是说，必须确保在每一个构造器执行之后，这个字段的值已经设置，并且以后不能再修改这个字段。例如，可以将<strong>Employee</strong>类中的<strong>name</strong>字段声明为<strong>final</strong>，因为在对象构造之后，这个值不会再改变，即没有<strong>setName</strong>方法。</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">class Employee 
+&#123;
+    private final String name;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p><strong>final</strong>修饰符对于类型为基本类型或者<strong>不可变</strong>类的字段尤其有用。（如果类中的所有方法都不会改变其对象，这样的类就是不可变的类。例如，<strong>String</strong>类就是不可变的。）</p><p>对于可变的类，使用<strong>final</strong>修饰符可能会造成混乱。例如，考虑以下字段：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">private final StringBuilder evaluations;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p>它在<strong>Employee</strong>构造器中初始化为</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">evaluations &#x3D; new StringBuilder();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><p><strong>final</strong>关键字只是表示存储在<strong>evaluations</strong>变量中的对象引用不会再指示另一个不同的<strong>StringBuilder</strong>对象。不过这个对象可以更改：</p></blockquote><pre class="line-numbers language-C/C++" data-language="C/C++"><code class="language-C/C++">public void giveGoldStar()
+&#123;
+    evaluations.append(LocalDate.now() + &quot;：Gold star!\n&quot;);
+&#125;    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]--><audio id="audio" loop preload="auto" controls data-autoplay="true"><source type="audio/mpeg" src=""></audio><ul id="audio-list" style="display:none"><li title="0" data-url="https://link.hhtjim.com/163/4989670.mp3"></li><li title="1" data-url="https://link.hhtjim.com/163/214374.mp3"></li><li title="2" data-url="https://link.hhtjim.com/163/443794.mp3"></li><li title="3" data-url="https://link.hhtjim.com/163/28188450.mp3"></li><li title="4" data-url="https://link.hhtjim.com/163/29816860.mp3"></li><li title="5" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="6" data-url="https://link.hhtjim.com/163/443860.mp3"></li><li title="7" data-url="https://link.hhtjim.com/163/4940920.mp3"></li><li title="8" data-url="https://link.hhtjim.com/163/1825230064.mp3"></li><li title="9" data-url="https://link.hhtjim.com/163/27570832.mp3"></li><li title="10" data-url="https://link.hhtjim.com/163/28285777.mp3"></li><li title="11" data-url="https://link.hhtjim.com/163/68622.mp3"></li><li title="12" data-url="https://link.hhtjim.com/163/4968365.mp3"></li><li title="13" data-url="https://link.hhtjim.com/163/4968352.mp3"></li><li title="14" data-url="https://link.hhtjim.com/163/28378263.mp3"></li><li title="15" data-url="https://link.hhtjim.com/163/1461262038.mp3"></li><li title="16" data-url="https://link.hhtjim.com/163/1821680008.mp3"></li><li title="17" data-url="https://link.hhtjim.com/163/1404997257.mp3"></li></ul></div></div><div class="side"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">用户自定义类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Employee%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">Employee类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">多个源文件的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E7%BC%96%E8%AF%91%E6%BA%90%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">两种编译源程序的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E9%85%8D%E7%AC%A6%E8%B0%83%E7%94%A8Java%E7%BC%96%E8%AF%91%E5%99%A8"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">使用通配符调用Java编译器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%AE%E5%85%A5%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">键入命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.2.2.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%96%E6%9E%90Employee%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">剖析Employee类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#public"><span class="toc-number">1.3.1.</span> <span class="toc-text">public</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#private"><span class="toc-number">1.3.2.</span> <span class="toc-text">private</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B%E4%B8%80"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">程序示例一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E4%B8%80"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">运行结果一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B%E4%BA%8C"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">程序示例二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E4%BA%8C"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">运行结果二</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%80%E5%A7%8B"><span class="toc-number">1.4.</span> <span class="toc-text">从构造器开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E4%B8%8E%E7%B1%BB%E5%90%8C%E5%90%8D"><span class="toc-number">1.4.1.</span> <span class="toc-text">构造器与类同名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E7%BB%93%E5%90%88new%E8%BF%90%E7%AE%97%E7%AC%A6%E6%9D%A5%E8%B0%83%E7%94%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">构造器结合new运算符来调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%85%B3%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">1.4.3.</span> <span class="toc-text">有关构造器的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A"><span class="toc-number">1.4.4.</span> <span class="toc-text">警告</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8var%E5%A3%B0%E6%98%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number">1.5.</span> <span class="toc-text">用var声明局部变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.5.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="toc-number">1.5.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8null%E5%BC%95%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">使用null引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NullPointerException%E5%BC%82%E5%B8%B8"><span class="toc-number">1.6.1.</span> <span class="toc-text">NullPointerException异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-2"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86null%E5%80%BC%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.2.</span> <span class="toc-text">处理null值的两种解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86null%E5%80%BC%E7%9A%84%E5%AE%BD%E5%AE%B9%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">处理null值的宽容型方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-3"><span class="toc-number">1.6.2.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-3"><span class="toc-number">1.6.2.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86null%E5%80%BC%E7%9A%84%E4%B8%A5%E6%A0%BC%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.3.</span> <span class="toc-text">处理null值的严格型方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-4"><span class="toc-number">1.6.3.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-4"><span class="toc-number">1.6.3.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null%E5%90%8D%E5%AD%97%E6%9E%84%E9%80%A0%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.6.4.</span> <span class="toc-text">null名字构造对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A-2"><span class="toc-number">1.6.5.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E5%8F%82%E6%95%B0%E4%B8%8E%E6%98%BE%E5%BC%8F%E5%8F%82%E6%95%B0%EF%BC%88%E8%BF%99%E9%87%8C%E4%B8%8D%E5%A4%AA%E6%87%82%EF%BC%81%EF%BC%81%EF%BC%81%EF%BC%89"><span class="toc-number">1.7.</span> <span class="toc-text">隐式参数与显式参数（这里不太懂！！！）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97this"><span class="toc-number">1.7.1.</span> <span class="toc-text">关键字this</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">1.8.</span> <span class="toc-text">封装的优点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E8%AE%BF%E9%97%AE%E5%99%A8"><span class="toc-number">1.8.1.</span> <span class="toc-text">字段访问器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%BE%97%E6%88%96%E8%AE%BE%E7%BD%AE%E5%AE%9E%E4%BE%8B%E5%AD%97%E6%AE%B5%E7%9A%84%E5%80%BC"><span class="toc-number">1.8.2.</span> <span class="toc-text">获得或设置实例字段的值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-5"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-5"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A-1"><span class="toc-number">1.8.3.</span> <span class="toc-text">警告</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E5%99%A8%E6%96%B9%E6%B3%95setTime"><span class="toc-number">1.8.3.1.</span> <span class="toc-text">更改器方法setTime</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-6"><span class="toc-number">1.8.3.1.1.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-6"><span class="toc-number">1.8.3.1.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%EF%BC%88clone%EF%BC%89"><span class="toc-number">1.8.3.2.</span> <span class="toc-text">克隆（clone）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B-7"><span class="toc-number">1.8.4.</span> <span class="toc-text">程序示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-7"><span class="toc-number">1.8.5.</span> <span class="toc-text">运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="toc-number">1.9.</span> <span class="toc-text">私有方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final%E5%AE%9E%E4%BE%8B%E5%AD%97%E6%AE%B5%EF%BC%88%E8%BF%99%E4%B8%AA%E4%B8%8D%E5%A4%AA%E6%87%82%EF%BC%81%EF%BC%81%EF%BC%81%EF%BC%89"><span class="toc-number">1.10.</span> <span class="toc-text">final实例字段（这个不太懂！！！）</span></a></li></ol></li></ol></div></div></div></div></body><script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script><script src="/js/plugin.js"></script><script src="/js/typed.js"></script><script src="/js/diaspora.js"></script><link rel="stylesheet" href="/photoswipe/photoswipe.css"><link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css"><script src="/photoswipe/photoswipe.min.js"></script><script src="/photoswipe/photoswipe-ui-default.min.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></html><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?6af129e1f4dfb540b30b7969d7e7fc32";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script>
